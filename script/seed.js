@@ -1,6 +1,6 @@
 'use strict'
-
 const {db, models: {User, Pie} } = require('../server/db')
+const jsonPieData = require('./pies.json');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -24,6 +24,10 @@ async function seed() {
       Pie.create({ name: 'Clam Chowder Pie', origin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
       Pie.create({ name: 'Ghost Pepper Tart', origin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
     ])
+    for (let wikiPie of jsonPieData) {
+       //console.log(wikiPie)
+       await Pie.create(wikiPie);
+    }
   console.log(`seeded ${pies.length} pies`)
   console.log(`seeded successfully`)
   return {
@@ -39,6 +43,7 @@ async function seed() {
  This way we can isolate the error handling and exit trapping.
  The `seed` function is concerned only with modifying the database.
 */
+
 async function runSeed() {
   console.log('seeding...')
   try {
