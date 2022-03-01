@@ -21,8 +21,8 @@ async function seed() {
 
   // Creating Pies
     const pies = await Promise.all([
-      Pie.create({ name: 'Clam Chowder Pie', orgin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
-      Pie.create({ name: 'Ghost Pepper Tart', orgin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
+      Pie.create({ name: 'Clam Chowder Pie', origin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
+      Pie.create({ name: 'Ghost Pepper Tart', origin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
     ])
   console.log(`seeded ${pies.length} pies`)
   console.log(`seeded successfully`)
