@@ -25,7 +25,7 @@ const Pie = db.define('pie', {
   },
   thumbnailurl: {
     type: Sequelize.STRING,
-    defaultValue: "/default.png",
+    defaultValue: "https://www.simplyrecipes.com/thmb/s874U4AjfQBxYGz2nj5SWc-kYLg=/648x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Lattice-Pie-Crust-LEAD-1-1e320e0b6b864abbb0d038042a0af55b.jpg",
   },
   price: {
     type: Sequelize.FLOAT,

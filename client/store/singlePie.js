@@ -28,7 +28,7 @@ const initialState = {};
 export default function singlePieReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_PIE:
-      return state.pie;
+      return action.pie;
     default:
       return state;
   }
