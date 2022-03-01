@@ -14,7 +14,43 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-  }
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  type: {
+    type: Sequelize.ENUM("guest", "user", "admin"),
+    defaultValue: "guest",
+  },
+  streetAddress: {
+    type: Sequelize.STRING,
+  },
+  city: {
+    type: Sequelize.STRING,
+  },
+  state:{
+    type: Sequelize.STRING
+  },
+  zipcode: {
+    type: Sequelize.INTEGER,
+  },
+  cardHolderName: {
+    type: Sequelize.STRING,
+  },
+  cardNumber: {
+    type: Sequelize.STRING,
+  },
+  cardExpiration: {
+    type: Sequelize.STRING,
+  },
+  CVV: { // Card Verification Value
+    type: Sequelize.INTEGER,
+  }, 
 })
 
 module.exports = User
