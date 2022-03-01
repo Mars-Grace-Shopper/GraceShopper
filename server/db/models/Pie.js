@@ -18,7 +18,7 @@ const Pie = db.define('pie', {
     allowNull: false,
   },
   type: {
-    type: Sequelize.ENUM('Savory', 'Sweet or savory', 'Sweet', 'Savory or sweet', 'Savory and sweet'), 
+    type: Sequelize.ENUM('Savory', 'Sweet', 'Savory or sweet', 'Savory and sweet'), 
   },
   description: {
     type: Sequelize.TEXT,
