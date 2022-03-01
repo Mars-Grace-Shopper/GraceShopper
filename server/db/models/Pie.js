@@ -13,7 +13,7 @@ const Pie = db.define('pie', {
       notEmpty: true,
     },
   },
-  orgin: {
+  origin: {
     type: Sequelize.STRING,
     allowNull: false,
   },
