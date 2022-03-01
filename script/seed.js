@@ -1,6 +1,6 @@
 'use strict'
-
 const {db, models: {User, Pie} } = require('../server/db')
+const jsonPieData = require('./pies.json');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -21,9 +21,13 @@ async function seed() {
 
   // Creating Pies
     const pies = await Promise.all([
-      Pie.create({ name: 'Clam Chowder Pie', orgin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
-      Pie.create({ name: 'Ghost Pepper Tart', orgin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
+      Pie.create({ name: 'Clam Chowder Pie', origin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
+      Pie.create({ name: 'Ghost Pepper Tart', origin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
     ])
+    for (let wikiPie of jsonPieData) {
+       //console.log(wikiPie)
+       await Pie.create(wikiPie);
+    }
   console.log(`seeded ${pies.length} pies`)
   console.log(`seeded successfully`)
   return {
