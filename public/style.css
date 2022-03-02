@@ -13,6 +13,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-size: 30px;
 }
 
 form div {
@@ -47,4 +48,20 @@ form div {
 
 .item-pie-name {
   align-self: flex-end;
+}
+
+.single-pie-view-container {
+    display: flex;
+    flex-direction: row;
+
+}
+.single-view-img {
+  flex-basis: 1;
+}
+
+.single-view-text-container {
+  display: flex; 
+  flex-direction: column;
+  margin: 20px;
+  flex-basis: 1;
 }
