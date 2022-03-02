@@ -6,6 +6,7 @@ import UserHome from './components/UserHome';
 import HomePage from './components/HomePage'
 import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
+import EditPie from './components/EditPie';
 import {me} from './store'
 
 /**
@@ -26,7 +27,10 @@ class Routes extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' component={UserHome}/>
             <Route path='/pies' exact component={AllPies}/>
-            <Route path='/pies/:name' component={SinglePieView}/>
+            <Route path='/pies/:id' component={SinglePieView}/>
+            <Route path='/pies/:id/edit' component={EditPie}/>
+
+
             <Redirect to="/" />
           </Switch>
         ) : (
