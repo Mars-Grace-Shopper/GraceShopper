@@ -4,9 +4,9 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import piesReducer from './allPies';
-import singlePie from './singlePie';
+import singlePieReducer from './singlePie';
 
-const reducer = combineReducers({ auth, pies: piesReducer });
+const reducer = combineReducers({ auth, pies: piesReducer, pie: singlePieReducer});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

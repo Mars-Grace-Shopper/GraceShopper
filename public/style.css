@@ -13,9 +13,55 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-size: 30px;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.featured-items-container {
+  display: flex;
+  height: 100px;
+  border: 10px solid black;
+  align-items: center;
+}
+
+.all-pies-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 50px;
+  flex-wrap: wrap;
+
+}
+
+.single-pie-item {
+  display:flex;
+  flex-direction: column;
+  width:200px;
+  height: 400px;
+  position: relative;
+
+}
+
+.item-pie-name {
+  align-self: flex-end;
+}
+
+.single-pie-view-container {
+    display: flex;
+    flex-direction: row;
+
+}
+.single-view-img {
+  flex-basis: 1;
+}
+
+.single-view-text-container {
+  display: flex; 
+  flex-direction: column;
+  margin: 20px;
+  flex-basis: 1;
 }

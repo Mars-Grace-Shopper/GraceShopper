@@ -4,7 +4,7 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { Home } from './Home'
+import { UserHome } from './UserHome'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -13,7 +13,7 @@ describe('Home', () => {
   let home
 
   beforeEach(() => {
-    home = shallow(<Home username="cody" />)
+    home = shallow(<UserHome username="cody" />)
   })
 
   it('renders the email in an h3', () => {
