@@ -26,3 +26,25 @@ form div {
   border: 10px solid black;
   align-items: center;
 }
+
+.all-pies-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 50px;
+  flex-wrap: wrap;
+
+}
+
+.single-pie-item {
+  display:flex;
+  flex-direction: column;
+  width:200px;
+  height: 400px;
+  position: relative;
+
+}
+
+.item-pie-name {
+  align-self: flex-end;
+}
