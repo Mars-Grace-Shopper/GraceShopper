@@ -36,6 +36,18 @@ async function seed() {
        await Pie.create(wikiPie);
     }
   console.log(`seeded ${jsonPieData.length} pies from pies.json`)
+
+
+
+  // Associations
+  const tmppies = await Pie.findAll();
+  const tmpusers = await User.findAll();
+  const tmpcartpies = [tmppies[0], tmppies[5], tmppies[8]]
+  await tmpusers[0].addPies(tmpcartpies)
+  console.log(tmpusers[0].username)
+  console.log(`associated ${tmpcartpies.length} pies to ${tmpusers[0].username} seed.js`)
+
+
   console.log(`seeded successfully`)
   return {
     users: {
