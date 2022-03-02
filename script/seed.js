@@ -43,7 +43,12 @@ async function seed() {
   const tmppies = await Pie.findAll();
   const tmpusers = await User.findAll();
   const tmpcartpies = [tmppies[0], tmppies[5], tmppies[8]]
-  await tmpusers[0].addPies(tmpcartpies)
+  //await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
+  //await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
+  //for (let p in tmppies) {
+  for (let i in [4,6,8]) {
+    await tmpusers[0].addPie(tmppies[i], { through: { quantity: 5 }})
+  }
   console.log(tmpusers[0].username)
   console.log(`associated ${tmpcartpies.length} pies to ${tmpusers[0].username} seed.js`)
 
