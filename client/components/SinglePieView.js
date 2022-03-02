@@ -10,7 +10,12 @@ export class SinglePieView extends Component{
     render() {
         return(
             <div className='single-pie-view-container'>
+                <img className='single-view-img' src={this.props.pie.thumbnailurl}/>
+                <div className='single-view-text-container'>
                 <h1> {this.props.pie.name}</h1>
+                <h2>{this.props.pie.origin}</h2>
+                <h3>{this.props.pie.description}</h3>
+                </div>
             </div>
         )
     }
