@@ -1,6 +1,7 @@
 'use strict'
 const {db, models: {User, Pie} } = require('../server/db')
 const jsonPieData = require('./pies.json');
+const jsonUserData = require('./users.json');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,11 +13,16 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123', email: 'cody@seed.js'}),
+    User.create({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'}),
     User.create({ username: 'murphy', password: '123', email: 'murphy@seed.js' }),
   ])
+  console.log(`seeded ${users.length} users from seed.js`)
+  for (let u of jsonUserData) {
+     //console.log(wikiPie)
+     await User.create(u);
+  }
+  console.log(`seeded ${jsonUserData.length} users from users.json`)
 
-  console.log(`seeded ${users.length} users`)
 
 
   // Creating Pies
@@ -24,11 +30,12 @@ async function seed() {
       Pie.create({ name: 'Clam Chowder Pie', origin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
       Pie.create({ name: 'Ghost Pepper Tart', origin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
     ])
+  console.log(`seeded ${pies.length} pies from seed.js`)
     for (let wikiPie of jsonPieData) {
        //console.log(wikiPie)
        await Pie.create(wikiPie);
     }
-  console.log(`seeded ${pies.length} pies`)
+  console.log(`seeded ${jsonPieData.length} pies from pies.json`)
   console.log(`seeded successfully`)
   return {
     users: {
