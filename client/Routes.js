@@ -35,7 +35,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path='/pies' exact component={AllPies}/>
-            <Route path='/pies/:name' component={SinglePieView}/>
+            <Route path='/pies/:id' component={SinglePieView}/>
           </Switch>
         )}
       </div>
