@@ -1,5 +1,5 @@
 'use strict'
-const {db, models: {User, Pie} } = require('../server/db')
+const {db, models: {User, Pie, Cart, CartItem} } = require('../server/db')
 const jsonPieData = require('./pies.json');
 const jsonUserData = require('./users.json');
 
@@ -10,20 +10,6 @@ const jsonUserData = require('./users.json');
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
-
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'}),
-    User.create({ username: 'murphy', password: '123', email: 'murphy@seed.js' }),
-  ])
-  console.log(`seeded ${users.length} users from seed.js`)
-  for (let u of jsonUserData) {
-     //console.log(wikiPie)
-     await User.create(u);
-  }
-  console.log(`seeded ${jsonUserData.length} users from users.json`)
-
-
 
   // Creating Pies
     const pies = await Promise.all([
@@ -39,20 +25,88 @@ async function seed() {
 
 
 
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'}),
+    User.create({ username: 'murphy', password: '123', email: 'murphy@seed.js' }),
+  ])
+  console.log(`seeded ${users.length} users from seed.js`)
+  for (let u of jsonUserData) {
+     //console.log(wikiPie)
+     const createdUser = await User.create(u);
+     const createdCart = await createdUser.createCart()
+     createdCart.createCartitem({pieId: 27, quantity: 33})
+     
+  }
+  console.log(`seeded ${jsonUserData.length} users from users.json`)
+
+
+
+    const not_signed_in_cart = await Cart.create()
+    await not_signed_in_cart.createCartitem({pieId: 17, quantity: 66})
+    await not_signed_in_cart.createAddress({name:"cccccccc", streetAddress: "dddddd"})
+
+    const tmpusers = await User.findAll();
+    await tmpusers[0].createCart()
+    await tmpusers[1].createCart()
+    //const tmp_user_1_cart[0] = await tmpusers[1].getCarts({where: {paid: 'false'}})
+    const tmp_user_1_cart = await tmpusers[1].getCarts()
+    await tmpusers[1].createAddress({name:"aaaa", streetAddress: "bbbbbb", cartId: tmp_user_1_cart[0].id})
+
+  // Creating Carts
+
+
   // Associations
-  const tmppies = await Pie.findAll();
-  const tmpusers = await User.findAll();
+//  const tmppies = await Pie.findAll();
+//  const tmpusers = await User.findAll();
+
+     //Cart.create(tmpusers[0])
+
+ /* 
   const tmpcartpies = [tmppies[0], tmppies[5], tmppies[8]]
-  //await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
-  //await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
-  //for (let p in tmppies) {
+  await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
+  await tmpusers[0].addPies(tmpcartpies, {quantity: 5})
+  for (let p in tmppies) {
+    
+    await tmpusers[0].createCart()
+    await tmpusers[1].createCart()
+    //const tmp_user_1_cart[0] = await tmpusers[1].getCarts({where: {paid: false}})
+    const tmp_user_1_cart = await tmpusers[1].getCarts()
+    const tmp_user_1_cart_id = tmp_user_1_cart.id
+    console.log('tmp_user_1_cart', tmp_user_1_cart)
+    console.log('tmp_user_1_cart_id', tmp_user_1_cart_id)
+//    console.log('tmp_user_1_cart_id', tmp_user_1_cart.cart.id)
+    console.log('tmp_user_1_cart_id', tmp_user_1_cart[0].id)
+    await tmpusers[1].createAddress({name:"aaaa", streetAddress: "bbbbbb", cartId: tmp_user_1_cart[0].id})
+    const tmp_user_1_address = await tmpusers[1].getAddress()
+    //await tmp_user_1_cart.setAddress(tmp_user_1_address)
+//    await tmp_user_1_address.setCart(tmp_user_1_cart)
+
+
+    const tmpcarts = await Cart.findAll()
+
+    console.log(Object.keys(Cart.prototype))
+    //console.log(Object.keys(User.prototype))
+    await tmpcarts[0].createCartitem({pieId: 4, quantity: 9})
+
+    const a_cart = await Cart.create({userId: 9})
+//    const a_cart = await Cart.findOrCreate({where: {userId: 10}})
+    console.log(a_cart)
+//    console.log(Object.keys(a_cart))
+    //await a_cart.createCartitem({pieId: 27, quantity: 44})
+//////    await a_cart.createCartitem({pieId: 27, quantity: 33})
+   
+    const not_signed_in_cart = await Cart.create()
+    await not_signed_in_cart.createCartitem({pieId: 17, quantity: 66})
+    await not_signed_in_cart.createAddress({name:"cccccccc", streetAddress: "dddddd"})
+ 
   for (let i in [4,6,8]) {
-    await tmpusers[0].addPie(tmppies[i], { through: { quantity: 5 }})
+    //await tmpusers[0].addPie(tmppies[i], { through: { quantity: 5 }})
   }
   console.log(tmpusers[0].username)
   console.log(`associated ${tmpcartpies.length} pies to ${tmpusers[0].username} seed.js`)
 
-
+*/
   console.log(`seeded successfully`)
   return {
     users: {
