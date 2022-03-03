@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addPie, fetchPies } from '../store/allPies';
+import { me } from '../store/auth.js';
 
 class AddProduct extends React.Component {
   constructor() {
@@ -10,13 +11,19 @@ class AddProduct extends React.Component {
       origin: '',
       type: '',
       description: '',
+      isAdmin: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchPies();
+  async componentDidMount() {
+    let token = window.localStorage.getItem('token');
+    if (token) {
+      await this.props.getAuth();
+      if (this.props.auth.type === 'admin')
+        this.setState({ ...this.state, isAdmin: true });
+    }
   }
 
   handleChange(event) {
@@ -49,7 +56,6 @@ class AddProduct extends React.Component {
 
   render() {
     const { handleSubmit, handleChange } = this;
-    console.log(this.props)
 
     return (
       <div id='add-product'>
@@ -94,6 +100,7 @@ class AddProduct extends React.Component {
 const mapState = (state) => {
   return {
     pies: state.pies,
+    auth: state.auth,
   };
 };
 
@@ -101,6 +108,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchPies: () => dispatch(fetchPies()),
     addPie: (pie) => dispatch(addPie(pie)),
+    getAuth: () => dispatch(me()),
   };
 };
 

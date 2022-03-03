@@ -11,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </h1>
       <h2>INTERNATIONAL HOUSE OF PIE</h2>
     </div>
-    <nav>
+    <nav id="navbar">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}

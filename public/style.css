@@ -66,9 +66,9 @@ label {
   letter-spacing: 2px;
 }
 
-nav a:link,
-a:active,
-a:visited {
+#navbar a:link,
+#navbar a:active,
+#navbar a:visited {
   margin: 70px 10px 40px 10px;
   display: inline-block;
   text-align: center;
@@ -79,16 +79,16 @@ a:visited {
   text-decoration: none;
 }
 
-nav {
+#navbar {
   text-align: center;
 }
 
-nav a:hover {
+#navbar a:hover {
   text-decoration: underline;
   text-underline-offset: 8px;
 }
 
-nav img {
+#navbar img {
   position: absolute;
   margin: 60px 0px 40px 0px;
   width: 30px;
