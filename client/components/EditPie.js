@@ -8,12 +8,12 @@ class EditPie extends Component{
         super();
         this.state = {
             name:'',
-            origin:'',
+            countryOrigin:'',
             type:'',
             description:'',
             thumbnailurl:'',
             price:0,
-            quanitity:0,
+            stockQuantity:0,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,13 +27,15 @@ class EditPie extends Component{
         event.persist()
         event.preventDefault();
         const value = event.target.value
+        console.log(value);
         if(event.target.name === 'name') await this.setState({...this.state, name: value})
-        if(event.target.name === 'origin') await this.setState({...this.state, origin: value})
+        if(event.target.name === 'country') await this.setState({...this.state, countryOrigin: value})
         if(event.target.name === 'type') await this.setState({...this.state, type: value})
         if(event.target.name === 'description') await this.setState({...this.state, description: value})
         if(event.target.name === 'thumbnailurl') await this.setState({...this.state, thumbnailurl: value})
         if(event.target.name === 'price') await this.setState({...this.state, price: value})
-        if(event.target.name === 'quantity') await this.setState({...this.state, quantity: value})
+        if(event.target.name === 'stockQuantity') await this.setState({...this.state, stockQuantity: value})
+        console.log(this.state.type);
 
 
       }
@@ -54,7 +56,15 @@ class EditPie extends Component{
             <br />
             <br />
                 <label htmlFor='country'>COUNTRY </label>
-                     <input onChange={this.handleChange} name='origin' placeholder={pie.origin} />
+                     <input onChange={this.handleChange} name='country' placeholder={pie.countryOrigin} />
+            <br />
+            <br />
+            <select defaultValue={pie.type} onChange={this.handleChange} name='type'>
+                <option value="Savory">Savory</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Savory and sweet">Savory and Sweet</option>
+                <option value="Savory or sweet">Savory or Sweet</option>
+             </select>
             <br />
             <br />
                 <label htmlFor='description'>DESCRIPTION </label>
@@ -62,17 +72,17 @@ class EditPie extends Component{
             <br />
             <br />
                 <label htmlFor='price'>PRICE </label>
-                        <input onChange={this.handleChange} name='price' placeholder={pie.description} />
+                        <input type="number" step='.01' min='0' max='99.99' onChange={this.handleChange} name='price' placeholder={pie.price} />
             <br />
             <br />
                 <label htmlFor='quantity'>QUANTITY </label>
-                     <input onChange={this.handleChange} name='quantity' placeholder={pie.quantity}/>
+                     <input type='number' step='1' min='0' onChange={this.handleChange} name='stockQuantity' placeholder={pie.stockQuantity}/>
             <br />
-            <br />
+            {/* <br />
                 <label htmlFor='ingredients'>INGREDIENTS </label>
                      <input name='ingredients' />
             <br />
-            <br />
+            <br /> */}
                 <label htmlFor='thumbnailurl'>PICTURE</label>
                         <input onChange={this.handleChange} name='thumbnailurl' placeholder='Link an image!' />
             <br />

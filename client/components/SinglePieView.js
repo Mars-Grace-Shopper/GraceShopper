@@ -30,6 +30,7 @@ export class SinglePieView extends Component{
                 <h1> {this.props.pie.name}</h1>
                 <h2>{this.props.pie.origin}</h2>
                 <h3>{this.props.pie.description}</h3>
+                <h3>{this.props.pie.type}</h3>
                 </div>
             </div>
         )
