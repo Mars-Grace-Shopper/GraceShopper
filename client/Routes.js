@@ -9,6 +9,7 @@ import AllPies from './components/AllPies'
 import AddProduct from './components/AddProduct';
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
+import Cart from './components/Cart';
 
 /**
  * COMPONENT
@@ -30,8 +31,9 @@ class Routes extends Component {
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
             <Route path='/addproduct' exact component={AddProduct}/>
+            <Route path='/cart' exact component={Cart}/>
+            <Redirect to="/" />
             <Route path="/error" exact component={ErrorPage}/>
-            <Redirect to='/' />
           </Switch>
         ) : (
           <Switch>
@@ -40,8 +42,10 @@ class Routes extends Component {
             <Route path="/signup" exact component={Signup} />
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
+            <Route path='/cart' exact component={Cart}/>
             <Route path="/error" component={ErrorPage}/>
             {/* <Redirect to='/error' /> */}
+
           </Switch>
         )}
       </div>

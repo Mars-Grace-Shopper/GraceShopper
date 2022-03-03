@@ -22,7 +22,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             LOGOUT
           </a>
           {/* <input type='text' placeholder='Search..' /> */}
-          <img src='/cart.png' />
+
+          {/* will change the link for cart later */}
+          <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
       ) : (
         <div>
@@ -32,7 +34,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/login'>LOGIN</Link>
           <Link to='/signup'>SIGN UP</Link>
           {/* <input type='text' placeholder='Search..' /> */}
-          <img src='/cart.png' />
+
+          {/* will change the link for cart later */}
+          <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
       )}
     </nav>
