@@ -136,6 +136,41 @@ label {
 
 /* ---------------------------- SINGLE PIE */
 
+.single-pie-view-container {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.single-view-img {
+  width: 300px;
+  height: 200px;
+}
+
+.back-and-img {
+  display: inline-block;
+  border: 2px solid red;
+}
+
+.single-view-text-container {
+  width: 500px;
+  border: 2px solid red;
+  padding-left: 30px;
+}
+
+.quantity {
+  display: flex;
+  margin: 0px 0px 0px 20px;
+}
+
+.quantity button {
+  width: 20px;
+  height: 20px;
+  margin: 0px 10px 0px 10px;
+}
+
+
 .single-pie-item {
   display: flex;
   flex-direction: column;
@@ -148,17 +183,3 @@ label {
   align-self: flex-end;
 }
 
-.single-pie-view-container {
-  display: flex;
-  flex-direction: row;
-}
-.single-view-img {
-  flex-basis: 1;
-}
-
-.single-view-text-container {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  flex-basis: 1;
-}
