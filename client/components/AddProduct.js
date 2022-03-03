@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form } from './Form';
 import { connect } from 'react-redux';
 import { addPie, fetchPies } from '../store/allPies';
 
