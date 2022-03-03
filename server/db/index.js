@@ -23,8 +23,8 @@ Address.belongsTo(User)
 Cart.hasOne(Address)
 Address.belongsTo(Cart)
 
-Pie.belongsToMany(User, { through: Order });
-User.belongsToMany(Pie, { through: Order });
+//Pie.belongsToMany(User, { through: Order });
+//User.belongsToMany(Pie, { through: Order });
 
 module.exports = {
   db,

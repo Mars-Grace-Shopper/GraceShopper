@@ -2,6 +2,10 @@
 const {db, models: {User, Pie, Cart, CartItem} } = require('../server/db')
 const jsonPieData = require('./pies.json');
 const jsonUserData = require('./users.json');
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
+const randomBool = () => Math.random() < 0.5;
+const genAddr = require('./address.js');
+
 
 /**
  * seed - this function clears the database, updates tables to
@@ -13,8 +17,8 @@ async function seed() {
 
   // Creating Pies
     const pies = await Promise.all([
-      Pie.create({ name: 'Clam Chowder Pie', origin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
-      Pie.create({ name: 'Ghost Pepper Tart', origin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
+      Pie.create({ name: 'Clam Chowder Pie', countryOrigin: 'United States', type: 'Savory', description: 'basically a breadbowl'}),
+      Pie.create({ name: 'Ghost Pepper Tart', countryOrigin: 'Antarctica', type: 'Savory', description: 'really spicy!'})
     ])
   console.log(`seeded ${pies.length} pies from seed.js`)
     for (let wikiPie of jsonPieData) {
@@ -26,23 +30,34 @@ async function seed() {
 
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'}),
-    User.create({ username: 'murphy', password: '123', email: 'murphy@seed.js' }),
-  ])
-  console.log(`seeded ${users.length} users from seed.js`)
+//  const users = await Promise.all([
+//    User.create({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'}),
+//    User.create({ username: 'murphy', password: '123', email: 'murphy@seed.js' }),
+//  ])
+//  console.log(`seeded ${users.length} users from seed.js`)
+
+  jsonUserData.unshift({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin'})
+  jsonUserData.unshift({ username: 'murphy', password: '123', email: 'murphy@seed.js' })
+    
   for (let u of jsonUserData) {
      //console.log(wikiPie)
      const createdUser = await User.create(u);
      const createdCart = await createdUser.createCart()
-     createdCart.createCartitem({pieId: 27, quantity: 33})
-     
+     for (let i = 1; i < 5; i++) {
+       if (randomBool()) {
+         await createdCart.createCartitem({pieId: randomInt(1,100), quantity: randomInt(1,10)});         
+       }
+     }
+     const streetAddress = await genAddr()
+     //console.log(streetAddress)
+     await createdUser.createAddress({customerName: createdUser.firstName + ' ' + createdUser.lastName, ...streetAddress})
+
   }
   console.log(`seeded ${jsonUserData.length} users from users.json`)
 
 
 
-    const not_signed_in_cart = await Cart.create()
+    const not_signed_in_cart = await Cart.create({paid: true})
     await not_signed_in_cart.createCartitem({pieId: 17, quantity: 66})
     await not_signed_in_cart.createAddress({name:"cccccccc", streetAddress: "dddddd"})
 
@@ -53,8 +68,13 @@ async function seed() {
     const tmp_user_1_cart = await tmpusers[1].getCarts()
     await tmpusers[1].createAddress({name:"aaaa", streetAddress: "bbbbbb", cartId: tmp_user_1_cart[0].id})
 
-  // Creating Carts
+    //console.log(Object.keys(Cart.prototype))
+    //console.log(Object.keys(User.prototype))
 
+
+    const a_cart = await Cart.findOrCreate({where: {userId: 10}})
+    //console.log('a_cart', a_cart)
+    await a_cart[0].createCartitem({pieId: 27, quantity: 44})
 
   // Associations
 //  const tmppies = await Pie.findAll();
@@ -108,12 +128,12 @@ async function seed() {
 
 */
   console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
+//  return {
+//    users: {
+//      cody: users[0],
+//      murphy: users[1]
+//    }
+//  }
 }
 
 /*
