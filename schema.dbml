@@ -3,6 +3,7 @@
 Table User {
   id int [pk, increment] // auto-increment
   username str
+  password str
   firstName str
   lastName str
   email str
