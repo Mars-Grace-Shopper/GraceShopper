@@ -12,12 +12,13 @@ export class SinglePieView extends Component{
         }
         this.handleClick =  this.handleClick.bind(this)
     }
-    componentDidMount() {
+   componentDidMount() {
         this.props.fetchSinglePie(this.props.match.params.id)
     }
 
     handleClick() {
-        this.setState({...this.state, editPieView: true})
+        this.setState({...this.state, editPieView: !this.state.editPieView})
+        this.props.fetchSinglePie(this.props.match.params.id)
     }
     render() {
         if(this.state.editPieView === false){
@@ -33,7 +34,7 @@ export class SinglePieView extends Component{
             </div>
         )
         }
-        return <EditPie pie={this.props.pie}/>
+        return <EditPie pie={this.props.pie} click={this.handleClick}/>
 
     }
 }

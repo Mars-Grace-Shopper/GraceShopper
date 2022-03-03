@@ -23,6 +23,7 @@ export const fetchSinglePie = (pieId) => {
 };
 
 export const updatePie = (updatedPie) => {
+  console.log("=======",updatedPie)
   return async (dispatch) => {
    const {data} = await axios.put(`/api/pies/${updatedPie.id}`, updatedPie)
    dispatch(setSinglePie(data));
