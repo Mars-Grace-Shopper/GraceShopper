@@ -6,6 +6,7 @@ import UserHome from './components/UserHome';
 import HomePage from './components/HomePage'
 import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
+import EditPie from './components/EditPie';
 import AddProduct from './components/AddProduct';
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
