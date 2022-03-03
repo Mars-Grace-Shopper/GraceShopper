@@ -2,12 +2,20 @@ import axios from 'axios';
 
 // ACTION TYPE:
 const SET_PIES = 'SET_PIES';
+const ADD_PIE = 'SET_PIE';
 
 // ACTION CREATOR:
 export const setPies = (pies) => {
   return {
     type: SET_PIES,
-    pies
+    pies,
+  };
+};
+
+export const createPie = (pie) => {
+  return {
+    type: ADD_PIE,
+    pie,
   };
 };
 
@@ -23,16 +31,27 @@ export const fetchPies = () => {
   };
 };
 
+export const addPie = (pie) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post('/api/pies', pie);
+      dispatch(createPie(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 //INITIAL STATE:
 const initialState = [];
 
 //SUB-REDUCER:
-// Take a look at app/redux/index.js to see where this reducer is
-// added to the Redux store with combineReducers
 export default function piesReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PIES:
       return action.pies;
+    case ADD_PIE:
+      return action.pie;
     default:
       return state;
   }

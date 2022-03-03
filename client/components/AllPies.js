@@ -1,27 +1,35 @@
-import React, { Component } from "react";
-import SinglePieItem from "./SinglePieItem";
-import { FilterPieByFlavor } from "./FilterMenus";
+import React, { Component } from 'react';
+import SinglePieItem from './SinglePieItem';
+import { FilterPieByFlavor } from './FilterMenus';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
+import AddProduct from './AddProduct';
+import { Link } from 'react-router-dom';
 
 export class AllPies extends Component {
-    constructor(){
-        super();
-        
-    }
+  constructor() {
+    super();
+  }
+
   componentDidMount() {
     this.props.fetchPies();
   }
 
-
-
   render() {
-    const pies = this.props.pies
+    const pies = this.props.pies;
+
     return (
-      <div className="all-pies-view">
+      <div className='all-pies-view'>
+        <Link to='/addproduct'>
+          <button>Add Product</button>
+        </Link>
         <FilterPieByFlavor />
-        <div className="all-pies-item-container">
-          {pies.map((pie) => (<SinglePieItem key={pie.id} pie={pie}/>))}
+        <div className='all-pies-item-container'>
+          {[].concat(pies)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((pie) => (
+              <SinglePieItem key={pie.id} pie={pie} />
+            ))}
         </div>
       </div>
     );
