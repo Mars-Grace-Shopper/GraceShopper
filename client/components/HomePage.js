@@ -12,7 +12,7 @@ export default class HomePage extends Component {
                 <FeaturedItems />
                 <div className='introductions'>
                     <h1>About Us!</h1>
-                    <p>We love pies from around the world!</p>
+                    <p>We love pies from around the world! We better than ihop</p>
                 </div>
             </div>
         )

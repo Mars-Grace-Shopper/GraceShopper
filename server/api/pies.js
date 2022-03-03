@@ -23,3 +23,13 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+// POST /api/pies to add a new pie
+router.post('/', async (req, res, next) => {
+  try {
+    const newPie = await Pie.create(req.body);
+    res.send(newPie);
+  } catch (error) {
+    next(error);
+  }
+});
