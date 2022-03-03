@@ -1,0 +1,53 @@
+// https://dbdiagram.io/d
+
+Table User {
+  id int [pk, increment] // auto-increment
+  username str
+  password str
+  firstName str
+  lastName str
+  email str
+
+}
+
+Table Pie {
+  id int [pk, increment] // auto-increment
+  name string
+  countryOrigin string
+  type string
+  description string
+  thumbnailurl string
+  price int
+}
+
+Table Cart {
+  id int [pk, increment] // auto-increment
+  paid boolean
+  shipped boolean
+  created_at timestamp
+}
+
+Table CartItem {
+  Id int [pk, increment] // auto-increment
+  cartId int
+  pieId int
+  quantity int
+}
+
+Table Address {
+  Id int [pk, increment] // auto-increment
+  cartId int
+  userId int
+  customerName str
+  streetAddress str
+  city str
+  state str
+  zip str
+  country str
+}
+
+Ref: CartItem.cartId > Cart.id
+Ref: CartItem.pieId > Pie.id
+Ref: Cart.id > User.id
+Ref: Address.cartId - Cart.id
+ref: Address.userId - User.id
