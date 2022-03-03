@@ -8,6 +8,7 @@ import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
 import AddProduct from './components/AddProduct';
 import {me} from './store'
+import Cart from './components/Cart';
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:name' component={SinglePieView}/>
             <Route path='/addproduct' exact component={AddProduct}/>
+            <Route path='/cart' exact component={Cart}/>
             <Redirect to="/" />
           </Switch>
         ) : (
@@ -38,6 +40,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
+            <Route path='/cart' exact component={Cart}/>
 
           </Switch>
         )}

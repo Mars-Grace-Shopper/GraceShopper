@@ -6,7 +6,10 @@ export class Cart extends React.Component {
   render() {
     return (
       <div id='cart'>
-        This is our cart.
+        <div>My Shopping Cart</div>
+        <div>
+          Pie #1
+        </div>
       </div>
     );
   }
