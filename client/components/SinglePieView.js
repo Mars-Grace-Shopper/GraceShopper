@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
+
+
 import EditPie from './EditPie';
 
 class SinglePieView extends Component {
@@ -15,6 +18,7 @@ class SinglePieView extends Component {
     this.decrement = this.decrement.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
+
 
   componentDidMount() {
     this.props.fetchSinglePie(this.props.match.params.id);
@@ -65,6 +69,7 @@ class SinglePieView extends Component {
           </div>
         </div>
       );
+
     }
     return <EditPie pie={this.props.pie} click={handleClick} />;
   }
