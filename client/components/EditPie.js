@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updatePie } from '../store/singlePie'
 
 
-export class EditPie extends Component{
+export default class EditPie extends Component{
     constructor() {
         super();
         this.state = {
@@ -20,6 +20,25 @@ export class EditPie extends Component{
     componentDidMount(){
         const pie = this.props.pie
         this.setState({...this.props.pie})
+      }
+
+      async handleChange(event) {
+        event.persist()
+        event.preventDefault();
+        const value = event.target.value
+        if(event.target.name === 'name') await this.setState({...this.state, name: value})
+        // if(event.target.name === 'origin') await this.setState({...this.state, origin: value})
+        // if(event.target.name === 'type') await this.setState({...this.state, type: value})
+        // if(this.state.name.length === 0) await this.setState({...this.state, name: robot.name})
+        // if(this.state.fuelType.length === 0) await this.setState({...this.state, fuelType: robot.fuelType})
+        // if(this.state.imageUrl.length === 0) await this.setState({...this.state, imageUrl: robot.imageUrl})
+      }
+
+      async handleSubmit (event) {
+        event.preventDefault();
+        const pie = this.props.pie
+        this.props.updatePie({...this.state, id: pie.id});
+        // this.props.newEntryViewChange();
       }
       
     render() {
