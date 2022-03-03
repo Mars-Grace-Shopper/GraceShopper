@@ -7,6 +7,7 @@ import HomePage from './components/HomePage'
 import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
 import AddProduct from './components/AddProduct';
+import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 
 /**
@@ -25,20 +26,22 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path='/userhome' component={UserHome}/>
+            <Route path='/userhome' exact component={UserHome}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:name' component={SinglePieView}/>
             <Route path='/addproduct' exact component={AddProduct}/>
-            <Redirect to="/" />
+            <Route path="/error" exact component={ErrorPage}/>
+            <Redirect to='/' />
           </Switch>
         ) : (
           <Switch>
             <Route path='/' exact component={ HomePage } />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
-
+            <Route path="/error" component={ErrorPage}/>
+            {/* <Redirect to='/error' /> */}
           </Switch>
         )}
       </div>
