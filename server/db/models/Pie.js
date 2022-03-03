@@ -13,7 +13,7 @@ const Pie = db.define('pie', {
       notEmpty: true,
     },
   },
-  origin: {
+  countryOrigin: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -36,7 +36,7 @@ const Pie = db.define('pie', {
     },
   },
 
-  quantity: {
+  stockQuantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1,
     validate: {
