@@ -46,27 +46,27 @@ class EditPie extends Component{
       }
       
     render() {
-        console.log(this.state);
+        const pie = this.props.pie
         return (
             <form id='add-edit-form' onSubmit={this.handleSubmit}>
                 <label htmlFor='name'>NAME </label>
-                    <input onChange={this.handleChange} name='name' />
+                    <input onChange={this.handleChange} name='name' placeholder={pie.name}/>
             <br />
             <br />
                 <label htmlFor='country'>COUNTRY </label>
-                     <input onChange={this.handleChange} name='origin' />
+                     <input onChange={this.handleChange} name='origin' placeholder={pie.origin} />
             <br />
             <br />
                 <label htmlFor='description'>DESCRIPTION </label>
-                     <input onChange={this.handleChange} name='description' />
+                     <input onChange={this.handleChange} name='description' placeholder={pie.description}/>
             <br />
             <br />
                 <label htmlFor='price'>PRICE </label>
-                        <input onChange={this.handleChange} name='price' />
+                        <input onChange={this.handleChange} name='price' placeholder={pie.description} />
             <br />
             <br />
                 <label htmlFor='quantity'>QUANTITY </label>
-                     <input onChange={this.handleChange} name='quantity' />
+                     <input onChange={this.handleChange} name='quantity' placeholder={pie.quantity}/>
             <br />
             <br />
                 <label htmlFor='ingredients'>INGREDIENTS </label>
