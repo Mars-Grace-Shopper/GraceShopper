@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { addPie, fetchPies } from '../store/allPies';
 import { me } from '../store/auth.js';
 
-class AddProduct extends React.Component {
+class AddPie extends React.Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      origin: '',
+      countryOrigin: '',
       type: '',
       description: '',
       isAdmin: false,
@@ -32,7 +32,7 @@ class AddProduct extends React.Component {
     const value = event.target.value;
 
     if (className === 'name') this.setState({ ...this.state, name: value });
-    if (className === 'origin') this.setState({ ...this.state, origin: value });
+    if (className === 'countryOrigin') this.setState({ ...this.state, countryOrigin: value });
     if (className === 'type') this.setState({ ...this.state, type: value });
     if (className === 'description')
       this.setState({ ...this.state, description: value });
@@ -64,8 +64,8 @@ class AddProduct extends React.Component {
           <input name='name' placeholder='Required' onChange={handleChange} />
           <br />
           <br />
-          <label htmlFor='origin'>ORIGIN </label>
-          <input name='origin' onChange={handleChange} />
+          <label htmlFor='countryOrigin'>countryOrigin </label>
+          <input name='countryOrigin' placeholder='Required' onChange={handleChange} />
           <br />
           <br />
           <label htmlFor='type'>TYPE </label>
@@ -112,4 +112,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(AddProduct);
+export default connect(mapState, mapDispatch)(AddPie);
