@@ -14,8 +14,14 @@ export const setSinglePie = (pie) => ({
 export const fetchSinglePie = (pieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/pies/${pieId}`);
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const { data } = await axios.get(`/api/pies/${pieId}`,{
+          headers: {
+            authorization: token
+          }});
       dispatch(setSinglePie(data));
+        }
     } catch (error) {
       console.log(error);
     }
