@@ -79,14 +79,14 @@ class SinglePieView extends Component {
                     +
                   </button>
                 </div>
-                <AddToCart pie={pie} quantity={this.state.quantity}/>
+                <AddToCart pie={pie} quantity={this.state.quantity} className='add-to-cart'/>
               </div>
             </div>
           </div>
         </div>
       );
     }
-    return <EditPie pie={this.props.pie} click={handleClick} className='add-to-cart'/>;
+    return <EditPie pie={this.props.pie} click={handleClick} />;
   }
 }
 

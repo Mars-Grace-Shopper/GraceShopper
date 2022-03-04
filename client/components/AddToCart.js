@@ -36,7 +36,7 @@ class AddToCart extends React.Component {
     render () {
        
         return (
-            <Link to={`/cart`}><button onClick={this.handleAddItem} className='add-to-cart'> ADD TO CART </button></Link>
+            <button onClick={this.handleAddItem} className='add-to-cart'> <Link to={`/cart`}>ADD TO CART </Link> </button>
         )
     }
 
