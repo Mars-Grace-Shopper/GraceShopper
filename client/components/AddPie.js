@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { addPie, fetchPies } from '../store/allPies';
 import { me } from '../store/auth.js';
 
-class AddProduct extends React.Component {
+class AddPie extends React.Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      origin: '',
+      countryOrigin: '',
       type: '',
       description: '',
       isAdmin: false,
@@ -32,7 +32,7 @@ class AddProduct extends React.Component {
     const value = event.target.value;
 
     if (className === 'name') this.setState({ ...this.state, name: value });
-    if (className === 'origin') this.setState({ ...this.state, origin: value });
+    if (className === 'countryOrigin') this.setState({ ...this.state, countryOrigin: value });
     if (className === 'type') this.setState({ ...this.state, type: value });
     if (className === 'description')
       this.setState({ ...this.state, description: value });
@@ -64,12 +64,16 @@ class AddProduct extends React.Component {
           <input name='name' placeholder='Required' onChange={handleChange} />
           <br />
           <br />
-          <label htmlFor='origin'>ORIGIN </label>
-          <input name='origin' onChange={handleChange} />
+          <label htmlFor='countryOrigin'>countryOrigin </label>
+          <input name='countryOrigin' placeholder='Required' onChange={handleChange} />
           <br />
           <br />
-          <label htmlFor='type'>TYPE </label>
-          <input name='type' placeholder='Required' onChange={handleChange} />
+          <select onChange={handleChange} name='type'>
+                <option value="Savory">Savory</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Savory and sweet">Savory and Sweet</option>
+                <option value="Savory or sweet">Savory or Sweet</option>
+             </select>
           <br />
           <br />
           <label htmlFor='description'>DESCRIPTION </label>
@@ -77,11 +81,11 @@ class AddProduct extends React.Component {
           <br />
           <br />
           <label htmlFor='price'>PRICE </label>
-          <input name='price' onChange={handleChange} />
+          <input type="number" step='.01' min='0' max='99.99' onChange={handleChange} name='price'/>
           <br />
           <br />
-          <label htmlFor='quantity'>QUANTITY </label>
-          <input name='quantity' onChange={handleChange} />
+          <label htmlFor='stockQuantity'>QUANTITY </label>
+          <input type='number' step='1' min='0' onChange={this.handleChange} name='stockQuantity'/>
           <br />
           <br />
           <label htmlFor='thumbnailurl'>PICTURE</label>
@@ -112,4 +116,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(AddProduct);
+export default connect(mapState, mapDispatch)(AddPie);

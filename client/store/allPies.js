@@ -34,8 +34,15 @@ export const fetchPies = () => {
 export const addPie = (pie) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('/api/pies', pie);
-      dispatch(createPie(data));
+      const token = window.localStorage.getItem('token');
+      if (token) {
+      const { data } = await axios.post('/api/pies', pie, {
+        headers: {
+          authorization: token
+        }});
+        dispatch(createPie(data));
+      }
+      else throw new Error('unauthorized');
     } catch (error) {
       console.log(error);
     }

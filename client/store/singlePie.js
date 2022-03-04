@@ -3,7 +3,6 @@ import axios from 'axios';
 // ACTION TYPES:
 const SET_SINGLE_PIE = 'SET_SINGLE_PIE';
 
-
 // ACTION CREATORS:
 export const setSinglePie = (pie) => ({
   type: SET_SINGLE_PIE,
@@ -23,12 +22,26 @@ export const fetchSinglePie = (pieId) => {
 };
 
 export const updatePie = (updatedPie) => {
-  console.log("=======",updatedPie)
   return async (dispatch) => {
-   const {data} = await axios.put(`/api/pies/${updatedPie.id}`, updatedPie)
-   dispatch(setSinglePie(data));
-  }
-}
+    try {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const { data } = await axios.put(
+          `/api/pies/${updatedPie.id}`,
+          updatedPie,
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        dispatch(setSinglePie(data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 // INITIAL STATE:
 const initialState = {};

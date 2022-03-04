@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
 
-
 import EditPie from './EditPie';
 
 class SinglePieView extends Component {
@@ -18,7 +17,6 @@ class SinglePieView extends Component {
     this.decrement = this.decrement.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-
 
   componentDidMount() {
     this.props.fetchSinglePie(this.props.match.params.id);
@@ -39,37 +37,49 @@ class SinglePieView extends Component {
 
     if (this.state.editPieView === false) {
       return (
-        <div className='single-pie-view-container'>
-          <div className='back-and-img'>
-            <Link to='/pies'>Back</Link>
-            <br />
-            <img
-              className='single-view-img'
-              src={this.props.pie.thumbnailurl}
-            />
+        <div className='single-pie'>
+          <div className='single-pie-links'>
+            <Link to='/pies'><button className='back-button'>&#8249; BACK</button></Link>
+            <Link to='/editpie'><button className='edit-button'>EDIT</button></Link>
           </div>
-
-          <div className='single-view-text-container'>
-            <h1>{pie.name}</h1>
-            <h2>${pie.price}</h2>
-            <h2>{pie.origin}</h2>
-            <h3>{pie.description}</h3>
-            <div className='quantity'>
-              <button type='button' className='decrement' onClick={decrement}>
-                -
-              </button>
-              <h3>{this.state.quantity}</h3>
-              <button type='button' className='increment' onClick={increment}>
-                +
-              </button>
+          <div className='single-pie-view-container'>
+            <div className='img-box'>
+              <img className='single-view-img' src={pie.thumbnailurl} />
+              <h4>TYPE: <span style={{ color: "#3961e7" }}>{pie.type}</span></h4>
             </div>
-            <button type='button' className='add-to-cart'>
-              ADD TO CART
-            </button>
+            <div className='single-view-text-container'>
+              <div className='name-price'>
+                <h2>{pie.name}</h2>
+                <h2>${pie.price}</h2>
+              </div>
+              <h4>{pie.countryOrigin}</h4>
+              <p>{pie.description}</p>
+              <div className='quantity-box'>
+                <div className='quantity'>
+                  <button
+                    type='button'
+                    className='decrement'
+                    onClick={decrement}
+                  >
+                    -
+                  </button>
+                  <h3>{this.state.quantity}</h3>
+                  <button
+                    type='button'
+                    className='increment'
+                    onClick={increment}
+                  >
+                    +
+                  </button>
+                </div>
+                <button type='button' className='add-to-cart'>
+                  ADD TO CART
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       );
-
     }
     return <EditPie pie={this.props.pie} click={handleClick} />;
   }

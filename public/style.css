@@ -12,6 +12,7 @@
 body {
   width: 100%;
   font-family: sans-serif;
+  background-color: #fafafa;
 }
 
 label {
@@ -41,7 +42,7 @@ label {
   background: radial-gradient(
     circle at 50% 0%,
     #3961e7 25%,
-    white 26%,
+    #fafafa 26%,
     transparent
   );
   background-size: 30px 120px;
@@ -69,7 +70,7 @@ label {
 #navbar a:link,
 #navbar a:active,
 #navbar a:visited {
-  margin: 70px 10px 40px 10px;
+  margin: 50px 10px 40px 10px;
   display: inline-block;
   text-align: center;
   font-family: 'Fredoka', sans-serif;
@@ -90,10 +91,9 @@ label {
 
 #navbar img {
   position: absolute;
-  margin: 60px 0px 40px 0px;
   width: 30px;
   height: 30px;
-  right: 50px;
+  float: right;
 }
 
 /* ---------------------------- HOMEPAGE */
@@ -130,56 +130,297 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 50px;
+  align-content: flex-start;
   flex-wrap: wrap;
+  margin: 50px;
+}
+
+.single-pie-item {
+  display: flex;
+  position: relative;
+  text-align: center;
+  flex-direction: column;
+  align-content: flex-start;
+  word-wrap: break-word;
+  width: 200px;
+  height: 280px;
+  padding-top: 20px;
+  margin: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.single-pie-item a:link {
+  margin: 0;
+  padding: 0;
+}
+
+.single-pie-item img {
+  width: 150px;
+  height: 130px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.single-pie-item p {
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+}
+
+.pie-name {
+  font-family: 'Fredoka', sans-serif;
+  margin: 10px 18px 0px 18px;
+}
+
+.pie-price {
+  color: #3961e7;
+  margin: 10px 15px 20px 15px;
+  margin-top: auto;
+}
+
+.single-pie-item button {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  bottom: 15px;
+  right: 15px;
+  font-size: 12px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  background-color: #3961e7;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* ---------------------------- ALL PIES MENU */
+
+.all-pies-menu {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 70px 50px 70px;
+}
+
+.all-pies-menu button {
+  width: 150px;
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
+}
+
+.filter-search {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter select {
+  width: 170px;
+  height: 35px;
+  padding: 0px 5px 0px 5px;
+  color: rgb(57, 97, 231);
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  outline-width: 0;
+  cursor: pointer;
+}
+
+.filter-search input {
+  width: 250px;
+  height: 35px;
+  margin: 0px 0px 0px 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  outline-width: 0;
 }
 
 /* ---------------------------- SINGLE PIE */
+
+.single-pie {
+  display: flex;
+  flex-direction: column;
+}
+
+.single-pie-links {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.single-pie-links button {
+  width: 70px;
+  margin: 0px 20px 0px 20px;
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.back-button {
+  color: #3961e7;
+  background-color: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+.edit-button {
+  color: white;
+  background-color: #3961e7;
+}
 
 .single-pie-view-container {
   display: flex;
   flex-wrap: no-wrap;
   align-content: center;
   justify-content: center;
+  margin-top: 3%;
+  padding: 0px 50px 0px 50px;
+}
+
+.img-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 30px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.img-box h4 {
+  font-family: "Fredoka", sans-serif;
+  margin: 40px 0px 0px 0px;
 }
 
 .single-view-img {
-  width: 300px;
+  width: 220px;
   height: 200px;
-}
-
-.back-and-img {
-  display: inline-block;
-  border: 2px solid red;
+  border-radius: 2px;
 }
 
 .single-view-text-container {
+  display: flex;
+  flex-direction: column;
   width: 500px;
-  border: 2px solid red;
-  padding-left: 30px;
+  padding: 0px 0px 0px 50px;
+}
+
+.single-view-text-container h4 {
+  margin: 20px 0px 0px 0px;
+  color: grey;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.name-price {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.name-price h2:first-child {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 30px;
+  width: 320px;
+}
+
+.name-price h2:nth-child(2) {
+  color: #3961e7;
+}
+
+.single-view-text-container p {
+  flex-grow: 1;
+  margin: 40px 0px 40px 0px;
+  line-height: 24px;
+}
+
+.quantity-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .quantity {
   display: flex;
-  margin: 0px 0px 0px 20px;
 }
 
-.quantity button {
-  width: 20px;
-  height: 20px;
-  margin: 0px 10px 0px 10px;
+.quantity h3 {
+  margin: 0;
+  padding: 0px 20px 0px 20px;
+  align-self: center;
 }
 
+.increment,
+.decrement {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
+}
 
-.single-pie-item {
+.add-to-cart {
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+}
+
+/* ---------------------------- LOGGED IN USER HOME */
+
+.logged-in-userhome {
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 400px;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0px 50px 0px 50px;
 }
 
-.item-pie-name {
-  align-self: flex-end;
+.logged-in-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
+.bio {
+  text-align: left;
+  line-height: 30px;
+}
+
+.logged-in-header button {
+  height: 20px;
+}
+
+.past-orders {
+  width: 500px;
+  height: 500px;
+  margin: 50px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}

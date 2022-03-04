@@ -20,4 +20,13 @@ const Cart = db.define("cart", {
   
   });
 
+// instance methods
+// https://sebhastian.com/sequelize-instance-methods/
+
+Cart.prototype.setPaidTrue = async function () {
+  await this.set('paid', true).save()
+  console.log('set order paid to true from Cart.prototype.setPaidTrue')
+};
+
+
 module.exports = Cart;

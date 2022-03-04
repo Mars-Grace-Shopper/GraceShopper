@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SinglePieItem from './SinglePieItem';
-import { FilterPieByFlavor } from './FilterMenus';
+import { FilterMenu } from './FilterMenu';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
 import { Link } from 'react-router-dom';
@@ -19,8 +19,18 @@ export class AllPies extends Component {
 
     return (
       <div className='all-pies-view'>
-        <Link to='/addproduct'><button>ADD PRODUCT</button></Link>
-        <FilterPieByFlavor />
+        <div className='all-pies-menu'>
+          <div className='filter-search'>
+            <FilterMenu />
+            <input
+              type='text'
+              placeholder='Search for a pie...'
+            />
+          </div>
+          <Link to='/addpie'>
+            <button>ADD PRODUCT</button>
+          </Link>
+        </div>
         <div className='all-pies-item-container'>
           {[]
             .concat(pies)

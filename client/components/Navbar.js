@@ -21,8 +21,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <a href='#' onClick={handleClick}>
             LOGOUT
           </a>
-          {/* <input type='text' placeholder='Search..' /> */}
-
           {/* will change the link for cart later */}
           <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
@@ -33,8 +31,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/pies'>PIES</Link>
           <Link to='/login'>LOGIN</Link>
           <Link to='/signup'>SIGN UP</Link>
-          {/* <input type='text' placeholder='Search..' /> */}
-
           {/* will change the link for cart later */}
           <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
