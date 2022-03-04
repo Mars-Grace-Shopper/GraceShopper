@@ -5,8 +5,33 @@ import { authenticate } from '../store';
 /**
  * COMPONENT
  */
-const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+const AuthForm = props => {
+  const {name, displayName, handleSubmit, error} = props
+  let signUpInfo
+  if (name === "signup") {
+    signUpInfo = (
+      <div>
+        <div>
+          <label htmlFor="firstName">
+            <small>First Name</small>
+          </label>
+          <input name="firstName" type="text" />
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            <small>Last Name</small>
+          </label>
+          <input name="lastName" type="text" />
+        </div>
+        <div>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="email" />
+          </div>
+      </div> 
+    )
+  }
 
   return (
     <div>
@@ -23,6 +48,7 @@ const AuthForm = (props) => {
           </label>
           <input name='password' type='password' />
         </div>
+          {signUpInfo}
         <div>
           <button type='submit'>{displayName}</button>
         </div>
@@ -58,14 +84,24 @@ const mapSignup = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault();
-      const formName = evt.target.name;
-      const username = evt.target.username.value;
-      const password = evt.target.password.value;
-      dispatch(authenticate(username, password, formName));
-    },
-  };
-};
+      evt.preventDefault()
+      const userObj = {}
+      const formName = evt.target.name
+      
+      userObj.username = evt.target.username.value
+      userObj.password = evt.target.password.value
+
+      if (formName === "signup") {
+        userObj.email = evt.target.email.value
+        userObj.firstName = evt.target.firstName.value
+        userObj.lastName = evt.target.lastName.value
+      }
+
+      dispatch(authenticate(userObj, formName))
+
+    }
+  }
+}
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
