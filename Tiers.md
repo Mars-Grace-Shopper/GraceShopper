@@ -5,7 +5,7 @@
 ### As a customer/visitor, I want to be able to:
 [x] access a deployed version of the website so I can browse and purchase products.
 [x] view all available products so I can pick from a variety.
-[] view a single product so I can see more details.
+[x] view a single product so I can see more details.
 [] add a product to my cart so I can collect my desired products in one place.
 [] edit my cart if I change my mind:
   [] change the quantity of a product in my cart.

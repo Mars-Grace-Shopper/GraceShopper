@@ -6,7 +6,8 @@ import UserHome from './components/UserHome';
 import HomePage from './components/HomePage'
 import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
-import AddProduct from './components/AddProduct';
+import AddPie from './components/AddPie';
+import EditPie from './components/EditPie'
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
@@ -30,7 +31,8 @@ class Routes extends Component {
             <Route path='/userhome' exact component={UserHome}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
-            <Route path='/addproduct' exact component={AddProduct}/>
+            <Route path='/addpie' exact component={AddPie}/>
+            <Route path='/editpie' exact component={EditPie}/>
             <Route path='/cart' exact component={Cart}/>
             <Redirect to="/" />
             <Route path="/error" exact component={ErrorPage}/>

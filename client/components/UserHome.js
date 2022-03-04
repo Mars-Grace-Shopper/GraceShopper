@@ -6,12 +6,20 @@ import { connect } from 'react-redux';
  */
 export const UserHome = (props) => {
   const { username, type } = props;
-  console.log(props)
+  console.log(props);
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
-      <h4>Status: {type}</h4>
+    <div className='logged-in-userhome'>
+      <div className='logged-in-header'>
+        <div className='bio'>
+        <h3>Welcome, {username}!</h3>
+        <h4>Status: {type}</h4>
+        </div>
+        <button type='button'>EDIT ACCOUNT</button>
+      </div>
+      <div className='past-orders'>
+        <h3>PAST ORDERS</h3>
+      </div>
     </div>
   );
 };
@@ -26,4 +34,4 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(UserHome);
