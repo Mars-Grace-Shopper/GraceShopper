@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
 
 import EditPie from './EditPie';
+import AddToCart from './AddToCart';
 
 class SinglePieView extends Component {
   constructor() {
@@ -22,9 +23,15 @@ class SinglePieView extends Component {
     this.props.fetchSinglePie(this.props.match.params.id);
   }
 
-  increment() {}
+  increment() {
+    this.setState({ ...this.state, quantity: this.state.quantity + 1})
+  }
 
-  decrement() {}
+  decrement() {
+    if (this.state.quantity > 0) {
+      this.setState({ ...this.state, quantity: this.state.quantity - 1})
+    }
+  }
 
   handleClick() {
     this.setState({ ...this.state, editPieView: !this.state.editPieView });
@@ -72,16 +79,14 @@ class SinglePieView extends Component {
                     +
                   </button>
                 </div>
-                <button type='button' className='add-to-cart'>
-                  ADD TO CART
-                </button>
+                <AddToCart pie={pie} quantity={this.state.quantity}/>
               </div>
             </div>
           </div>
         </div>
       );
     }
-    return <EditPie pie={this.props.pie} click={handleClick} />;
+    return <EditPie pie={this.props.pie} click={handleClick} className='add-to-cart'/>;
   }
 }
 
