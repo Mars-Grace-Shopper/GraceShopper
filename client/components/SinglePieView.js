@@ -10,7 +10,7 @@ class SinglePieView extends Component {
   constructor() {
     super();
     this.state = {
-      editPieView: false,
+      isAdmin: false,
       quantity: 1,
     };
     this.increment = this.increment.bind(this);
@@ -20,6 +20,8 @@ class SinglePieView extends Component {
 
   componentDidMount() {
     this.props.fetchSinglePie(this.props.match.params.id);
+    if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true})
+  
   }
 
   increment() {}
@@ -34,13 +36,14 @@ class SinglePieView extends Component {
   render() {
     const { increment, decrement, handleClick } = this;
     const pie = this.props.pie;
-
-    if (this.state.editPieView === false) {
+    let editButton = <div></div>
+    if(this.state.isAdmin) editButton = <Link to='/editpie'><button className='edit-button'>EDIT</button></Link>
+    
       return (
         <div className='single-pie'>
           <div className='single-pie-links'>
             <Link to='/pies'><button className='back-button'>&#8249; BACK</button></Link>
-            <Link to='/editpie'><button className='edit-button'>EDIT</button></Link>
+            {editButton}
           </div>
           <div className='single-pie-view-container'>
             <div className='img-box'>
@@ -80,14 +83,13 @@ class SinglePieView extends Component {
           </div>
         </div>
       );
-    }
-    return <EditPie pie={this.props.pie} click={handleClick} />;
   }
 }
 
 const mapState = (state) => {
   return {
     pie: state.pie,
+    auth: state.auth
   };
 };
 
