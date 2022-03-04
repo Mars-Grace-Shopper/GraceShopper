@@ -49,6 +49,22 @@ export const addPie = (pie) => {
   };
 };
 
+export const deletePie = (pieId) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+      await axios.delete(`/api/pies/${pieId}`,{
+        headers: {
+          authorization: token
+        }});
+      dispatch(fetchPies());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 //INITIAL STATE:
 const initialState = [];
 

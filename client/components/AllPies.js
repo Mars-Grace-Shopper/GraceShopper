@@ -4,14 +4,24 @@ import { FilterMenu } from './FilterMenu';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
 import { Link } from 'react-router-dom';
+import { deletePie } from '../store/allPies';
 
 export class AllPies extends Component {
   constructor() {
     super();
+    this.state = {
+      isAdmin: false,
+    }
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchPies();
+    if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true})
+  }
+
+  handleDelete(id){
+    this.props.deletePie(id);
   }
 
   render() {
@@ -36,7 +46,7 @@ export class AllPies extends Component {
             .concat(pies)
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((pie) => (
-              <SinglePieItem key={pie.id} pie={pie} />
+              <SinglePieItem key={pie.id} pie={pie} isAdmin={this.state.isAdmin} delete={this.handleDelete}/>
             ))}
         </div>
       </div>
@@ -47,12 +57,14 @@ export class AllPies extends Component {
 const mapState = (state) => {
   return {
     pies: state.pies,
-  };
+    auth: state.auth
+}
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchPies: () => dispatch(fetchPies()),
+    deletePie: (id) => dispatch(deletePie(id)),
   };
 };
 

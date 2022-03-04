@@ -54,3 +54,21 @@ router.post('/', requireAdminToken, async (req, res, next) => {
     next(error);
   }
 });
+
+
+// DELETE /api/pies/:id
+router.delete('/:id', requireAdminToken, async (req, res, next) => {
+  try {
+    if(!req.admin) throw new Error('Unauthorized')
+    const pie = await Pie.findByPk(req.params.id);
+    if (!pie) {
+      let err = new Error("Cannot remove pie - ID not found!");
+      err.status = 404;
+      next(err);
+    }
+    await pie.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
