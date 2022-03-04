@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
+const requireAdminToken = require('./gatekeeper')
 
-router.get('/', async (req, res, next) => {
+// Only Admin can view user information:
+router.get('/', requireAdminToken, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
