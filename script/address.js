@@ -53,7 +53,4 @@ const main = async () => {
 
 module.exports = main
 
-// to use later:
-// const genAddr = require('./address.js');
-// addrObj = genAddr()
 
