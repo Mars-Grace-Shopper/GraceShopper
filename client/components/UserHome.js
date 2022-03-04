@@ -6,16 +6,13 @@ import { Link } from 'react-router-dom'
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const { firstName } = props;
-  const { type } = props;
+  const { username, type } = props;
+  console.log(props)
 
   return (
     <div>
-      <h3>Welcome back, {firstName}!</h3>
-      <div>Status: {type} </div>
-      {/* <Link><button> Edit Account </button></Link> */}
-      <div>Order History: </div>
-      {/* Need to map out past orders here */}
+      <h3>Welcome, {username}</h3>
+      <h4>Status: {type}</h4>
     </div>
   );
 };
@@ -25,8 +22,8 @@ export const UserHome = (props) => {
  */
 const mapState = (state) => {
   return {
-    firstName: state.auth.firstName,
-    type: state.auth.type
+    username: state.auth.username,
+    type: state.auth.type,
   };
 };
 

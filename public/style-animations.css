@@ -1,0 +1,42 @@
+/* ---------------------------- FONTS */
+
+@import url(https://fonts.googleapis.com/css?family=Fredoka);
+
+/* ---------------------------- HOMEPAGE IMAGE CAROUSEL */
+
+.featured-items-container {
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  animation: slide 30s infinite;
+}
+
+.carousel-wrapper img {
+  height: 400px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(40%);
+  }
+  25% {
+    transform: translateX(-40%);
+  }
+  50% {
+    transform: translateX(40%);
+  }
+  75% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(40%);
+  }
+}

@@ -1,32 +1,130 @@
-body {
-  font-family: sans-serif;
+/* ---------------------------- FONTS */
+
+@import url(https://fonts.googleapis.com/css?family=Fredoka);
+
+/* ---------------------------- GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
+body {
+  width: 100%;
+  font-family: sans-serif;
 }
 
 label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-  font-size: 30px;
-}
+/* ---------------------------- NAV BAR */
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
-.featured-items-container {
+.header {
   display: flex;
-  height: 100px;
-  border: 10px solid black;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
   align-items: center;
+  background-color: rgb(57, 97, 231);
+  color: white;
+  position: relative;
 }
+
+.header::after {
+  position: absolute;
+  bottom: -50px;
+  left: 0px;
+  width: 100%;
+  content: ' ';
+  background: radial-gradient(
+    circle at 50% 0%,
+    #3961e7 25%,
+    white 26%,
+    transparent
+  );
+  background-size: 30px 120px;
+  height: 50px;
+  background-repeat: repeat-x;
+}
+
+.header h1 {
+  margin: 20px 0px 15px 0px;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.header h1 a {
+  color: white;
+  text-decoration: none;
+}
+
+.header h2 {
+  margin: 0px;
+  font-size: 12px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+}
+
+#navbar a:link,
+#navbar a:active,
+#navbar a:visited {
+  margin: 70px 10px 40px 10px;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
+  color: rgb(57, 97, 231);
+  text-decoration: none;
+}
+
+#navbar {
+  text-align: center;
+}
+
+#navbar a:hover {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+#navbar img {
+  position: absolute;
+  margin: 60px 0px 40px 0px;
+  width: 30px;
+  height: 30px;
+  right: 50px;
+}
+
+/* ---------------------------- HOMEPAGE */
+
+.introductions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.introductions h1 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.intro-para {
+  width: 50%;
+  position: relative;
+  margin-top: 30px;
+}
+
+.intro-para p {
+  width: 100%;
+  position: relative;
+  word-wrap: break-word;
+  line-height: 28px;
+}
+
+/* ---------------------------- ALL PIES */
 
 .all-pies-item-container {
   display: flex;
@@ -34,34 +132,54 @@ form div {
   justify-content: space-between;
   padding: 50px;
   flex-wrap: wrap;
-
 }
 
+/* ---------------------------- SINGLE PIE */
+
+.single-pie-view-container {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.single-view-img {
+  width: 300px;
+  height: 200px;
+}
+
+.back-and-img {
+  display: inline-block;
+  border: 2px solid red;
+}
+
+.single-view-text-container {
+  width: 500px;
+  border: 2px solid red;
+  padding-left: 30px;
+}
+
+.quantity {
+  display: flex;
+  margin: 0px 0px 0px 20px;
+}
+
+.quantity button {
+  width: 20px;
+  height: 20px;
+  margin: 0px 10px 0px 10px;
+}
+
+
 .single-pie-item {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  width:200px;
+  width: 200px;
   height: 400px;
   position: relative;
-
 }
 
 .item-pie-name {
   align-self: flex-end;
 }
 
-.single-pie-view-container {
-    display: flex;
-    flex-direction: row;
-
-}
-.single-view-img {
-  flex-basis: 1;
-}
-
-.single-view-text-container {
-  display: flex; 
-  flex-direction: column;
-  margin: 20px;
-  flex-basis: 1;
-}

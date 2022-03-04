@@ -10,7 +10,6 @@ export default function SinglePieItem(props) {
         <div className='single-pie-item'>
             <Link to= {`/pies/${props.pie.id}`}><img style={{width: '200px'}} src={props.pie.thumbnailurl}/></Link>
             <h3 className='item-pie-name'>{props.pie.name}</h3>
-            
         </div>
     )
 }
