@@ -68,8 +68,12 @@ class AddPie extends React.Component {
           <input name='countryOrigin' placeholder='Required' onChange={handleChange} />
           <br />
           <br />
-          <label htmlFor='type'>TYPE </label>
-          <input name='type' placeholder='Required' onChange={handleChange} />
+          <select onChange={handleChange} name='type'>
+                <option value="Savory">Savory</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Savory and sweet">Savory and Sweet</option>
+                <option value="Savory or sweet">Savory or Sweet</option>
+             </select>
           <br />
           <br />
           <label htmlFor='description'>DESCRIPTION </label>
@@ -77,11 +81,11 @@ class AddPie extends React.Component {
           <br />
           <br />
           <label htmlFor='price'>PRICE </label>
-          <input name='price' onChange={handleChange} />
+          <input type="number" step='.01' min='0' max='99.99' onChange={handleChange} name='price'/>
           <br />
           <br />
-          <label htmlFor='quantity'>QUANTITY </label>
-          <input name='quantity' onChange={handleChange} />
+          <label htmlFor='stockQuantity'>QUANTITY </label>
+          <input type='number' step='1' min='0' onChange={this.handleChange} name='stockQuantity'/>
           <br />
           <br />
           <label htmlFor='thumbnailurl'>PICTURE</label>

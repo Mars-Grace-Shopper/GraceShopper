@@ -22,7 +22,7 @@ for (let i = 0; i < htmljson.length; i++) {
   if (imghtml.length > 0) {
     tmpThumb = 'https:' + imghtml.split(' ').filter(w => w.includes('src='))[0].split('"')[1]
   } else {
-    tmpThumb = '/default.png'
+    tmpThumb = "https://www.simplyrecipes.com/thmb/s874U4AjfQBxYGz2nj5SWc-kYLg=/648x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Lattice-Pie-Crust-LEAD-1-1e320e0b6b864abbb0d038042a0af55b.jpg"
   }
 
   if (parsedjson[i].Type == 'Sweet or savory') {
