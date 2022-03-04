@@ -26,7 +26,6 @@ class EditPie extends Component {
     event.persist();
     event.preventDefault();
     const value = event.target.value;
-    console.log(value);
     if (event.target.name === 'name')
       await this.setState({ ...this.state, name: value });
     if (event.target.name === 'country')
@@ -41,14 +40,15 @@ class EditPie extends Component {
       await this.setState({ ...this.state, price: value });
     if (event.target.name === 'stockQuantity')
       await this.setState({ ...this.state, stockQuantity: value });
-    console.log(this.state.type);
+    
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const pie = this.props.pie;
     this.props.updatePie({ ...this.state, id: pie.id });
-    this.props.click();
+    console.log(this.props.history)
+    this.props.history.goBack()
   }
 
   render() {
