@@ -1,3 +1,4 @@
+const { models: { User }} = require('../db')
 const requireAdminToken = async (req, res, next) => {
     try {
       const token = req.headers.authorization;
@@ -7,7 +8,7 @@ const requireAdminToken = async (req, res, next) => {
     } catch(error) {
       next(error);
     }
-  };
+};
 
 
-  module.exports = requireAdminToken
+module.exports = requireAdminToken
