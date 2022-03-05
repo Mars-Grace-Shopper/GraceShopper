@@ -67,26 +67,29 @@ label {
   letter-spacing: 2px;
 }
 
+#navbar {
+  text-align: center;
+}
+
 #navbar a:link,
 #navbar a:active,
 #navbar a:visited {
+  position: relative;
   margin: 50px 10px 40px 10px;
   display: inline-block;
-  text-align: center;
   font-family: 'Fredoka', sans-serif;
   font-size: 20px;
   font-weight: bolder;
   color: rgb(57, 97, 231);
   text-decoration: none;
-}
-
-#navbar {
-  text-align: center;
+  top: 0px;
+  transition: top ease 0.5s;
 }
 
 #navbar a:hover {
   text-decoration: underline;
-  text-underline-offset: 8px;
+  text-underline-offset: 5px;
+  top: -5px;
 }
 
 #navbar img {
@@ -149,6 +152,12 @@ label {
   background-color: white;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+  top: 0px;
+  transition: top ease 0.5s;
+}
+
+.single-pie-item:hover {
+  top: -10px;
 }
 
 .single-pie-item a:link {
@@ -259,7 +268,8 @@ label {
   margin-bottom: 30px;
 }
 
-.single-pie-links button {
+.single-pie-links .back-button,
+.single-pie-links .edit-button {
   width: 70px;
   margin: 0px 20px 0px 20px;
   height: 35px;
@@ -270,14 +280,13 @@ label {
   cursor: pointer;
 }
 
-.back-button {
+.single-pie-links .back-button {
   color: #3961e7;
   background-color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-
 }
 
-.edit-button {
+.single-pie-links .edit-button {
   color: white;
   background-color: #3961e7;
 }
@@ -303,7 +312,7 @@ label {
 }
 
 .img-box h4 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin: 40px 0px 0px 0px;
 }
 
@@ -376,6 +385,7 @@ label {
   border-radius: 2px;
   background-color: #3961e7;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart {
@@ -386,6 +396,159 @@ label {
   color: white;
   border: none;
   border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.increment:hover,
+.decrement:hover {
+  background-color: #77a9f3;
+}
+
+.add-to-cart:hover {
+  background-color: #77a9f3;
+}
+
+/* ---------------------------- EDIT / ADD FORM */
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 50px 0px 50px;
+}
+
+.title-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: red;
+  word-wrap: break-word;
+  width: 200px;
+  height: 300px;
+  padding-top: 20px;
+  margin: 20px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 10%);
+  border-radius: 3px;
+}
+
+.title img {
+  width: 150px;
+  height: 130px;
+}
+
+.title p {
+  margin: 15px 18px 0px 18px;
+  letter-spacing: 2px;
+  font-weight: bolder;
+  color: #8a8a8a;
+}
+
+.title h2 {
+  font-family: 'Fredoka', sans-serif;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin: 0px 18px 0px 18px;
+}
+
+.form-box input,
+.form-box select {
+  width: 100%;
+  outline-width: 0;
+  height: 35px;
+  color: #3961e7;;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 10px 0px 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.form-box input::placeholder {
+  color: #3961e7;
+}
+
+.form-box label {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bolder;
+  color: #4b4b4b;
+  margin: 0px 0px 5px 0px;
+}
+
+.field-box {
+  display: flex;
+  width: 800px;
+  margin-top: 7%;
+}
+
+.left-field,
+.right-field {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px 0px 10px 0px;
+  flex: 1 1;
+  justify-content: space-between;
+}
+
+.price-qty {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-qty label {
+  margin: 0px 0px 14px 0px;
+}
+
+.price {
+  margin-right: 20px;
+  width: 50%;
+}
+
+.qty {
+  width: 50%;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.form-box .back-button,
+.form-box .edit-submit {
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.form-box .back-button {
+  width: 70px;
+  color: #3961e7;
+  background-color: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form-box .edit-submit {
+  width: 80px;
+  color: white;
   background-color: #3961e7;
 }
 

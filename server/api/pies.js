@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const {models: { Pie, User }} = require('../db');
-const requireAdminToken = require('./gatekeeper')
+const {
+  models: { Pie },
+} = require('../db');
+const requireAdminToken = require('./gatekeeper');
 module.exports = router;
 
 // GET /api/pies
@@ -23,21 +25,23 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id',requireAdminToken, async (req, res, next) => {
+// PUT /api/pies/:id to update a pie
+router.put('/:id', requireAdminToken, async (req, res, next) => {
   try {
-    if(!req.admin) throw new Error('Unauthorized')
+    if (!req.admin) throw new Error('Unauthorized');
     const id = req.params.id;
-    const pie = await Pie.findByPk(id)
+    const pie = await Pie.findByPk(id);
     await pie.update(req.body);
     res.status(204).end();
   } catch (err) {
     next(err);
-  }}
-)
+  }
+});
+
 // POST /api/pies to add a new pie
 router.post('/', requireAdminToken, async (req, res, next) => {
   try {
-    if(!req.admin) throw new Error('Unauthorized')
+    if (!req.admin) throw new Error('Unauthorized');
     const newPie = await Pie.create(req.body);
     res.send(newPie);
   } catch (error) {
@@ -45,14 +49,13 @@ router.post('/', requireAdminToken, async (req, res, next) => {
   }
 });
 
-
 // DELETE /api/pies/:id
 router.delete('/:id', requireAdminToken, async (req, res, next) => {
   try {
-    if(!req.admin) throw new Error('Unauthorized')
+    if (!req.admin) throw new Error('Unauthorized');
     const pie = await Pie.findByPk(req.params.id);
     if (!pie) {
-      let err = new Error("Cannot remove pie - ID not found!");
+      let err = new Error('Cannot remove pie - ID not found!');
       err.status = 404;
       next(err);
     }

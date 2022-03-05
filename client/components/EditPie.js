@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { updatePie } from '../store/singlePie';
 
 class EditPie extends Component {
@@ -25,111 +26,150 @@ class EditPie extends Component {
   async handleChange(event) {
     event.persist();
     event.preventDefault();
+    const className = event.target.className;
     const value = event.target.value;
-    if (event.target.name === 'name')
-      await this.setState({ ...this.state, name: value });
-    if (event.target.name === 'country')
-      await this.setState({ ...this.state, countryOrigin: value });
-    if (event.target.name === 'type')
-      await this.setState({ ...this.state, type: value });
-    if (event.target.name === 'description')
-      await this.setState({ ...this.state, description: value });
-    if (event.target.name === 'thumbnailurl')
-      await this.setState({ ...this.state, thumbnailurl: value });
-    if (event.target.name === 'price')
-      await this.setState({ ...this.state, price: value });
-    if (event.target.name === 'stockQuantity')
-      await this.setState({ ...this.state, stockQuantity: value });
     
+    if (className === 'name')
+      await this.setState({ ...this.state, name: value });
+    if (className === 'country')
+      await this.setState({ ...this.state, countryOrigin: value });
+    if (className === 'type')
+      await this.setState({ ...this.state, type: value });
+    if (className === 'description')
+      await this.setState({ ...this.state, description: value });
+    if (className === 'thumbnailurl')
+      await this.setState({ ...this.state, thumbnailurl: value });
+    if (className === 'price')
+      await this.setState({ ...this.state, price: value });
+    if (className === 'stockQuantity')
+      await this.setState({ ...this.state, stockQuantity: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const pie = this.props.pie;
     this.props.updatePie({ ...this.state, id: pie.id });
-    console.log(this.props.history)
-    this.props.history.goBack()
+    this.props.history.goBack();
   }
 
   render() {
+    const { handleSubmit, handleChange } = this;
     const pie = this.props.pie;
+    let price = this.props.pie.price;
+    price = Number(price / 100).toFixed(2);
+
+    const spanStyle = {
+      color: 'red',
+      fontSize: '12px',
+      letterSpacing: '0.5px',
+      fontWeight: 'normal',
+    };
+    const required = <span style={spanStyle}>*Required</span>;
+
     return (
-      <form id='add-edit-form' onSubmit={this.handleSubmit}>
-        <label htmlFor='name'>NAME </label>
-        <input
-          onChange={this.handleChange}
-          name='name'
-          placeholder={pie.name}
-        />
-        <br />
-        <br />
-        <label htmlFor='country'>COUNTRY </label>
-        <input
-          onChange={this.handleChange}
-          name='country'
-          placeholder={pie.countryOrigin}
-        />
-        <br />
-        <br />
-        <select
-          defaultValue={pie.type}
-          onChange={this.handleChange}
-          name='type'
-        >
-          <option value='Savory'>Savory</option>
-          <option value='Sweet'>Sweet</option>
-          <option value='Savory and sweet'>Savory and Sweet</option>
-          <option value='Savory or sweet'>Savory or Sweet</option>
-        </select>
-        <br />
-        <br />
-        <label htmlFor='description'>DESCRIPTION </label>
-        <input
-          onChange={this.handleChange}
-          name='description'
-          placeholder={pie.description}
-        />
-        <br />
-        <br />
-        <label htmlFor='price'>PRICE </label>
-        <input
-          type='number'
-          step='.01'
-          min='0'
-          max='99.99'
-          onChange={this.handleChange}
-          name='price'
-          placeholder={pie.price}
-        />
-        <br />
-        <br />
-        <label htmlFor='quantity'>QUANTITY </label>
-        <input
-          type='number'
-          step='1'
-          min='0'
-          onChange={this.handleChange}
-          name='stockQuantity'
-          placeholder={pie.stockQuantity}
-        />
-        <br />
-        {/* <br />
-                <label htmlFor='ingredients'>INGREDIENTS </label>
-                     <input name='ingredients' />
+      <div className='form-box'>
+        <form className='add-edit-form' onSubmit={handleSubmit}>
+          <div className='field-box'>
+            <div className='title-box'>
+              <div className='title'>
+                <div className='pie-card'>
+                  <img src={pie.thumbnailurl} />
+                  <p>EDITING</p>
+                </div>
+                <h2>{pie.name}</h2>
+              </div>
+            </div>
+            <div className='left-field'>
+              <label htmlFor='name'>
+                NAME {required}
+              </label>
+              <input
+                onChange={handleChange}
+                name='name'
+                placeholder={pie.name}
+              />
+              <br />
+              <br />
+              <label htmlFor='countryOrigin'>COUNTRY {required}</label>
+              <input
+                onChange={handleChange}
+                name='countryOrigin'
+                placeholder={pie.countryOrigin}
+              />
+              <br />
+              <br />
+              <label htmlFor='type'>TYPE {required}</label>
+              <select
+                defaultValue={pie.type}
+                onChange={handleChange}
+                name='type'
+              >
+                <option value='Savory'>Savory</option>
+                <option value='Sweet'>Sweet</option>
+                <option value='Savory and sweet'>Savory and Sweet</option>
+                <option value='Savory or sweet'>Savory or Sweet</option>
+              </select>
+            </div>
             <br />
-            <br /> */}
-        <label htmlFor='thumbnailurl'>PICTURE</label>
-        <input
-          onChange={this.handleChange}
-          name='thumbnailurl'
-          placeholder='Link an image!'
-        />
-        <br />
-        <br />
-        <button type='submit' id='add-edit-form-submit'>
-          Submit
-        </button>
-      </form>
+            <br />
+            <div className='right-field'>
+              <div className='price-qty'>
+                <div className='price'>
+                  <label htmlFor='price'>PRICE</label>
+                  <input
+                    type='number'
+                    step='.01'
+                    min='0'
+                    max='99.99'
+                    onChange={handleChange}
+                    name='price'
+                    placeholder={price}
+                  />
+                </div>
+                <br />
+                <br />
+                <div className='qty'>
+                  <label htmlFor='stockQuantity'>QUANTITY</label>
+                  <input
+                    type='number'
+                    step='1'
+                    min='0'
+                    onChange={handleChange}
+                    name='stockQuantity'
+                    placeholder={pie.stockQuantity}
+                  />
+                </div>
+              </div>
+              <br />
+              <br />
+              <label htmlFor='description'>DESCRIPTION</label>
+              <input
+                onChange={handleChange}
+                name='description'
+                placeholder={pie.description}
+              />
+              <br />
+              <br />
+              <label htmlFor='thumbnailurl'>PICTURE</label>
+              <input
+                onChange={handleChange}
+                name='thumbnailurl'
+                placeholder={pie.thumbnailurl}
+              />
+            </div>
+            <br />
+            <br />
+          </div>
+          <div className='edit-buttons'>
+            <Link to={`/pies/${pie.id}`}>
+              <button className='back-button'>&#8249; BACK</button>
+            </Link>
+            <button type='submit' className='edit-submit'>
+              SUBMIT
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
