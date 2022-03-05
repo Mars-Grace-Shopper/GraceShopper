@@ -68,14 +68,21 @@ label {
 }
 
 #navbar {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
+  align-items: center;
+  margin: 65px 70px 40px 70px;
 }
 
-#navbar a:link,
-#navbar a:active,
-#navbar a:visited {
+.links a {
+  margin: 0px 10px 0px 10px;
+}
+
+.links a:link,
+.links a:active,
+.links a:visited {
   position: relative;
-  margin: 50px 10px 40px 10px;
   display: inline-block;
   font-family: 'Fredoka', sans-serif;
   font-size: 20px;
@@ -86,18 +93,28 @@ label {
   transition: top ease 0.5s;
 }
 
-#navbar a:hover {
+.links a:hover {
   text-decoration: underline;
   text-underline-offset: 5px;
   top: -5px;
 }
 
-#navbar img {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  float: right;
+.nav-invisible {
+  width: 40px;
+  height: 40px;
 }
+
+.cart-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform .5s ease-in-out;
+}
+
+.cart-icon:hover {
+  transform: rotate(360deg);
+}
+
+
 
 /* ---------------------------- HOMEPAGE */
 
@@ -468,13 +485,12 @@ label {
   width: 100%;
   outline-width: 0;
   height: 35px;
-  color: #3961e7;;
+  color: #3961e7;
   background-color: white;
   border: none;
   border-radius: 5px;
   padding: 0px 10px 0px 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-
 }
 
 .form-box input::placeholder {

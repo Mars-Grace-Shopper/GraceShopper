@@ -12,8 +12,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <h2>INTERNATIONAL HOUSE OF PIE</h2>
     </div>
     <nav id="navbar">
+      <div className='nav-invisible'></div>
       {isLoggedIn ? (
-        <div>
+        <div className='links'>
           {/* The navbar will show these links after you log in */}
           <Link to='/'>HOME</Link>
           <Link to='/pies'>PIES</Link>
@@ -21,27 +22,22 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <a href='#' onClick={handleClick}>
             LOGOUT
           </a>
-          {/* will change the link for cart later */}
-          <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
       ) : (
-        <div>
+        <div className='links'>
           {/* The navbar will show these links before you log in */}
           <Link to='/'>HOME</Link>
           <Link to='/pies'>PIES</Link>
           <Link to='/login'>LOGIN</Link>
           <Link to='/signup'>SIGN UP</Link>
           {/* will change the link for cart later */}
-          <Link to='/cart'><img src='/cart.png' /></Link>
         </div>
       )}
+      <Link to='/cart' ><img src='/cart.png' className='cart-icon'/></Link>
     </nav>
   </div>
 );
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,

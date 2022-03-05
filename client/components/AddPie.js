@@ -52,8 +52,13 @@ class AddPie extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addPie({ ...this.state });
-    this.props.history.goBack();
+
+    if (this.state.type === '' || null) {
+      alert('Please pick a type!');
+    } else {
+      this.props.addPie({ ...this.state });
+      this.props.history.goBack();
+    }
   }
 
   render() {
@@ -78,15 +83,28 @@ class AddPie extends React.Component {
             </div>
             <div className='left-field'>
               <label htmlFor='name'>NAME {required}</label>
-              <input onChange={handleChange} name='name' />
+              <input
+                onChange={handleChange}
+                name='name'
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
+              />
               <br />
               <br />
               <label htmlFor='countryOrigin'>COUNTRY {required}</label>
-              <input onChange={handleChange} name='countryOrigin' />
+              <input
+                onChange={handleChange}
+                name='countryOrigin'
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
+              />
               <br />
               <br />
               <label htmlFor='type'>TYPE {required}</label>
-              <select defaultValue='Savory' onChange={handleChange} name='type'>
+              <select defaultValue='none' onChange={handleChange} name='type'>
+                <option value='none'>Pick a type!</option>
                 <option value='Savory'>Savory</option>
                 <option value='Sweet'>Sweet</option>
                 <option value='Savory and sweet'>Savory and Sweet</option>
