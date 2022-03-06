@@ -188,7 +188,7 @@ for (let i = 0; i < htmljson.length; i++) {
     type: tmpType,
     description:parsedjson[i].Description.replace(/\[\d*\]/g, ''),
     thumbnailurl: tmpThumb,
-    price: randomInt(700, 1000)
+    price: randomInt(1000, 10000)
   }
 
   tmpPie.countryCode = countryCode(tmpPie.countryOrigin);
