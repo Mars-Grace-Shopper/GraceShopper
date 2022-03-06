@@ -26,7 +26,8 @@ export class AllPies extends Component {
 
   render() {
     const pies = this.props.pies;
-
+    let addPie = <div></div>
+    if(this.state.isAdmin === true) addPie = <Link to='/addpie'><button>ADD PRODUCT</button></Link>
     return (
       <div className='all-pies-view'>
         <div className='all-pies-menu'>
@@ -37,9 +38,7 @@ export class AllPies extends Component {
               placeholder='Search for a pie...'
             />
           </div>
-          <Link to='/addpie'>
-            <button>ADD PRODUCT</button>
-          </Link>
+        {addPie}
         </div>
         <div className='all-pies-item-container'>
           {[]
