@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
-
 import EditPie from './EditPie';
 import AddToCart from './AddToCart';
 
@@ -19,7 +17,6 @@ class SinglePieView extends Component {
     };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -31,23 +28,22 @@ class SinglePieView extends Component {
   }
 
   increment() {
-    this.setState({ ...this.state, quantity: this.state.quantity + 1})
+    this.setState({ ...this.state, quantity: this.state.quantity + 1 });
   }
 
   decrement() {
-    if (this.state.quantity > 0) {
-      this.setState({ ...this.state, quantity: this.state.quantity - 1})
+    if (this.state.quantity > 1) {
+      this.setState({ ...this.state, quantity: this.state.quantity - 1 });
     }
   }
 
-  handleClick() {
-    this.setState({ ...this.state, editPieView: !this.state.editPieView });
-    this.props.fetchSinglePie(this.props.match.params.id);
-  }
-
   render() {
-    const { increment, decrement, handleClick } = this;
+    const { increment, decrement } = this;
     const pie = this.props.pie;
+
+    let price = pie.price;
+    price = Number(price / 100).toFixed(2);
+
     let editButton = <div></div>
     if(this.state.isAdmin) editButton = <Link to='/editpie'><button className='edit-button'>EDIT</button></Link>
 
@@ -106,7 +102,7 @@ class SinglePieView extends Component {
 const mapState = (state) => {
   return {
     pie: state.pie,
-    auth: state.auth
+    auth: state.auth,
   };
 };
 

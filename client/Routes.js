@@ -30,9 +30,9 @@ class Routes extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
             <Route path='/pies' exact component={AllPies}/>
-            <Route path='/pies/:id' component={SinglePieView}/>
+            <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>
-            <Route path='/editpie' exact component={EditPie}/>
+            <Route path='/pies/:id/editpie' exact component={EditPie}/>
             <Route path='/cart' exact component={Cart}/>
             <Redirect to="/" />
             <Route path="/error" exact component={ErrorPage}/>

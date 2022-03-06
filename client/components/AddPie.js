@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addPie, fetchPies } from '../store/allPies';
+import { Link } from 'react-router-dom';
 import { me } from '../store/auth.js';
 
 class AddPie extends React.Component {
@@ -9,7 +10,7 @@ class AddPie extends React.Component {
     this.state = {
       name: '',
       countryOrigin: '',
-      type: '',
+      type: null,
       description: '',
       isAdmin: false,
     };
@@ -32,7 +33,8 @@ class AddPie extends React.Component {
     const value = event.target.value;
 
     if (className === 'name') this.setState({ ...this.state, name: value });
-    if (className === 'countryOrigin') this.setState({ ...this.state, countryOrigin: value });
+    if (className === 'countryOrigin')
+      this.setState({ ...this.state, countryOrigin: value });
     if (className === 'type') this.setState({ ...this.state, type: value });
     if (className === 'description')
       this.setState({ ...this.state, description: value });
@@ -50,51 +52,113 @@ class AddPie extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addPie({ ...this.state });
-    this.props.history.push('/pies');
+
+    if (this.state.type === null) {
+      alert('Please pick a type!');
+    } else {
+      this.props.addPie({ ...this.state });
+      this.props.history.goBack();
+    }
   }
 
   render() {
     const { handleSubmit, handleChange } = this;
 
+    const spanStyle = {
+      color: 'red',
+      fontSize: '12px',
+      letterSpacing: '0.5px',
+      fontWeight: 'normal',
+    };
+    const required = <span style={spanStyle}>*Required</span>;
+
     return (
-      <div id='add-product'>
-        <form id='add-edit-form' onSubmit={handleSubmit}>
-          <label htmlFor='name'>NAME </label>
-          <input name='name' placeholder='Required' onChange={handleChange} />
-          <br />
-          <br />
-          <label htmlFor='countryOrigin'>countryOrigin </label>
-          <input name='countryOrigin' placeholder='Required' onChange={handleChange} />
-          <br />
-          <br />
-          <select onChange={handleChange} name='type'>
-                <option value="Savory">Savory</option>
-                <option value="Sweet">Sweet</option>
-                <option value="Savory and sweet">Savory and Sweet</option>
-                <option value="Savory or sweet">Savory or Sweet</option>
-             </select>
-          <br />
-          <br />
-          <label htmlFor='description'>DESCRIPTION </label>
-          <input name='description' onChange={handleChange} />
-          <br />
-          <br />
-          <label htmlFor='price'>PRICE </label>
-          <input type="number" step='.01' min='0' max='99.99' onChange={handleChange} name='price'/>
-          <br />
-          <br />
-          <label htmlFor='stockQuantity'>QUANTITY </label>
-          <input type='number' step='1' min='0' onChange={this.handleChange} name='stockQuantity'/>
-          <br />
-          <br />
-          <label htmlFor='thumbnailurl'>PICTURE</label>
-          <input name='thumbnailurl' onChange={handleChange} />
-          <br />
-          <br />
-          <button type='submit' id='add-edit-form-submit'>
-            SUBMIT
-          </button>
+      <div className='form-box'>
+        <form className='add-edit-form' onSubmit={handleSubmit}>
+          <div className='field-box'>
+            <div className='title-box'>
+              <div className='title' style={{ padding: '0px' }}>
+                <h2>Add a Pie!</h2>
+              </div>
+            </div>
+            <div className='left-field'>
+              <label htmlFor='name'>NAME {required}</label>
+              <input
+                onChange={handleChange}
+                name='name'
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
+              />
+              <br />
+              <br />
+              <label htmlFor='countryOrigin'>COUNTRY {required}</label>
+              <input
+                onChange={handleChange}
+                name='countryOrigin'
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
+              />
+              <br />
+              <br />
+              <label htmlFor='type'>TYPE {required}</label>
+              <select defaultValue='none' onChange={handleChange} name='type'>
+                <option value='none'>Pick a type!</option>
+                <option value='Savory'>Savory</option>
+                <option value='Sweet'>Sweet</option>
+                <option value='Savory and sweet'>Savory and Sweet</option>
+                <option value='Savory or sweet'>Savory or Sweet</option>
+              </select>
+            </div>
+            <br />
+            <br />
+            <div className='right-field'>
+              <div className='price-qty'>
+                <div className='price'>
+                  <label htmlFor='price'>PRICE</label>
+                  <input
+                    type='number'
+                    step='.01'
+                    min='0'
+                    max='99.99'
+                    onChange={handleChange}
+                    name='price'
+                  />
+                </div>
+                <br />
+                <br />
+                <div className='qty'>
+                  <label htmlFor='stockQuantity'>QUANTITY</label>
+                  <input
+                    type='number'
+                    step='1'
+                    min='0'
+                    onChange={handleChange}
+                    name='stockQuantity'
+                  />
+                </div>
+              </div>
+              <br />
+              <br />
+              <label htmlFor='description'>DESCRIPTION</label>
+              <input onChange={handleChange} name='description' />
+              <br />
+              <br />
+              <label htmlFor='thumbnailurl'>PICTURE</label>
+              <input onChange={handleChange} name='thumbnailurl' />
+            </div>
+            <br />
+            <br />
+          </div>
+          <div className='edit-buttons'>
+            <Link to='/pies'>
+              <button className='back-button'>&#8249; BACK</button>
+            </Link>
+            <button type='submit' className='edit-submit'>
+              SUBMIT
+            </button>
+          </div>
         </form>
       </div>
     );
