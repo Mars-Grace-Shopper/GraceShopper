@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class AddToCart extends React.Component {
-  constructor() {
-    super();
-    this.handleAddItem = this.handleAddItem.bind(this);
-  }
+    constructor() {
+        super();
+        this.handleAddItem = this.handleAddItem.bind(this);
+    }
 
-  handleAddItem() {
-    console.log('HIIII', this);
+    handleAddItem () {
+        let localCart = eval(localStorage.getItem("cart"));
+
+        if (!Array.isArray(localCart)) {
+            localCart = []
+        }
 
     let localCart = eval(localStorage.getItem('cart'));
 
@@ -30,8 +33,9 @@ class AddToCart extends React.Component {
     }
 
     localStorage.setItem('cart', JSON.stringify(localCart));
-  }
-
+    // this.props.history.push("/cart")
+  }    
+}
   render() {
     return (
       <button className='add-to-cart' onClick={this.handleAddItem}>

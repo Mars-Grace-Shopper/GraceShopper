@@ -45,6 +45,10 @@ const Pie = db.define('pie', {
     },
   }, 
 
+  countryCode: {
+    type: Sequelize.JSON,
+    defaultValue: [],
+  }  
 })
 
 module.exports = Pie
