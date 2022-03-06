@@ -88,6 +88,7 @@ class EditPie extends Component {
                 onChange={handleChange}
                 name='name'
                 placeholder={pie.name}
+                // value={pie.name}
               />
               <br />
               <br />

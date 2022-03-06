@@ -33,9 +33,9 @@ export const UserHome = (props) => {
         {/* ------ return if  NO orders */}
 
         {/* ------ return if orders */}
-        {/*
-        <div className='orders'>
-          <p style={{ color: '#3961e7' }}>1</p>
+        
+        {/* <div className='orders'>
+          <p style={{ color: '#3961e7' }}>2</p>
           <p>12/22/2022</p>
           <p>$45.00</p>
         </div> */}
