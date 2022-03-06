@@ -13,12 +13,6 @@ class AddToCart extends React.Component {
             localCart = []
         }
 
-    let localCart = eval(localStorage.getItem('cart'));
-
-    if (!Array.isArray(localCart)) {
-      localCart = [];
-    }
-
     // if this pie is in the local cart
     if (localCart.filter((e) => e.pie.id === this.props.pie.id).length > 0) {
       // iterate over the cart and find this pie and increment the quantity
@@ -35,7 +29,7 @@ class AddToCart extends React.Component {
     localStorage.setItem('cart', JSON.stringify(localCart));
     // this.props.history.push("/cart")
   }    
-}
+
   render() {
     return (
       <button className='add-to-cart' onClick={this.handleAddItem}>
