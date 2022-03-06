@@ -26,7 +26,6 @@ class SinglePieView extends Component {
   }
 
   increment() {
-    console.log('eeeee', this)
     this.setState({ ...this.state, quantity: this.state.quantity + 1})
   }
 

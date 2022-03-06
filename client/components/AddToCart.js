@@ -7,8 +7,6 @@ class AddToCart extends React.Component {
     }
 
     handleAddItem () {
-        console.log("HIIII", this)
-
         let localCart = eval(localStorage.getItem("cart"));
 
         if (!Array.isArray(localCart)) {
