@@ -1,74 +1,76 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
+import { Link } from 'react-router-dom';
 
-/**
- * COMPONENT
- */
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
-  let signUpInfo
-  if (name === "signup") {
+const AuthForm = (props) => {
+  const { name, displayName, title, handleSubmit, error } = props;
+  let signUpInfo;
+  if (name === 'signup') {
     signUpInfo = (
       <div>
         <div>
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
-          <input name="firstName" type="text" />
+          <label htmlFor='firstName'>FIRST NAME</label>
+          <input name='firstName' type='text'  pattern='*'
+            required/>
         </div>
         <div>
-          <label htmlFor="lastName">
-            <small>Last Name</small>
-          </label>
-          <input name="lastName" type="text" />
+          <label htmlFor='lastName'>LAST NAME</label>
+          <input name='lastName' type='text'  pattern='*'
+            required/>
         </div>
         <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="email" />
-          </div>
-      </div> 
-    )
+          <label htmlFor='email'>EMAIL</label>
+          <input name='email' type='email'  pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
+            required
+            title='Please enter a valid email.'/>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div>
+    <div className='info-input'>
+      <h1>{title}</h1>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor='username'>
-            <small>Username</small>
-          </label>
-          <input name='username' type='text' />
-        </div>
-        <div>
-          <label htmlFor='password'>
-            <small>Password</small>
-          </label>
-          <input name='password' type='password' />
-        </div>
           {signUpInfo}
-        <div>
-          <button type='submit'>{displayName}</button>
+          <label htmlFor='username'>USERNAME</label>
+          <input
+            name='username'
+            type='text'
+            pattern='*'
+            required
+          />
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        <div>
+          <label htmlFor='password'>PASSWORD</label>
+          <input name='password' type='password' pattern='*'
+            required/>
+        </div>
+
+        <button type='submit' >{displayName}</button>
+
+        {error && error.response && <div className='error'> {error.response.data} </div>}
       </form>
+      {name === 'signup' ? (
+        <Link to='/login' className='login-signup'>
+          Have an account already? Sign in!
+        </Link>
+      ) : (
+        <Link to='/signup' className='login-signup'>
+          Don't have an account? Sign up!
+        </Link>
+      )}
     </div>
   );
 };
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = (state) => {
   return {
     name: 'login',
-    displayName: 'Login',
+    title: 'Login',
+    displayName: 'LOG IN',
     error: state.auth.error,
   };
 };
@@ -76,7 +78,8 @@ const mapLogin = (state) => {
 const mapSignup = (state) => {
   return {
     name: 'signup',
-    displayName: 'Sign Up',
+    title: 'Signup',
+    displayName: 'SIGN UP',
     error: state.auth.error,
   };
 };
@@ -84,24 +87,23 @@ const mapSignup = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const userObj = {}
-      const formName = evt.target.name
-      
-      userObj.username = evt.target.username.value
-      userObj.password = evt.target.password.value
+      evt.preventDefault();
+      const userObj = {};
+      const formName = evt.target.name;
 
-      if (formName === "signup") {
-        userObj.email = evt.target.email.value
-        userObj.firstName = evt.target.firstName.value
-        userObj.lastName = evt.target.lastName.value
+      userObj.username = evt.target.username.value;
+      userObj.password = evt.target.password.value;
+
+      if (formName === 'signup') {
+        userObj.email = evt.target.email.value;
+        userObj.firstName = evt.target.firstName.value;
+        userObj.lastName = evt.target.lastName.value;
       }
 
-      dispatch(authenticate(userObj, formName))
-
-    }
-  }
-}
+      dispatch(authenticate(userObj, formName));
+    },
+  };
+};
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);

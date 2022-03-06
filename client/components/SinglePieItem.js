@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default function SinglePieItem(props) {
   const pie = props.pie;
-  pie.price = (props.pie.price / 100).toFixed(2);
+  let price = props.pie.price
+  price = (price / 100).toFixed(2);
 
   let deleteButton = <div></div>;
   if (props.isAdmin) {
@@ -17,7 +18,7 @@ export default function SinglePieItem(props) {
         <img src={pie.thumbnailurl} />
       </Link>
       <p className='pie-name'>{pie.name}</p>
-      <p className='pie-price'>${pie.price}</p>
+      <p className='pie-price'>${price}</p>
       {deleteButton}
     </div>
   );

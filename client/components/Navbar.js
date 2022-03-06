@@ -29,7 +29,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/'>HOME</Link>
           <Link to='/pies'>PIES</Link>
           <Link to='/login'>LOGIN</Link>
-          <Link to='/signup'>SIGN UP</Link>
           {/* will change the link for cart later */}
         </div>
       )}

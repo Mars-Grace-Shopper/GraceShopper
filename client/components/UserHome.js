@@ -26,13 +26,14 @@ export const UserHome = (props) => {
           <h4>DATE</h4>
           <h4>TOTAL</h4>
         </div>
+        <hr className='navbar-hr' />
 
         {/* ------ return if NO orders */}
         <div className='no-orders'>No orders yet! <Link to='/pies'>Make one?</Link></div>
         {/* ------ return if  NO orders */}
 
         {/* ------ return if orders */}
-        {/* <hr className='navbar-hr' />
+        {/*
         <div className='orders'>
           <p style={{ color: '#3961e7' }}>1</p>
           <p>12/22/2022</p>
