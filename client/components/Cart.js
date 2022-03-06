@@ -28,16 +28,36 @@ export class Cart extends React.Component {
     }
   }
 
-  handleRemove(id) {
-    console.log("Handleremove: ", id);
+  async handleRemove(id) {
+    await this.setState({cart: this.state.cart.filter(i => i.pie.id  != id)})
+    localStorage.setItem("cart", JSON.stringify(this.state.cart))
   }
 
-  handleIncrement(id) {
+  async handleIncrement(id) {
     console.log("Handleincrement: ", id);
+    console.log('this.state.cart : ', this.state.cart)
+    const tmpCart = this.state.cart
+    for (let i = 0; i < tmpCart.length; ++i) {
+      if (tmpCart[i]['pie']['id'] === id) {
+        tmpCart[i]['quantity'] += 1;
+      }
+    }
+    await this.setState({...this.state, cart: tmpCart})
+    localStorage.setItem("cart", JSON.stringify(this.state.cart))
   }
 
-  handleDecrement(id) {
-    console.log("Handleincrement: ", id);
+  async handleDecrement(id) {
+    console.log("HandleDecrement: ", id);
+    const tmpCart = this.state.cart
+    for (let i = 0; i < tmpCart.length; ++i) {
+      if (tmpCart[i]['pie']['id'] === id) {
+        if (tmpCart[i]['quantity'] > 1) {
+          tmpCart[i]['quantity'] -= 1;
+        }
+      }
+    }
+    await this.setState({...this.state, cart: tmpCart})
+    localStorage.setItem("cart", JSON.stringify(this.state.cart))
   }
 
   findTotalQuantity(cart) {
