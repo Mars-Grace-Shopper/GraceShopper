@@ -1,33 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-/**
- * COMPONENT
- */
 export const UserHome = (props) => {
   const { username, type } = props;
-  console.log(props);
+
+  /*
+  will only need the DATE when a order is created
+  >> 2022-03-04 19:06:05.541-05 ==> 2022-03-04
+
+  let date = order.createdAt;
+  date = String(order).slice(0, 10);
+  */
 
   return (
     <div className='logged-in-userhome'>
       <div className='logged-in-header'>
-        <div className='bio'>
-        <h3>Welcome, {username}!</h3>
-        <h4>Status: {type}</h4>
-        </div>
-        <button type='button'>EDIT ACCOUNT</button>
+          <h1>Welcome, {username}!</h1>
+          <h3>{type}</h3>
       </div>
       <div className='past-orders'>
-        <h3>PAST ORDERS</h3>
+        <h2>PAST ORDERS</h2>
+        <div className='order-table'>
+          <h4>ORDER #</h4>
+          <h4>DATE</h4>
+          <h4>TOTAL</h4>
+        </div>
+
+        {/* ------ return if NO orders */}
+        <div className='no-orders'>No orders yet! <Link to='/pies'>Make one?</Link></div>
+        {/* ------ return if  NO orders */}
+
+        {/* ------ return if orders */}
+        {/* <hr className='navbar-hr' />
+        <div className='orders'>
+          <p style={{ color: '#3961e7' }}>1</p>
+          <p>12/22/2022</p>
+          <p>$45.00</p>
+        </div> */}
+        {/* ------ return if orders */}
       </div>
     </div>
   );
 };
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     username: state.auth.username,

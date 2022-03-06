@@ -43,7 +43,7 @@ label {
     circle at 50% 0%,
     #3961e7 25%,
     #fafafa 26%,
-    transparent
+    #fafafa
   );
   background-size: 30px 120px;
   height: 50px;
@@ -72,7 +72,8 @@ label {
   justify-content: space-between;
   text-align: center;
   align-items: center;
-  margin: 65px 70px 40px 70px;
+  margin: 55px 70px 30px 70px;
+  background-color: #fafafa;
 }
 
 .links a {
@@ -107,14 +108,20 @@ label {
 .cart-icon {
   width: 40px;
   height: 40px;
-  transition: transform .5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .cart-icon:hover {
   transform: rotate(360deg);
 }
 
-
+/* offset-x | offset-y | blur-radius | spread-radius | color */
+.navbar-hr {
+  margin: 0;
+  height: 15px;
+  border: 0;
+  box-shadow: inset 1px 5px 5px 0px rgba(236, 236, 236, 0.5);
+}
 
 /* ---------------------------- HOMEPAGE */
 
@@ -145,6 +152,10 @@ label {
 }
 
 /* ---------------------------- ALL PIES */
+
+.all-pies-view {
+  margin-top: 30px;
+}
 
 .all-pies-item-container {
   display: flex;
@@ -576,30 +587,94 @@ label {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0px 50px 0px 50px;
+  padding: 0px 70px 0px 70px;
+  margin-top: 50px;
 }
 
 .logged-in-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-content: center;
   width: 100%;
+  text-align: center;
 }
 
-.bio {
-  text-align: left;
+.logged-in-header h1 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.logged-in-header h3 {
+  text-transform: uppercase;
   line-height: 30px;
-}
-
-.logged-in-header button {
-  height: 20px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  color: #3961e7;
 }
 
 .past-orders {
   width: 500px;
-  height: 500px;
+  height: 100%;
   margin: 50px;
-  padding: 20px;
+  padding: 30px;
   background-color: white;
   border-radius: 2px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.order-table {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 19px 20px 19px;
+}
+
+.past-orders h2 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.order-table h4 {
+  color: grey;
+  letter-spacing: 1px;
+}
+
+.order-table h4:first-child {
+  text-align: left;
+  width: 79px;
+}
+
+.order-table h4:nth-child(3) {
+  text-align: center;
+  width: 79px;
+}
+
+.orders {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 19px 30px 19px;
+  text-align: center;
+}
+
+.orders p:first-child,
+.orders p:nth-child(3) {
+  width: 79px;
+}
+
+.logged-in-userhome button {
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 140px;
+  color: white;
+  background-color: #3961e7;
+}
+
+.no-orders {
+  padding: 30px 20px 30px 20px;
+}
+
+.no-orders a {
+  text-decoration: none;
+  color: #3961e7;
 }

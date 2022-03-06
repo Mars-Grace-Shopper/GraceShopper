@@ -10,7 +10,7 @@ class AddPie extends React.Component {
     this.state = {
       name: '',
       countryOrigin: '',
-      type: '',
+      type: null,
       description: '',
       isAdmin: false,
     };
@@ -31,6 +31,7 @@ class AddPie extends React.Component {
     event.preventDefault();
     const className = event.target.className;
     const value = event.target.value;
+    console.log(value)
 
     if (className === 'name') this.setState({ ...this.state, name: value });
     if (className === 'countryOrigin')
@@ -53,7 +54,7 @@ class AddPie extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    if (this.state.type === '' || null) {
+    if (this.state.type === null) {
       alert('Please pick a type!');
     } else {
       this.props.addPie({ ...this.state });

@@ -11,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </h1>
       <h2>INTERNATIONAL HOUSE OF PIE</h2>
     </div>
-    <nav id="navbar">
+    <nav id='navbar'>
       <div className='nav-invisible'></div>
       {isLoggedIn ? (
         <div className='links'>
@@ -33,8 +33,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           {/* will change the link for cart later */}
         </div>
       )}
-      <Link to='/cart' ><img src='/cart.png' className='cart-icon'/></Link>
+      <Link to='/cart'>
+        <img src='/cart.png' className='cart-icon' />
+      </Link>
     </nav>
+    <hr className='navbar-hr' />
   </div>
 );
 

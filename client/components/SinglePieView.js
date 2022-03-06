@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
-
 import EditPie from './EditPie';
 import AddToCart from './AddToCart';
 
@@ -37,7 +35,8 @@ class SinglePieView extends Component {
   render() {
     const { increment, decrement } = this;
     const pie = this.props.pie;
-    let price = this.props.pie.price;
+
+    let price = pie.price;
     price = Number(price / 100).toFixed(2);
 
     let editButton = <div></div>;
