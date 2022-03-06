@@ -27,7 +27,7 @@ class SinglePieView extends Component {
   }
 
   decrement() {
-    if (this.state.quantity > 0) {
+    if (this.state.quantity > 1) {
       this.setState({ ...this.state, quantity: this.state.quantity - 1 });
     }
   }

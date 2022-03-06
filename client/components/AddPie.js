@@ -31,7 +31,6 @@ class AddPie extends React.Component {
     event.preventDefault();
     const className = event.target.className;
     const value = event.target.value;
-    console.log(value)
 
     if (className === 'name') this.setState({ ...this.state, name: value });
     if (className === 'countryOrigin')

@@ -24,24 +24,25 @@ class EditPie extends Component {
   }
 
   async handleChange(event) {
+
+    console.log(event.target.value)
     event.persist();
     event.preventDefault();
-    const className = event.target.className;
+    const name = event.target.name;
     const value = event.target.value;
-    
-    if (className === 'name')
+    if (name === 'name')
       await this.setState({ ...this.state, name: value });
-    if (className === 'country')
+    if (name === 'country')
       await this.setState({ ...this.state, countryOrigin: value });
-    if (className === 'type')
+    if (name === 'type')
       await this.setState({ ...this.state, type: value });
-    if (className === 'description')
+    if (name === 'description')
       await this.setState({ ...this.state, description: value });
-    if (className === 'thumbnailurl')
+    if (name === 'thumbnailurl')
       await this.setState({ ...this.state, thumbnailurl: value });
-    if (className === 'price')
+    if (name === 'price')
       await this.setState({ ...this.state, price: value });
-    if (className === 'stockQuantity')
+    if (name === 'stockQuantity')
       await this.setState({ ...this.state, stockQuantity: value });
   }
 

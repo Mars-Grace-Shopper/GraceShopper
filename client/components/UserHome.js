@@ -29,7 +29,7 @@ export const UserHome = (props) => {
         <hr className='navbar-hr' />
 
         {/* ------ return if NO orders */}
-        <div className='no-orders'>No orders yet! <Link to='/pies'>Make one?</Link></div>
+        <div className='no-orders'>No orders yet. <Link to='/pies'>Make one!</Link></div>
         {/* ------ return if  NO orders */}
 
         {/* ------ return if orders */}
