@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class AddToCart extends React.Component {
     constructor() {
@@ -31,12 +30,13 @@ class AddToCart extends React.Component {
         }
 
         localStorage.setItem("cart", JSON.stringify(localCart));
+        this.props.history.push("/cart")
     }
 
     render () {
        
         return (
-            <button onClick={this.handleAddItem} className='add-to-cart'> <Link to={`/cart`}>ADD TO CART </Link> </button>
+            <button style={{ cursor: "pointer" }} onClick={this.handleAddItem} className='add-to-cart'> ADD TO CART </button>
         )
     }
 

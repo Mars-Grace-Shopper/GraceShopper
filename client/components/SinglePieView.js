@@ -26,6 +26,7 @@ class SinglePieView extends Component {
   }
 
   increment() {
+    console.log('eeeee', this)
     this.setState({ ...this.state, quantity: this.state.quantity + 1})
   }
 
@@ -82,7 +83,7 @@ class SinglePieView extends Component {
                     +
                   </button>
                 </div>
-                <AddToCart pie={pie} quantity={this.state.quantity} className='add-to-cart'/>
+                <AddToCart pie={pie} quantity={this.state.quantity} history={this.props.history} />
               </div>
             </div>
           </div>
