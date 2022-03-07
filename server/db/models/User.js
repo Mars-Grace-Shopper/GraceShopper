@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 const Cart = require('./Cart');
+const Address = require('./Address');
 
 const SALT_ROUNDS = 5;
 
@@ -69,7 +70,7 @@ User.authenticate = async function ({ username, password }) {
 User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    const user = User.findByPk(id);
+    const user = User.findByPk(id, {include: Address});
     if (!user) {
       throw 'nooo';
     }

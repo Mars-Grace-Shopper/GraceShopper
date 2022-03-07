@@ -1,112 +1,72 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { SingleCheckoutCartItem } from "./SingleCartRow";
+import AddressForm from "./AddressForm";
+import {me} from "../store/auth"
+import axios from 'axios';
 
-export default class CheckoutPage extends Component {
+class CheckoutPage extends Component {
     constructor() {
+        super();
+        this.state = {
+            address : {
+                customerName : '',
+                streetAddress : '',
+                city : '',
+                state : '',
+                zipcode : 0,
+            }
+
+        }
         this.handleCheckOut= this.handleCheckOut.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
-    async handleCheckOut() {
+
+    async componentDidMount(){
+        // await this.props.getAuth();
+        // if(this.props.auth.address) this.setState({...this.state, address: this.props.auth.address})
+    }
+
+    handleChange(event) {
+        event.persist();
+        event.preventDefault();
+        const className = event.target.name;
+        const value = event.target.value;
+        if (className === 'customerName') this.setState({ ...this.state, address:{...this.state.address, customerName: value }});
+        if (className === 'streetAddress') this.setState({ ...this.state, address:{...this.state.address, streetAddress: value }});
+        if (className === 'city') this.setState({ ...this.state, address:{...this.state.address, city: value }});
+        if (className === 'state') this.setState({ ...this.state, address:{...this.state.address, state: value }});
+        if (className === 'zipcode') this.setState({ ...this.state, address:{...this.state.address, zipcode: value }});
+        this.setState({
+          [event.target.name]: event.target.value,
+        });
+      }
+    async handleCheckOut(event) {
+        event.preventDefault();
         const token = localStorage.getItem('token')
         if (token) {
           await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
           this.props.history.push("/")
         } else {
           let localCart = eval(localStorage.getItem("cart"));
-          await axios.post(`/api/cart/checkout`, localCart)
+          let address = this.state.address
+          console.log('rrrrrrrrrrrr', address)
+          await axios.post(`/api/cart/checkout`, {address: address, cart: localCart})
           localStorage.setItem('cart', '[]')
           this.props.history.push("/")
         }
       }
   render() {
-    const spanStyle = {
-      color: "red",
-      fontSize: "12px",
-      letterSpacing: "0.5px",
-      fontWeight: "normal",
-    };
-    const required = <span style={spanStyle}>*Required</span>;
-    const cart = props.location.state.cart;
+    const cart = this.props.location.state.cart;
+    console.log(cart)
+    console.log('=========',this.state.address);
     return (
       <div className="form-box">
-        <form className="add-edit-form">
-          <div className="field-box">
-            {/* <div className='title-box'>
-              <div className='title' style={{ padding: '0px' }}>
-                <h2>Shipping Address</h2>
-              </div>
-            </div> */}
-            <div className="left-field">
-              <label htmlFor="customerName">NAME {required}</label>
-              <input
-                // onChange={}
-                name="customerName"
-                pattern="^[A-Za-z ]*$"
-                required
-                title="Please enter a valid name."
-              />
-              <br />
-              <br />
-              <label htmlFor="streetAddress">STREET ADDRESS {required}</label>
-              <input
-                // onChange={}
-                name="streetAddress"
-                pattern="^[A-Za-z0-9]*$"
-                required
-                title="Please enter a valid street address."
-              />
-            </div>
-            <br />
-            <br />
-            <div className="right-field">
-              <div className="price-qty">
-                <div className="city">
-                  <label htmlFor="city">CITY</label>
-                  <input
-                    //  onChange={}
-                    name="streetAddress"
-                    pattern="^[A-Za-z]*$"
-                    required
-                    title="Please enter a valid street address."
-                  />
-                </div>
-                <br />
-                <br />
-                <div className="qty">
-                  <label htmlFor="state">STATE</label>
-                  <input
-                    pattern="^[A-Za-z]*$"
-                    // onChange={}
-                    name="state"
-                  />
-                </div>
-                <br />
-                <br />
-                <div className="qty">
-                  <label htmlFor="zipcode">ZIPCODE</label>
-                  <input
-                    pattern="^[0-9]*$"
-                    // onChange={}
-                    name="zipcode"
-                  />
-                </div>
-              </div>
-            </div>
-            <br />
-            <br />
-          </div>
-          <div className="edit-buttons">
-            <Link to="/pies">
-              <button className="back-button">&#8249; BACK</button>
-            </Link>
-            <button type="submit" className="edit-submit">
-              SUBMIT
-            </button>
-          </div>
-        </form>
+        <AddressForm address={this.state.address} change={this.handleChange}/>
         {cart.map((cartItem) => (
           <SingleCheckoutCartItem
-            key={cartItem.id}
+            key={cartItem.pie.id}
             pie={cartItem.pie}
             quantity={cartItem.quantity}
           />
@@ -117,3 +77,17 @@ export default class CheckoutPage extends Component {
     );
   }
 }
+
+const mapState = (state) => {
+    return {
+      auth: state.auth,
+    };
+  };
+  
+  const mapDispatch = (dispatch) => {
+    return {
+      getAuth: () => dispatch(me()),
+    };
+  };
+  
+  export default connect(mapState, mapDispatch)(CheckoutPage);

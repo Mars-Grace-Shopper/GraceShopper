@@ -106,20 +106,14 @@ router.post('/checkout', async (req, res, next) => {
   try {
 
     const not_signed_in_cart = await Cart.create({paid: false})
-    for (let i of req.body) {
+    for (let i of req.body.cart) {
       await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
     }
 
 
-    placeHolderAddr = {
-      customerName: 'FIX ME IN server/api/cart.js  POST /api/cart/checkout',
-      streetAddress: 'aaaaaaaa',
-      city: 'bbbbbbbbb',
-      state: 'CC',
-      zipcode: 99999
-    }
+    let address = req.body.address
 
-    await not_signed_in_cart.createAddress({...placeHolderAddr})
+    await not_signed_in_cart.createAddress({...address})
     await not_signed_in_cart.setPaidTrue()
     res.status(201).end();
 
