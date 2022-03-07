@@ -32,6 +32,8 @@ class CartIcon extends React.Component {
   findTotalQuantity(cart) {
     if (cart.length > 0) {
       return cart.reduce((pv, cv) => pv + cv.quantity, 0);
+    } else {
+      return 0;
     }
   }
 

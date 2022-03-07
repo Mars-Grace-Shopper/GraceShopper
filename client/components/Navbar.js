@@ -30,7 +30,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/'>HOME</Link>
           <Link to='/pies'>PIES</Link>
           <Link to='/login'>LOGIN</Link>
-          {/* will change the link for cart later */}
         </div>
       )}
       <CartIcon />
