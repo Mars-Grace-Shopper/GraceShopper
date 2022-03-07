@@ -20,7 +20,7 @@ export const UserHome = (props) => {
           <h3>{type}</h3>
       </div>
       <div className='past-orders'>
-        <h2>PAST ORDERS</h2>
+        <h2>Past Orders</h2>
         <div className='order-table'>
           <h4>ORDER #</h4>
           <h4>DATE</h4>
@@ -29,16 +29,16 @@ export const UserHome = (props) => {
         <hr className='navbar-hr' />
 
         {/* ------ return if NO orders */}
-        {/* <div className='no-orders'>No orders yet. <Link to='/pies'>Make one!</Link></div> */}
+        <div className='empty'>No orders yet. <Link to='/pies'>Make one!</Link></div>
         {/* ------ return if  NO orders */}
 
         {/* ------ return if orders */}
         
-        <div className='orders'>
+        {/* <div className='orders'>
           <p style={{ color: '#3961e7' }}>2</p>
           <p>12/22/2022</p>
           <p>$45.00</p>
-        </div>
+        </div> */}
         {/* ------ return if orders */}
       </div>
     </div>

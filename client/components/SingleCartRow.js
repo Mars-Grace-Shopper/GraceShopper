@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom';
 
 export default function SinglePieItem(props) {
   return (
-    <li>
-      <button onClick={()=>props.remove(props.pie.id)}>X</button>
+    <div className='cart-item'>
+      <button
+        onClick={() => props.remove(props.pie.id)}
+        className='remove-button'
+      >
+        X
+      </button>
       <Link to={`/pies/${props.pie.id}`}>
         <img src={props.pie.thumbnailurl} />
       </Link>
-      <p >{props.pie.name}</p>
+      <p>{props.pie.name}</p>
       <div className='quantity'>
         <button
           type='button'
           className='decrement'
-          onClick={()=>props.decrement(props.pie.id)}
+          onClick={() => props.decrement(props.pie.id)}
         >
           -
         </button>
@@ -21,12 +26,12 @@ export default function SinglePieItem(props) {
         <button
           type='button'
           className='increment'
-          onClick={()=>props.increment(props.pie.id)}
+          onClick={() => props.increment(props.pie.id)}
         >
           +
         </button>
       </div>
-      <p className='pie-price'>${((props.pie.price)/ 100).toFixed(2)}</p>
-    </li>
+      <p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p>
+    </div>
   );
 }

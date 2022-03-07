@@ -30,7 +30,7 @@ export default function SingleOrder(props) {
           </p>
           <p>$27.00</p>
         </div>
-        <hr style={{margin: '0px 30px 0px 30px'}}/>
+        <hr style={{margin: '0px 30px'}}/>
         {/* map in here */}
 
         <div className='order-total'>
