@@ -911,6 +911,32 @@ label {
   text-align: center;
 }
 
+/* ---------------------------- CHECKOUT PAGE */
+
+/* ---------------------------- CONFIRMATION PAGE */
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  text-align: center;
+}
+
+.confirmation-msg {
+  margin: 30px;
+}
+
+.confirmation h1 {
+  font-family: "Fredoka", sans-serif;
+  margin-bottom: 30px;
+}
+
+.confirmation p {
+  line-height: 30px;
+}
+
+
 /* ---------------------------- LOADING COMPONENT */
 
 .loading-page {

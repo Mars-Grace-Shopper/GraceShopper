@@ -39,9 +39,11 @@
 
 /* ---------------------------- CART PAGE CHECKOUT BUTTON */
 /* ---------------------------- ADD TO CART BUTTON */
+/* ---------------------------- VIEW ORDER / CONTINUE SHOPPING CHECKOUT CONFIRMATION BUTTON */
 
 .add-to-cart,
-.total button {
+.total button,
+.confirmation button {
   flex-grow: 1;
   margin-left: 20px;
   font-size: 16px;
@@ -62,8 +64,15 @@
   width: 100%;
 }
 
+.confirmation button{
+  width: 300px;
+  height: 45px;
+  margin: 10px;
+}
+
 .add-to-cart,
-.total button {
+.total button,
+.confirmation button {
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -71,7 +80,8 @@
 }
 
 .add-to-cart:after,
-.total button:after {
+.total button:after,
+.confirmation button:after {
   content: '»';
   position: absolute;
   opacity: 0;
@@ -80,14 +90,16 @@
 }
 
 .add-to-cart:hover,
-.total button:hover {
+.total button:hover,
+.confirmation button:hover {
   padding-right: 24px;
   padding-left: 8px;
   background-color: #77a9f3;
 }
 
 .add-to-cart:hover:after,
-.total button:hover:after {
+.total button:hover:after,
+.confirmation button:after {
   opacity: 1;
   right: 10px;
 }
