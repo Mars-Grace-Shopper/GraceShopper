@@ -24,8 +24,8 @@ class CheckoutPage extends Component {
     }
 
     async componentDidMount(){
-        // await this.props.getAuth();
-        // if(this.props.auth.address) this.setState({...this.state, address: this.props.auth.address})
+        await this.props.getAuth();
+        if(this.props.auth.address) this.setState({...this.state, address: this.props.auth.address})
     }
 
     handleChange(event) {
@@ -46,7 +46,7 @@ class CheckoutPage extends Component {
         event.preventDefault();
         const token = localStorage.getItem('token')
         if (token) {
-          await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
+          await axios.put(`/api/cart/checkout`, {address: this.state.address}, {headers:{authorization: token}})
           this.props.history.push("/")
         } else {
           let localCart = eval(localStorage.getItem("cart"));
@@ -58,7 +58,7 @@ class CheckoutPage extends Component {
         }
       }
   render() {
-    const cart = this.props.location.state.cart;
+    let cart = eval(localStorage.getItem("cart"));
     console.log(cart)
     console.log('=========',this.state.address);
     return (

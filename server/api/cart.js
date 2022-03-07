@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-    models: { Cart, CartItem ,Pie},
+    models: { Cart, CartItem ,Pie,Address},
 } = require('../db');
 const {requireUserToken} = require('./gatekeeper')
 
@@ -84,10 +84,13 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
   try {
     if(req.user) {
       const user = req.user;
+      const address = req.body.address
       const [cart] = await user.getCarts({where: {paid: false}})
       await cart.setPaidTrue();
       await user.createCart()
-
+      const oldAddress = await Address.findByPk(address.id)
+      await oldAddress.update({...req.body.address})
+      oldAddress.save();
 //      const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
       //console.log(cartitem.quantity)
 //      cartitem.update({quantity: req.body.quantity})
