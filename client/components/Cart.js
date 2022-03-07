@@ -17,10 +17,17 @@ export class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ ...this.state, cart: eval(localStorage.getItem("cart")) });
+    let localCart = eval(localStorage.getItem("cart"));
+    if (!Array.isArray(localCart)) {
+      localCart = [];
+      localStorage.setItem("cart", '[]')
+    }
+
+    this.setState({ ...this.state, cart: localCart });
   }
 
   heading() {
+    console.log('heading this', this)
     if (this.state.cart.length === 0) {
       return <h3>Your cart is empty.</h3>;
     } else {
