@@ -12,11 +12,11 @@ export class Cart extends React.Component {
       cart: [],
     };
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
-    this.handleDecrement = this.handleDecrement.bind(this);
-    this.findTotalQuantity = this.findTotalQuantity.bind(this);
-    this.findTotalPrice = this.findTotalPrice.bind(this);
-    this.handleCheckOut = this.handleCheckOut.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this)
+    this.handleDecrement = this.handleDecrement.bind(this)
+    this.findTotalQuantity = this.findTotalQuantity.bind(this)
+    this.findTotalPrice = this.findTotalPrice.bind(this)
+    // this.handleCheckOut = this.handleCheckOut.bind(this)
   }
 
   async componentDidMount() {
@@ -121,22 +121,18 @@ export class Cart extends React.Component {
     }
   }
 
-  async handleCheckOut() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      await axios.put(
-        `/api/cart/checkout`,
-        {},
-        { headers: { authorization: token } }
-      );
-      this.props.history.push('/');
-    } else {
-      let localCart = eval(localStorage.getItem('cart'));
-      await axios.post(`/api/cart/checkout`, localCart);
-      localStorage.setItem('cart', '[]');
-      this.props.history.push('/');
-    }
-  }
+  // async handleCheckOut() {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
+  //     this.props.history.push("/")
+  //   } else {
+  //     let localCart = eval(localStorage.getItem("cart"));
+  //     await axios.post(`/api/cart/checkout`, localCart)
+  //     localStorage.setItem('cart', '[]')
+  //     this.props.history.push("/")
+  //   }
+  // }
 
   render() {
     let empty = <div></div>;
@@ -183,8 +179,8 @@ export class Cart extends React.Component {
             <p style={{ color: '#3961e7' }}>
               ${(this.findTotalPrice(this.state.cart) / 100).toFixed(2)}
             </p>
+         <Link to={{pathname:'/checkout', state:{cart: this.state.cart}}}><button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button> </Link>
           </div>
-            <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>
         </div>
       </div>
     );

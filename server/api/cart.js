@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-    models: { Cart, CartItem ,Pie},
+    models: { Cart, CartItem ,Pie,Address},
 } = require('../db');
 const {requireUserToken} = require('./gatekeeper')
 
@@ -84,10 +84,13 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
   try {
     if(req.user) {
       const user = req.user;
+      const address = req.body.address
       const [cart] = await user.getCarts({where: {paid: false}})
       await cart.setPaidTrue();
       await user.createCart()
-
+      const oldAddress = await Address.findByPk(address.id)
+      await oldAddress.update({...req.body.address})
+      oldAddress.save();
 //      const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
       //console.log(cartitem.quantity)
 //      cartitem.update({quantity: req.body.quantity})
@@ -106,20 +109,14 @@ router.post('/checkout', async (req, res, next) => {
   try {
 
     const not_signed_in_cart = await Cart.create({paid: false})
-    for (let i of req.body) {
+    for (let i of req.body.cart) {
       await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
     }
 
 
-    placeHolderAddr = {
-      customerName: 'FIX ME IN server/api/cart.js  POST /api/cart/checkout',
-      streetAddress: 'aaaaaaaa',
-      city: 'bbbbbbbbb',
-      state: 'CC',
-      zipcode: 99999
-    }
+    let address = req.body.address
 
-    await not_signed_in_cart.createAddress({...placeHolderAddr})
+    await not_signed_in_cart.createAddress({...address})
     await not_signed_in_cart.setPaidTrue()
     res.status(201).end();
 
