@@ -17,6 +17,7 @@ export class Cart extends React.Component {
     this.handleDecrement = this.handleDecrement.bind(this)
     this.findTotalQuantity = this.findTotalQuantity.bind(this)
     this.findTotalPrice = this.findTotalPrice.bind(this)
+    this.handleCheckOut = this.handleCheckOut.bind(this)
   }
 
   async componentDidMount() {
@@ -127,6 +128,14 @@ export class Cart extends React.Component {
     }
   }
 
+  async handleCheckOut() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
+      this.props.history.push("/")
+    }
+  }
+
   render() {
     console.log("ttt this: ", this);
     return (
@@ -151,7 +160,7 @@ export class Cart extends React.Component {
         <div id='totals'>
           <p>Total Quantity: {this.findTotalQuantity(this.state.cart)}</p>
           <p>Total Price: $ {(this.findTotalPrice(this.state.cart)/ 100).toFixed(2)}</p>
-          <button> PROCEED TO CHECKOUT </button>
+          <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>
         </div>
       </div>
     );

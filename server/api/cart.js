@@ -79,4 +79,27 @@ router.delete('/cartitem/:pieId', requireUserToken, async(req, res, next) => {
   }
 })
 
+// PUT /api/cart/checkout  -- for when a user is signed in, change cart to paid = true
+router.put('/checkout', requireUserToken, async(req, res, next) => {
+  try {
+    if(req.user) {
+      const user = req.user;
+      const [cart] = await user.getCarts({where: {paid: false}})
+      await cart.setPaidTrue();
+      await user.createCart()
+
+//      const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
+      //console.log(cartitem.quantity)
+//      cartitem.update({quantity: req.body.quantity})
+//      cartitem.save()
+      //console.log('cartitem.quantity', cartitem.quantity)
+      res.status(204).end();
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+// POST /api/cart/checkout  -- for when a user is not logged in, save cart to DB
 
