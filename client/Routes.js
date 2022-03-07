@@ -13,6 +13,7 @@ import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
 import AllUsers from './components/AllUsers'
+import CheckoutPage from './components/CheckoutPage';
 
 class Routes extends Component {
   componentDidMount() {
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path='/addpie' exact component={AddPie}/>
             <Route path='/pies/:id/editpie' exact component={EditPie}/>
             <Route path='/cart' exact component={Cart}/>
+            <Route path='/checkout' exact component={CheckoutPage}/>
             <Redirect to="/" />
             <Route path="/error" exact component={ErrorPage}/>
           </Switch>
@@ -46,6 +48,7 @@ class Routes extends Component {
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
             <Route path='/cart' exact component={Cart}/>
+            <Route path='/checkout' exact component={CheckoutPage}/>
             <Route path="/error" component={ErrorPage}/>
             {/* <Redirect to='/error' /> */}
 
