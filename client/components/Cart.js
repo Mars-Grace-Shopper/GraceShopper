@@ -5,7 +5,6 @@ import SingleCartRow from './SingleCartRow';
 
 import axios from 'axios';
 
-
 export class Cart extends React.Component {
   constructor() {
     super();
@@ -21,39 +20,45 @@ export class Cart extends React.Component {
   }
 
   async componentDidMount() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
 
     if (token) {
-      const {data} = await axios.get(`/api/cart`,{headers:{authorization: token}})
-      localStorage.setItem('cart', JSON.stringify(data))
+      const { data } = await axios.get(`/api/cart`, {
+        headers: { authorization: token },
+      });
+      localStorage.setItem('cart', JSON.stringify(data));
     }
-    
-    let localCart = eval(localStorage.getItem("cart"));
+
+    let localCart = eval(localStorage.getItem('cart'));
     if (!Array.isArray(localCart)) {
       localCart = [];
-      localStorage.setItem("cart", '[]')
+      localStorage.setItem('cart', '[]');
     }
 
     this.setState({ ...this.state, cart: localCart });
   }
 
   async handleRemove(id) {
-    await this.setState({cart: this.state.cart.filter(i => i.pie.id  != id)})
-    localStorage.setItem("cart", JSON.stringify(this.state.cart))
+    await this.setState({
+      cart: this.state.cart.filter((i) => i.pie.id != id),
+    });
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     if (token) {
-      await axios.delete(`/api/cart/cartitem/` + id, {headers:{authorization: token}})
+      await axios.delete(`/api/cart/cartitem/` + id, {
+        headers: { authorization: token },
+      });
     }
   }
 
   async handleIncrement(id) {
-    console.log("Handleincrement: ", id);
-    console.log('this.state.cart : ', this.state.cart)
+    console.log('Handleincrement: ', id);
+    console.log('this.state.cart : ', this.state.cart);
     let newQty;
 
-    const token = localStorage.getItem('token')
-    const tmpCart = this.state.cart
+    const token = localStorage.getItem('token');
+    const tmpCart = this.state.cart;
     for (let i = 0; i < tmpCart.length; ++i) {
       if (tmpCart[i]['pie']['id'] === id) {
         tmpCart[i]['quantity'] += 1;
@@ -61,21 +66,24 @@ export class Cart extends React.Component {
       }
     }
 
-    await this.setState({...this.state, cart: tmpCart})
-    localStorage.setItem("cart", JSON.stringify(this.state.cart))
+    await this.setState({ ...this.state, cart: tmpCart });
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
 
     if (token) {
-      await axios.put(`/api/cart/cartitem`, {quantity: newQty, pieId: id}, {headers:{authorization: token}})
+      await axios.put(
+        `/api/cart/cartitem`,
+        { quantity: newQty, pieId: id },
+        { headers: { authorization: token } }
+      );
     }
-
   }
 
   async handleDecrement(id) {
-    console.log("HandleDecrement: ", id);
+    console.log('HandleDecrement: ', id);
     let newQty;
-    const token = localStorage.getItem('token')
-  
-    const tmpCart = this.state.cart
+    const token = localStorage.getItem('token');
+
+    const tmpCart = this.state.cart;
     for (let i = 0; i < tmpCart.length; ++i) {
       if (tmpCart[i]['pie']['id'] === id) {
         if (tmpCart[i]['quantity'] > 1) {
@@ -85,17 +93,23 @@ export class Cart extends React.Component {
       }
     }
 
-    await this.setState({...this.state, cart: tmpCart})
-    localStorage.setItem("cart", JSON.stringify(this.state.cart))
+    await this.setState({ ...this.state, cart: tmpCart });
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
 
     if (token) {
-      await axios.put(`/api/cart/cartitem`, {quantity: newQty, pieId: id}, {headers:{authorization: token}})
+      await axios.put(
+        `/api/cart/cartitem`,
+        { quantity: newQty, pieId: id },
+        { headers: { authorization: token } }
+      );
     }
   }
 
   findTotalQuantity(cart) {
     if (cart.length > 0) {
       return cart.reduce((pv, cv) => pv + cv.quantity, 0);
+    } else {
+      return 0;
     }
   }
 
@@ -165,13 +179,8 @@ export class Cart extends React.Component {
             <p style={{ color: '#3961e7' }}>
               ${(this.findTotalPrice(this.state.cart) / 100).toFixed(2)}
             </p>
+         <Link to={{pathname:'/checkout', state:{cart: this.state.cart}}}><button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button> </Link>
           </div>
-        </div> 
-        <div id='totals'>
-          <p>Total Quantity: {this.findTotalQuantity(this.state.cart)}</p>
-          <p>Total Price: $ {(this.findTotalPrice(this.state.cart)/ 100).toFixed(2)}</p>
-          <Link to={{pathname:'/checkout', state:{cart: this.state.cart}}}>PROCEED TO CHECKOUT </Link>
-          {/* <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button> */}
         </div>
       </div>
     );

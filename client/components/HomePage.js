@@ -14,13 +14,11 @@ export default class HomePage extends Component {
           <h1>WELCOME TO iHOPie!</h1>
           <div className='intro-para'>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Your source for delicious pies from around the world, brought to you by <span data-hover="Brooke, Joanne, Mai, and Sarina!">Team Mars</span>!<br/>
+              Experience only the finest, first-rate, five-star, the-man-Gordon-Ramsey-himself approved pies from a myriad of different places and cultures.<br/><br/>
+              We are a company based in the U.S. even though our pies are shipped from their respective countries for the most authentic experience; hence the prices so don't question it. We are just that good trust us fam fr lmao<br /><br />
+              Not to be confused with IHOP&#174; as we are better than them. No we do not take criticism.<br /><br />
+              <span data-hover="whoever reading this owe me $5">Enjoy your stay! &#x2665;</span>
             </p>
           </div>
         </div>

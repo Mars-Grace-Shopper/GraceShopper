@@ -6,6 +6,7 @@ import { fetchUsers } from '../store/allUsers';
 import { Link } from 'react-router-dom';
 // import { deletePie } from '../store/allPies';
 import ClipLoader from "react-spinners/ClipLoader";
+import AdminToolbar from './AdminToolbar';
 
 export class AllUsers extends Component {
   constructor() {
@@ -40,7 +41,8 @@ export class AllUsers extends Component {
       </div>
     </div>
     : 
-    (<div className='all-pies-view'>
+    (<div className='all-users-view'>
+        <AdminToolbar/>
         <div className='all-pies-menu'>
           <div className='filter-search'>
             <FilterMenuUsers />
@@ -68,6 +70,7 @@ export class AllUsers extends Component {
                     ))}
                 </tbody>
             </table>
+            
         </div>
     </div>);
 
