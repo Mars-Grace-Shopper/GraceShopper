@@ -1,16 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//single pies that show up in featured and on all pies view
 export default function SinglePieItem(props) {
-//  let deleteButton = <div></div>
-//  if(props.isAdmin) {
-//    deleteButton = <button onClick={()=>props.delete(props.pie.id)}>X</button>
-//  }
-
-
-
-  console.log('rrrrrrrr', props)
   return (
     <li>
       <button onClick={()=>props.remove(props.pie.id)}>X</button>

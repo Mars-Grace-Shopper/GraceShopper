@@ -8,13 +8,11 @@ import SinglePieView from './components/SinglePieView'
 import AllPies from './components/AllPies'
 import AddPie from './components/AddPie';
 import EditPie from './components/EditPie'
+import SingleOrder from './components/SingleOrder';
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -29,6 +27,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
+            <Route path='/userhome/order/' exact component={SingleOrder}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>
@@ -55,9 +54,6 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.

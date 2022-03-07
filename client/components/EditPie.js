@@ -32,7 +32,7 @@ class EditPie extends Component {
     const value = event.target.value;
     if (name === 'name')
       await this.setState({ ...this.state, name: value });
-    if (name === 'country')
+    if (name === 'countryOrigin')
       await this.setState({ ...this.state, countryOrigin: value });
     if (name === 'type')
       await this.setState({ ...this.state, type: value });

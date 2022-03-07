@@ -19,6 +19,18 @@ label {
   display: block;
 }
 
+.back-button {
+  padding: 0px 13px 0px 13px;
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #3961e7;
+  background-color: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
 /* ---------------------------- NAV BAR */
 
 .header {
@@ -129,7 +141,7 @@ label {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
+  margin: 40px 50px 50px 50px;
   text-align: center;
 }
 
@@ -153,7 +165,7 @@ label {
 /* ---------------------------- ALL PIES */
 
 .all-pies-view {
-  margin-top: 30px;
+  margin: 30px 50px 50px 50px;
 }
 
 .all-pies-item-container {
@@ -162,7 +174,6 @@ label {
   justify-content: space-between;
   align-content: flex-start;
   flex-wrap: wrap;
-  margin: 50px;
 }
 
 .single-pie-item {
@@ -214,7 +225,7 @@ label {
   margin-bottom: auto;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -243,7 +254,7 @@ label {
 .all-pies-menu {
   display: flex;
   justify-content: space-between;
-  margin: 0px 70px 50px 70px;
+  margin: 0px 20px 30px 20px;
 }
 
 .all-pies-menu button {
@@ -291,6 +302,8 @@ label {
 .single-pie {
   display: flex;
   flex-direction: column;
+  margin: 0px 50px 50px 50px;
+  margin-top: 2%;
 }
 
 .single-pie-links {
@@ -301,25 +314,15 @@ label {
   margin-bottom: 30px;
 }
 
-.single-pie-links .back-button,
 .single-pie-links .edit-button {
   padding: 0px 13px 0px 13px;
-  margin: 0px 20px 0px 20px;
+  margin: 0px 0px 0px 20px;
   height: 35px;
   font-size: 14px;
   letter-spacing: 1px;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-}
-
-.single-pie-links .back-button {
-  color: #3961e7;
-  background-color: white;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.single-pie-links .edit-button {
   color: white;
   background-color: #3961e7;
 }
@@ -329,8 +332,7 @@ label {
   flex-wrap: no-wrap;
   align-content: center;
   justify-content: center;
-  margin-top: 3%;
-  padding: 0px 50px 0px 50px;
+  margin-top: 30px;
 }
 
 .img-box {
@@ -451,7 +453,8 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px 50px 0px 50px;
+  margin: 0px 50px 50px 50px;
+  margin-top: 7%;
 }
 
 .title-box {
@@ -527,7 +530,6 @@ label {
 .field-box {
   display: flex;
   width: 800px;
-  margin-top: 7%;
 }
 
 .left-field,
@@ -564,7 +566,6 @@ label {
   margin: 20px;
 }
 
-.form-box .back-button,
 .form-box .edit-submit {
   padding: 0px 13px 0px 13px;
   height: 35px;
@@ -573,12 +574,6 @@ label {
   border: none;
   border-radius: 2px;
   cursor: pointer;
-}
-
-.form-box .back-button {
-  color: #3961e7;
-  background-color: white;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .form-box .edit-submit {
@@ -594,8 +589,8 @@ label {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0px 70px 0px 70px;
-  margin-top: 50px;
+  /* padding: 0px 70px 0px 70px; */
+  margin: 50px 70px 50px 70px;
 }
 
 .logged-in-header {
@@ -631,13 +626,12 @@ label {
 .order-table {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding: 30px 39px 20px 39px;
+  margin: 20px 30px 20px 30px;
 }
 
 .past-orders h2 {
   font-family: 'Fredoka', sans-serif;
-  padding: 0px 20px 0px 20px;
+  margin: 0px 20px 0px 20px;
 }
 
 .order-table h4 {
@@ -658,7 +652,7 @@ label {
 .orders {
   display: flex;
   justify-content: space-between;
-  padding: 30px 19px 30px 19px;
+  margin: 30px 39px 30px 39px;
   text-align: center;
 }
 
@@ -676,6 +670,60 @@ label {
   color: #3961e7;
 }
 
+/* ---------------------------- SINGLE ORDER PAGE */
+
+.single-order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.single-order-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.single-order-header {
+  color: #8a8a8a;
+}
+
+.single-order-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px 0px 30px 0px;
+  margin: 30px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.order-info p {
+  width: 45%;
+  word-wrap: break-word;
+}
+
+.order-info p:nth-child(2) {
+  text-align: right;
+}
+
+.order-total {
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 30px 0px 30px;
+}
+
 /* ---------------------------- LOG IN PAGE */
 
 .info-input {
@@ -685,7 +733,7 @@ label {
 }
 
 .info-input h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   text-align: center;
   margin: 30px;
 }
@@ -744,6 +792,9 @@ label {
   margin: 20px 20px 0px 20px;
 }
 
+/* ---------------------------- CART PAGE */
+
+
 /* ---------------------------- LOADING COMPONENT */
 
 .loading-page {
@@ -752,11 +803,10 @@ label {
   width: 100%;
   height: 100vh;
   position: relative;
-  opacity: 0.5
+  opacity: 0.5;
 }
 
 .spinner {
   position: absolute;
   top: 100px;
 }
-
