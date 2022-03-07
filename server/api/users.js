@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
-const requireAdminToken = require('./gatekeeper')
+const {requireAdminToken, requireUserToken} = require('./gatekeeper')
 
 // Only Admin can view user information:
 router.get('/', requireAdminToken,  async (req, res, next) => {

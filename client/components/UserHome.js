@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import AdminToolbar from './AdminToolbar';
 
 export const UserHome = (props) => {
   const { username, type } = props;
 
-  let seeAllUsers = <div></div>
-  if(type === 'admin') seeAllUsers = <Link to='/users'><button>USERS</button></Link>
+  let adminToolbar = <div></div>
+  if(type === 'admin') adminToolbar = <AdminToolbar/>
+
 
   /*
   will only need the DATE when a order is created
@@ -23,7 +25,7 @@ export const UserHome = (props) => {
           <h3>{type}</h3>
       </div>
       <div className='past-orders'>
-        <h2>PAST ORDERS</h2>
+        <h2>Past Orders</h2>
         <div className='order-table'>
           <h4>ORDER #</h4>
           <h4>DATE</h4>
@@ -32,7 +34,7 @@ export const UserHome = (props) => {
         <hr className='navbar-hr' />
 
         {/* ------ return if NO orders */}
-        <div className='no-orders'>No orders yet. <Link to='/pies'>Make one!</Link></div>
+        <div className='empty'>No orders yet. <Link to='/pies'>Make one!</Link></div>
         {/* ------ return if  NO orders */}
 
         {/* ------ return if orders */}
@@ -44,7 +46,8 @@ export const UserHome = (props) => {
         </div> */}
         {/* ------ return if orders */}
       </div>
-      {seeAllUsers}
+      {adminToolbar}
+      <button>EDIT ACCOUNT INFO</button>
     </div>
   );
 };

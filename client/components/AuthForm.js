@@ -98,6 +98,13 @@ const mapDispatch = (dispatch) => {
         userObj.email = evt.target.email.value;
         userObj.firstName = evt.target.firstName.value;
         userObj.lastName = evt.target.lastName.value;
+
+        // get the cart they made before signup
+        let localCart = eval(localStorage.getItem("cart"));
+        if (!Array.isArray(localCart)) {
+           localCart = []
+        }
+        userObj.localCart = localCart;
       }
 
       dispatch(authenticate(userObj, formName));

@@ -24,15 +24,13 @@ class EditPie extends Component {
   }
 
   async handleChange(event) {
-
-    console.log(event.target.value)
     event.persist();
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
     if (name === 'name')
       await this.setState({ ...this.state, name: value });
-    if (name === 'country')
+    if (name === 'countryOrigin')
       await this.setState({ ...this.state, countryOrigin: value });
     if (name === 'type')
       await this.setState({ ...this.state, type: value });
@@ -49,8 +47,13 @@ class EditPie extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const pie = this.props.pie;
+
+    if (this.state.type === null) {
+      alert('Please pick a type!');
+    } else {
     this.props.updatePie({ ...this.state, id: pie.id });
     this.props.history.goBack();
+    }
   }
 
   render() {
@@ -87,7 +90,10 @@ class EditPie extends Component {
               <input
                 onChange={handleChange}
                 name='name'
-                placeholder={pie.name}
+                defaultValue={pie.name}
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
               />
               <br />
               <br />
@@ -95,7 +101,10 @@ class EditPie extends Component {
               <input
                 onChange={handleChange}
                 name='countryOrigin'
-                placeholder={pie.countryOrigin}
+                defaultValue={pie.countryOrigin}
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
               />
               <br />
               <br />
@@ -124,7 +133,7 @@ class EditPie extends Component {
                     max='99.99'
                     onChange={handleChange}
                     name='price'
-                    placeholder={price}
+                    defaultValue={price}
                   />
                 </div>
                 <br />
@@ -137,7 +146,7 @@ class EditPie extends Component {
                     min='0'
                     onChange={handleChange}
                     name='stockQuantity'
-                    placeholder={pie.stockQuantity}
+                    defaultValue={pie.stockQuantity}
                   />
                 </div>
               </div>
@@ -147,7 +156,7 @@ class EditPie extends Component {
               <input
                 onChange={handleChange}
                 name='description'
-                placeholder={pie.description}
+                defaultValue={pie.description}
               />
               <br />
               <br />
@@ -155,7 +164,7 @@ class EditPie extends Component {
               <input
                 onChange={handleChange}
                 name='thumbnailurl'
-                placeholder={pie.thumbnailurl}
+                defaultValue={pie.thumbnailurl}
               />
             </div>
             <br />

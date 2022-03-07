@@ -125,7 +125,6 @@ const countryCode = (inputStr) => {
     case "United States (New England)":
     case "United States (North Carolina)":
     case "United States (Pennsylvania Dutch Country)":
-    case "United States (Southern)":
       return ['US'];
     case "United States, Mexico":
       return ['US','MX'];
@@ -188,7 +187,7 @@ for (let i = 0; i < htmljson.length; i++) {
     type: tmpType,
     description:parsedjson[i].Description.replace(/\[\d*\]/g, ''),
     thumbnailurl: tmpThumb,
-    price: randomInt(1000, 10000)
+    price: randomInt(3000, 10000)
   }
 
   tmpPie.countryCode = countryCode(tmpPie.countryOrigin);

@@ -49,6 +49,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
+      localStorage.removeItem('token')
+      localStorage.removeItem('cart')
       dispatch(logout());
     },
   };
