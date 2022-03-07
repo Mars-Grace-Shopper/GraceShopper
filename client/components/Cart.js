@@ -78,10 +78,12 @@ export class Cart extends React.Component {
       <div className='cart-box'>
         <div className='cart'>
           <h1>My Shopping Cart</h1>
-          <div></div>
           <div className='cart-header'>
-            <h4>PRODUCT</h4>
-            <h4>QUANTITY</h4>
+            <div style={{ width: '25px' }}></div>
+
+            <h4 style={{ width: '150px', textAlign: 'center' }}>PRODUCT</h4>
+            <div style={{ width: '200px' }}></div>
+            <h4 style={{ width: '140px', textAlign: 'center' }}>QUANTITY</h4>
             <h4>PRICE</h4>
           </div>
           <hr className='navbar-hr' />
