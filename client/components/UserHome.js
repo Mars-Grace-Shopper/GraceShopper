@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AdminToolbar from './AdminToolbar';
 
 export const UserHome = (props) => {
-  const { username, type } = props;
+  const { id, username, type } = props;
 
   let adminToolbar = <div></div>
   if(type === 'admin') adminToolbar = <AdminToolbar/>
@@ -47,7 +47,8 @@ export const UserHome = (props) => {
         {/* ------ return if orders */}
       </div>
       {adminToolbar}
-      <button>EDIT ACCOUNT INFO</button>
+      {/* have to protect this ID */}
+      <Link to={`/users/${id}/editAccountForm`}><button>EDIT ACCOUNT INFO</button></Link>
     </div>
   );
 };

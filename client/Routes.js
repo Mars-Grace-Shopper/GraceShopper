@@ -13,6 +13,7 @@ import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
 import AllUsers from './components/AllUsers'
+import EditAccountForm from './components/EditAccountForm';
 
 class Routes extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class Routes extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
             <Route path='/userhome/order/' exact component={SingleOrder}/>
+            <Route path='/users/:id/editAccountForm' exact component={EditAccountForm}/>
             <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
