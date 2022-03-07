@@ -1,13 +1,18 @@
 import React from 'react';
 
+
+import axios from 'axios';
+
 class AddToCart extends React.Component {
     constructor() {
         super();
         this.handleAddItem = this.handleAddItem.bind(this);
     }
 
-    handleAddItem () {
+    async handleAddItem() {
+        const token = localStorage.getItem('token')
         let localCart = eval(localStorage.getItem("cart"));
+        let newQty;
 
         if (!Array.isArray(localCart)) {
             localCart = []
@@ -19,15 +24,26 @@ class AddToCart extends React.Component {
       for (let i = 0; i < localCart.length; ++i) {
         if (localCart[i]['pie']['id'] === this.props.pie.id) {
           localCart[i]['quantity'] += this.props.quantity;
+          newQty = localCart[i]['quantity'];
         }
       }
+ 
+      // if logged in, update quantity in database
+      if (token) {
+        await axios.put(`/api/cart/cartitem`, {quantity: newQty, pieId: this.props.pie.id}, {headers:{authorization: token}})
+      }
+
     } else {
       // else add this pie to the localcart
       localCart.push({ quantity: this.props.quantity, pie: this.props.pie });
+      // if logged in, create a new cart item in the database
+      if (token) {
+        await axios.post(`/api/cart/cartitem`, {quantity: this.props.quantity, pieId: this.props.pie.id}, {headers:{authorization: token}})
+      }
     }
 
     localStorage.setItem('cart', JSON.stringify(localCart));
-    // this.props.history.push("/cart")
+    this.props.history.push("/cart")
   }    
 
   render() {
