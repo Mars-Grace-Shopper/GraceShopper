@@ -45,7 +45,7 @@ class SinglePieView extends Component {
     price = Number(price / 100).toFixed(2);
 
     let editButton = <div></div>
-    if(this.state.isAdmin) editButton = <Link to='/editpie'><button className='edit-button'>EDIT</button></Link>
+    if(this.state.isAdmin) editButton = <Link to={`/pies/${pie.id}/editpie`}><button className='edit-button'>EDIT</button></Link>
 
     let component = this.state.isLoading ? 
     <div className='loading-page'>
@@ -67,7 +67,7 @@ class SinglePieView extends Component {
         <div className='single-view-text-container'>
           <div className='name-price'>
             <h2>{pie.name}</h2>
-            <h2>${pie.price}</h2>
+            <h2>${price}</h2>
           </div>
           <h4>{pie.countryOrigin}</h4>
           <p>{pie.description}</p>

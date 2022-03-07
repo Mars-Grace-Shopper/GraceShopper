@@ -1,6 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import SingleCartRow from "./SingleCartRow";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import SingleCartRow from './SingleCartRow';
 
 import axios from 'axios';
 
@@ -11,7 +12,6 @@ export class Cart extends React.Component {
     this.state = {
       cart: [],
     };
-    this.heading = this.heading.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this)
     this.handleDecrement = this.handleDecrement.bind(this)
@@ -37,15 +37,6 @@ export class Cart extends React.Component {
     this.setState({ ...this.state, cart: localCart });
   }
 
-  heading() {
-    console.log('heading this', this)
-    if (this.state.cart.length === 0) {
-      return <h3>Your cart is empty.</h3>;
-    } else {
-      return <h3>Items in your cart:</h3>;
-    }
-  }
-
   async handleRemove(id) {
     await this.setState({cart: this.state.cart.filter(i => i.pie.id  != id)})
     localStorage.setItem("cart", JSON.stringify(this.state.cart))
@@ -69,6 +60,7 @@ export class Cart extends React.Component {
         newQty = tmpCart[i]['quantity'];
       }
     }
+
     await this.setState({...this.state, cart: tmpCart})
     localStorage.setItem("cart", JSON.stringify(this.state.cart))
 
@@ -92,6 +84,7 @@ export class Cart extends React.Component {
         }
       }
     }
+
     await this.setState({...this.state, cart: tmpCart})
     localStorage.setItem("cart", JSON.stringify(this.state.cart))
 
@@ -101,28 +94,14 @@ export class Cart extends React.Component {
   }
 
   findTotalQuantity(cart) {
-    // p is previousValue, c is currentValue
-    if (cart.length > 0 ) {
-      return cart.reduce((pv, cv) => pv + cv.quantity, 0)
-      //let iv = 0;
-      //return cart.reduce((pv, cv, idx) => {
-        //const pq = pv.quantity;
-        //const cq = cv.quantity;
-        //console.log(`pv = ${pv}; pq = ${pq}; cv = ${cv}; cq = ${cq}; idx = ${idx}`)
-        //return pv + cq
-      //}, iv) 
+    if (cart.length > 0) {
+      return cart.reduce((pv, cv) => pv + cv.quantity, 0);
     }
   }
 
   findTotalPrice(cart) {
-    if (cart.length > 0 ) {
-      return cart.reduce((pv, cv) => pv + (cv.pie.price * cv.quantity), 0)
-      //let iv = 0;
-      //return cart.reduce((pv, cv, idx) => {
-        //const cp = cv.pie.price * cv.quantity;
-        //console.log(`pv = ${pv}; cv = ${cv}; cp = ${cp}; idx = ${idx}`)
-        //return pv + cp
-      //}, iv) 
+    if (cart.length > 0) {
+      return cart.reduce((pv, cv) => pv + cv.pie.price * cv.quantity, 0);
     } else {
       return 0;
     }
@@ -142,24 +121,50 @@ export class Cart extends React.Component {
   }
 
   render() {
-    console.log("ttt this: ", this);
+    let empty = <div></div>;
+    if (this.state.cart.length === 0)
+      empty = (
+        <p className='empty'>
+          Your cart is empty. <Link to='/pies'>Add something!</Link>
+        </p>
+      );
+
     return (
-      <div>
-        <div id="cart">
-          <div>{this.heading()}</div>
-          <div>
-            <ul>
-              {[].concat(this.state.cart).map((cartItem, idx) => (
-                <SingleCartRow
-                  key={idx}
-                  pie={cartItem.pie}
-                  quantity={cartItem.quantity}
-                  remove={this.handleRemove}
-                  increment={this.handleIncrement}
-                  decrement={this.handleDecrement}
-                />
-              ))}
-            </ul>
+      <div className='cart-box'>
+        <div className='cart'>
+          <h1>My Shopping Cart</h1>
+          <div className='cart-header'>
+            <div style={{ width: '25px' }}></div>
+
+            <h4 style={{ width: '150px', textAlign: 'center' }}>PRODUCT</h4>
+            <div style={{ width: '200px' }}></div>
+            <h4 style={{ width: '140px', textAlign: 'center' }}>QUANTITY</h4>
+            <h4>PRICE</h4>
+          </div>
+          <hr className='navbar-hr' />
+          {empty}
+          {[].concat(this.state.cart).map((cartItem, idx) => (
+            <SingleCartRow
+              key={idx}
+              pie={cartItem.pie}
+              quantity={cartItem.quantity}
+              remove={this.handleRemove}
+              increment={this.handleIncrement}
+              decrement={this.handleDecrement}
+            />
+          ))}
+        </div>
+        <div className='total'>
+          <div className='total-header'>
+            <h4>QUANTITY</h4>
+            <h4>TOTAL</h4>
+          </div>
+          <hr className='navbar-hr' />
+          <div className='total-price'>
+            <p>{this.findTotalQuantity(this.state.cart)}</p>
+            <p style={{ color: '#3961e7' }}>
+              ${(this.findTotalPrice(this.state.cart) / 100).toFixed(2)}
+            </p>
           </div>
         </div> 
         <div id='totals'>

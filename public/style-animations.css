@@ -36,3 +36,62 @@
     transform: translateX(40%);
   }
 }
+
+/* ---------------------------- CART PAGE CHECKOUT BUTTON */
+/* ---------------------------- ADD TO CART BUTTON */
+
+.add-to-cart,
+.total button {
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.total button {
+  bottom: 0;
+  border-radius: 0px 0px 2px 2px;
+  margin: 0;
+  height: 45px;
+  width: 100%;
+}
+
+.add-to-cart,
+.total button {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.add-to-cart:after,
+.total button:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.add-to-cart:hover,
+.total button:hover {
+  padding-right: 24px;
+  padding-left: 8px;
+  background-color: #77a9f3;
+}
+
+.add-to-cart:hover:after,
+.total button:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
+.add-to-cart:active {
+  bottom: -2px;
+}
