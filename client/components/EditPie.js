@@ -24,8 +24,6 @@ class EditPie extends Component {
   }
 
   async handleChange(event) {
-
-    console.log(event.target.value)
     event.persist();
     event.preventDefault();
     const name = event.target.name;
