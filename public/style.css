@@ -123,7 +123,7 @@ label {
 }
 
 .nav-invisible {
-  width: 40px;
+  width: 70px;
   height: 40px;
 }
 
@@ -131,6 +131,18 @@ label {
   width: 40px;
   height: 40px;
   transition: transform 0.5s ease-in-out;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+}
+
+.cart-qty p {
+  margin-left: 10px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 22px;
+  color: #3961e7;
 }
 
 .cart-icon:hover {
@@ -144,7 +156,6 @@ label {
   border: 0;
   box-shadow: inset 1px 5px 5px 0px rgba(236, 236, 236, 0.5);
 }
-
 /* ---------------------------- HOMEPAGE */
 
 .introductions {
@@ -161,7 +172,7 @@ label {
 }
 
 .intro-para {
-  width: 50%;
+  width: 63%;
   position: relative;
   margin-top: 30px;
 }
@@ -173,6 +184,42 @@ label {
   line-height: 28px;
 }
 
+.intro-para p span:first-child,
+.intro-para p span:last-child {
+  color: red;
+  border-bottom: 1px dotted black;
+  position: relative;
+}
+
+.intro-para p span:first-child:before,
+.intro-para p span:last-child:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity .5s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.intro-para p span:first-child:hover:before,
+.intro-para p span:last-child:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.intro-para p span:last-child {
+  color: #3961e7;
+}
 /* ---------------------------- ALL PIES */
 
 .all-pies-view {
@@ -447,7 +494,7 @@ label {
   justify-content: center;
   align-items: center;
   margin: 0px 50px 50px 50px;
-  margin-top: 7%;
+  margin-top: 5%;
 }
 
 .title-box {
@@ -810,7 +857,7 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0px;
+  margin: 15px 0px 30px 0px;
   padding: 0px 30px;
   height: 100%;
 }
@@ -864,6 +911,31 @@ label {
   text-align: center;
 }
 
+/* ---------------------------- CHECKOUT PAGE */
+
+/* ---------------------------- CONFIRMATION PAGE */
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  text-align: center;
+}
+
+.confirmation-msg {
+  margin: 30px;
+}
+
+.confirmation h1 {
+  font-family: "Fredoka", sans-serif;
+  margin-bottom: 30px;
+}
+
+.confirmation p {
+  line-height: 30px;
+}
+
 
 /* ---------------------------- LOADING COMPONENT */
 
@@ -894,7 +966,8 @@ table {
   width: 90%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -903,4 +976,3 @@ td, th {
 tr:nth-child(even) {
   background-color: #d5e5f8;
 }
-

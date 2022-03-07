@@ -102,7 +102,7 @@ class EditPie extends Component {
                 onChange={handleChange}
                 name='countryOrigin'
                 defaultValue={pie.countryOrigin}
-                pattern='^[A-Za-z ]*$'
+                pattern='^[A-Za-z\(\) ]*$'
                 required
                 title='Please enter a valid name.'
               />
