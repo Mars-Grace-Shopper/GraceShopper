@@ -11,6 +11,7 @@ import EditPie from './components/EditPie'
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
+            <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>

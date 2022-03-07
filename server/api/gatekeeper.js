@@ -1,6 +1,4 @@
-const {
-  models: { User },
-} = require('../db');
+const { models: { User }} = require('../db')
 
 const requireAdminToken = async (req, res, next) => {
   try {
