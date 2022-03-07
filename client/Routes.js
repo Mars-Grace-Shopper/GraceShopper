@@ -28,6 +28,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
+            {/* will eventually redirect to userhome/order/:id */}
             <Route path='/userhome/order/' exact component={SingleOrder}/>
             <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
