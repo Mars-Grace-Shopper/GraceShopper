@@ -12,6 +12,7 @@ import SingleOrder from './components/SingleOrder';
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
+import AllUsers from './components/AllUsers'
 
 class Routes extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class Routes extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
             <Route path='/userhome/order/' exact component={SingleOrder}/>
+            <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>

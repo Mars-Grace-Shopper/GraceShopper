@@ -5,8 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import piesReducer from './allPies';
 import singlePieReducer from './singlePie';
+import usersReducer from './allUsers';
 
-const reducer = combineReducers({ auth, pies: piesReducer, pie: singlePieReducer});
+const reducer = combineReducers({ 
+  auth, 
+  pies: piesReducer, 
+  pie: singlePieReducer,
+  users: usersReducer,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

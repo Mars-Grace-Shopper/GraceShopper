@@ -880,3 +880,27 @@ label {
   position: absolute;
   top: 100px;
 }
+
+/* ---------------------------- ALL USERS PAGE */
+
+.all-users-view {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #d5e5f8;
+}
+
