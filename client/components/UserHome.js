@@ -7,6 +7,8 @@ export const UserHome = (props) => {
 
   let seeAllUsers = <div></div>
   if(type === 'admin') seeAllUsers = <Link to='/users'><button>USERS</button></Link>
+  let seeAllProducts = <div></div>
+  if(type === 'admin') seeAllUsers = <Link to='/users'><button>PRODUCTS</button></Link>
 
   /*
   will only need the DATE when a order is created
@@ -44,7 +46,10 @@ export const UserHome = (props) => {
         </div> */}
         {/* ------ return if orders */}
       </div>
-      {seeAllUsers}
+      <div>
+        <h4>Management</h4>
+        {seeAllUsers}
+      </div>
     </div>
   );
 };
