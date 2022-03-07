@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 export const UserHome = (props) => {
   const { username, type } = props;
 
+  let seeAllUsers = <div></div>
+  if(type === 'admin') seeAllUsers = <Link to='/users'><button>USERS</button></Link>
+
   /*
   will only need the DATE when a order is created
   >> 2022-03-04 19:06:05.541-05 ==> 2022-03-04
@@ -41,6 +44,7 @@ export const UserHome = (props) => {
         </div> */}
         {/* ------ return if orders */}
       </div>
+      {seeAllUsers}
     </div>
   );
 };
