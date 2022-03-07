@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import AdminToolbar from './AdminToolbar';
 
 export const UserHome = (props) => {
   const { username, type } = props;
 
-  let seeAllUsers = <div></div>
-  if(type === 'admin') seeAllUsers = <Link to='/users'><button>USERS</button></Link>
+  let adminToolbar = <div></div>
+  if(type === 'admin') adminToolbar = <AdminToolbar/>
+
 
   /*
   will only need the DATE when a order is created
@@ -44,7 +46,8 @@ export const UserHome = (props) => {
         </div> */}
         {/* ------ return if orders */}
       </div>
-      {seeAllUsers}
+      {adminToolbar}
+      <button>EDIT ACCOUNT INFO</button>
     </div>
   );
 };

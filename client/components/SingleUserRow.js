@@ -17,7 +17,16 @@ export default function SingleUserRow(props) {
         <td>{props.user.id}</td>
         <td>{props.user.username}</td>
         <td>{props.user.email}</td>
-        <td>{props.user.type}</td>
+        <td>
+          <select
+            defaultValue={props.user.type}
+            // onChange={handleChange}
+            name='type'
+          >
+            <option value='user'>User</option>
+            <option value='admin'>Admin</option>
+          </select>
+        </td>
       </tr>
     
     // <li>
