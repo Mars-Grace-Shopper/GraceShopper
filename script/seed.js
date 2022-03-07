@@ -19,8 +19,8 @@ async function seed() {
 
   // Creating Pies
     const pies = await Promise.all([
-      Pie.create({ name: 'Clam Chowder Pie', countryOrigin: 'United States', type: 'Savory', description: 'basically a breadbowl', price: randomInt(700, 1000)}),
-      Pie.create({ name: 'Ghost Pepper Tart', countryOrigin: 'Antarctica', type: 'Savory', description: 'really spicy!', price: randomInt(700, 1000)})
+      Pie.create({ name: 'Clam Chowder Pie', countryOrigin: 'United States', type: 'Savory', description: 'basically a breadbowl', price: randomInt(3000, 10000)}),
+      Pie.create({ name: 'Ghost Pepper Tart', countryOrigin: 'Antarctica', type: 'Savory', description: 'really spicy!', price: randomInt(3000, 10000)})
     ])
   console.log(`seeded ${pies.length} pies from seed.js`)
     for (let wikiPie of jsonPieData) {
