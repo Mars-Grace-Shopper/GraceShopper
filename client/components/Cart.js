@@ -133,6 +133,11 @@ export class Cart extends React.Component {
     if (token) {
       await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
       this.props.history.push("/")
+    } else {
+      let localCart = eval(localStorage.getItem("cart"));
+      await axios.post(`/api/cart/checkout`, localCart)
+      localStorage.setItem('cart', '[]')
+      this.props.history.push("/")
     }
   }
 

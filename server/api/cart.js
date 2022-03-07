@@ -102,4 +102,40 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
 
 
 // POST /api/cart/checkout  -- for when a user is not logged in, save cart to DB
+router.post('/checkout', async (req, res, next) => {
+  try {
 
+    const not_signed_in_cart = await Cart.create({paid: false})
+    for (let i of req.body) {
+      await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
+    }
+
+
+    placeHolderAddr = {
+      customerName: 'FIX ME IN server/api/cart.js  POST /api/cart/checkout',
+      streetAddress: 'aaaaaaaa',
+      city: 'bbbbbbbbb',
+      state: 'CC',
+      zipcode: 99999
+    }
+
+    await not_signed_in_cart.createAddress({...placeHolderAddr})
+    await not_signed_in_cart.setPaidTrue()
+    res.status(201).end();
+
+
+//    res.send({token: await user.generateToken()})
+
+
+//    const user = await User.create(req.body)
+//    const cart = await user.createCart()
+//    for (let i of req.body.localCart) {
+//      await cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists!')
+    } else {
+      next(err)
+    }
+  }
+})
