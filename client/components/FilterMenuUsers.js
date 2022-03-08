@@ -4,10 +4,10 @@ export function FilterMenuUsers(props) {
   return (
     <div className='filter'>
       <select
-        defaultValue='alphabetical'
+        defaultValue='id'
         /*onChange={props.change}*/
       >
-        <option value='alphabetical'>Sort by: Alphabetical</option>
+        <option value='id'>Sort by: User ID</option>
         <option value='admin'>Sort by: Admin</option>
         <option value='user'>Sort by: User</option>
       </select>

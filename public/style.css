@@ -3,6 +3,7 @@
 @import url(https://fonts.googleapis.com/css?family=Fredoka);
 
 /* ---------------------------- GENERAL */
+
 * {
   margin: 0;
   padding: 0;
@@ -228,10 +229,13 @@ label {
 
 .all-pies-item-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-content: flex-start;
   flex-wrap: wrap;
+}
+
+.invisible-pie-div {
+  flex-grow: 1;
 }
 
 .single-pie-item {
@@ -586,10 +590,6 @@ label {
   justify-content: space-between;
 }
 
-.price-qty label {
-  margin-bottom: 14px;
-}
-
 .price {
   margin-right: 20px;
   width: 50%;
@@ -624,19 +624,17 @@ label {
 
 .logged-in-userhome {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   text-align: center;
-  margin: 50px 70px;
+  min-height: 100vh;
 }
 
 .logged-in-header {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  width: 100%;
+  align-items: center;
   text-align: center;
+  margin: 50px 0px;
 }
 
 .logged-in-header h1 {
@@ -653,9 +651,8 @@ label {
 
 .past-orders {
   width: 500px;
-  height: 100%;
   margin: 50px;
-  padding: 30px 0px 30px 0px;
+  padding: 30px 0px 15px 0px;
   background-color: white;
   border-radius: 2px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
@@ -698,6 +695,18 @@ label {
 .orders p:first-child,
 .orders p:nth-child(3) {
   width: 79px;
+}
+
+.logged-in-userhome button {
+  padding: 0px 13px 0px 13px;
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
 }
 
 /* ---------------------------- SINGLE ORDER PAGE */
@@ -964,13 +973,22 @@ label {
 
 .all-users-view {
   display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.all-users-table {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  margin: 50px 0px;
+  width: 900px;
 }
 
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 90%;
+  margin-top: 30px;
 }
 
 td,
@@ -982,4 +1000,10 @@ th {
 
 tr:nth-child(even) {
   background-color: #d5e5f8;
+}
+
+.invisible-div2 {
+  width: 225px;
+  height: 225px;
+  margin-left: 10px;
 }

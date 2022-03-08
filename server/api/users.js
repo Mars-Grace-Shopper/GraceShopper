@@ -38,15 +38,9 @@ router.put('/:id', requireUserToken, async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findByPk(id);
-    
-    console.log("LOLOLOLOLOL", req.body)
     await user.update(req.body);
-    console.log("LOLOLOLOLLOL", user)
-
-    const userAddress = await Address.findAll({ where: {userId: id }}).update(req.body);
-    // console.log("BRRRRRRRRR", userAddress)
-    // await userAddress.update();
-    // console.log("BBBBBBBBRR", userAddress)
+    const [userAddress] = await Address.findAll({ where: {userId: id }})
+    await userAddress.update({...req.body});
     res.status(204).end();
   } catch (err) {
     next(err);
