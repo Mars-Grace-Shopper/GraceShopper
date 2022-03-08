@@ -63,7 +63,7 @@ export class UserHome extends Component {
 
         return (
           <div className='orders' key={idx}> 
-            <p style={{ color: '#3961e7' }}>{order.id}</p>
+            <Link to={{pathname: "/order", state: {orderItems: order.cartitems, orderId: order.id, orderDate: order.updatedAt.slice(0, 10)} }} ><p style={{ color: '#3961e7' }}>{order.id}</p></Link>
             <p> {order.updatedAt.slice(0, 10)}</p>
             <p> $99.99 </p>
           </div>
