@@ -7,7 +7,7 @@ export default function SinglePieItem(props) {
   price = (price / 100).toFixed(2);
 
   let deleteButton = <div></div>;
-  if (props.isAdmin) {
+  if (props.isAdmin === 'admin') {
     deleteButton = (
       <button onClick={() => props.delete(pie.id)}>X</button>
     );

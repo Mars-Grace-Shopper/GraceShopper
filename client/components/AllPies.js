@@ -11,7 +11,7 @@ export class AllPies extends Component {
   constructor() {
     super();
     this.state = {
-      isAdmin: false,
+      // isAdmin: false,
       isLoading: true,
     }
     this.handleDelete = this.handleDelete.bind(this)
@@ -21,7 +21,7 @@ export class AllPies extends Component {
     this.props.fetchPies().then(() => {
       this.setState({...this.state, isLoading: false });
     });
-    if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true});
+    // if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true});
   }
 
   handleDelete(id){
@@ -31,7 +31,7 @@ export class AllPies extends Component {
   render() {
     const pies = this.props.pies;
     let addPie = <div></div>
-    if(this.state.isAdmin === true) addPie = <Link to='/addpie'><button>ADD PRODUCT</button></Link>
+    if(this.props.auth.type === 'admin') addPie = <Link to='/addpie'><button>ADD PRODUCT</button></Link>
 
     let component = this.state.isLoading ? 
     <div className='loading-page'>
@@ -56,7 +56,7 @@ export class AllPies extends Component {
             .concat(pies)
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((pie) => (
-              <SinglePieItem key={pie.id} pie={pie} isAdmin={this.state.isAdmin} delete={this.handleDelete}/>
+              <SinglePieItem key={pie.id} pie={pie} isAdmin={this.props.auth.type} delete={this.handleDelete}/>
             ))}
         </div>
     </div>);
