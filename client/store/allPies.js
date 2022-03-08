@@ -31,11 +31,15 @@ export const fetchPies = () => {
   };
 };
 
+// JOE CR: Make sure you're running dat formatter!
+
 export const addPie = (pie) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem('token');
       if (token) {
+        // JOE CR: I'm glad y'all figured out that the token goes on the config object as a
+        // THIRD argument to axios.post, because of the req.body second argument. Nice job!
       const { data } = await axios.post('/api/pies', pie, {
         headers: {
           authorization: token

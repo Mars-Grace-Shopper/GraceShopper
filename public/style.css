@@ -4,6 +4,10 @@
 
 /* ---------------------------- GENERAL */
 
+/* JOE CR: This file is insaaaaanely long. Let's discuss how we might split it up. */
+
+/* JOE CR: I love the class/id naming consistency with kebab case. */
+
 * {
   margin: 0;
   padding: 0;

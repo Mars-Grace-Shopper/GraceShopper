@@ -31,6 +31,7 @@ export default function SinglePieItem(props) {
           +
         </button>
       </div>
+      {/* JOE CR: I have seen the logic for formatting used a lot. Let's discuss some ways to centralize this. */}
       <p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p>
     </div>
   );

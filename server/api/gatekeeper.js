@@ -2,6 +2,7 @@ const {
   models: { User },
 } = require('../db');
 
+// JOE CR: These look great! But do these two functions need to be separate? Let's discuss.
 const requireAdminToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;

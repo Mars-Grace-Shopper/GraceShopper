@@ -12,7 +12,10 @@ router.get('/', requireUserToken, async(req, res, next) => {
     if(req.user){
     const user = req.user;
     const [cart] = await user.getCarts({where: {paid: false}})
+    // JOE CR: What's with the casing of this method?
     const cartItems = await cart.getCartitems();
+    // JOE CR: Although I love what's going on here, it seems like the sort of thing
+    // that is being done INSTEAD of using eager loading. Let's discuss.
     const data = await Promise.all(cartItems.map(async (item) => {
       let pie = await Pie.findByPk(item.pieId);
       return {id: item.id, quantity: item.quantity, pie: pie}
@@ -52,6 +55,8 @@ router.put('/cartitem', requireUserToken, async(req, res, next) => {
       const [cart] = await user.getCarts({where: {paid: false}})
       const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
       //console.log(cartitem.quantity)
+      // JOE CR: Both of these methods will send signals to your database to update the database's content.
+      // Therefore both of these functions are _____ and we should use the _____ keyword.
       cartitem.update({quantity: req.body.quantity})
       cartitem.save()
       //console.log('cartitem.quantity', cartitem.quantity)
@@ -86,6 +91,7 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
       const user = req.user;
       const address = req.body.address
       const [cart] = await user.getCarts({where: {paid: false}})
+      // JOE CR: Woo, instance methods!
       await cart.setPaidTrue();
       await user.createCart()
       const oldAddress = await Address.findByPk(address.id)
@@ -107,7 +113,7 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
 // POST /api/cart/checkout  -- for when a user is not logged in, save cart to DB
 router.post('/checkout', async (req, res, next) => {
   try {
-
+    // JOE CR: Variable naming conventions--stick to camelCase!
     const not_signed_in_cart = await Cart.create({paid: false})
     for (let i of req.body.cart) {
       await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
