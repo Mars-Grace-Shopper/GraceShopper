@@ -96,7 +96,9 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
 //      cartitem.update({quantity: req.body.quantity})
 //      cartitem.save()
       //console.log('cartitem.quantity', cartitem.quantity)
-      res.status(204).end();
+
+      res.status(200)
+      res.send({orderId: cart.id, orderDate: cart.updatedAt});
     }
   } catch (error) {
     next(error)
@@ -112,8 +114,6 @@ router.post('/checkout', async (req, res, next) => {
     for (let i of req.body.cart) {
       await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
     }
-
-
     let address = req.body.address
 
     await not_signed_in_cart.createAddress({...address})

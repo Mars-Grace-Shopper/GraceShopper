@@ -3,6 +3,7 @@
 @import url(https://fonts.googleapis.com/css?family=Fredoka);
 
 /* ---------------------------- GENERAL */
+
 * {
   margin: 0;
   padding: 0;
@@ -61,7 +62,7 @@ label {
   bottom: -50px;
   left: 0px;
   width: 100%;
-  content: ' ';
+  content: " ";
   background: radial-gradient(
     circle at 50% 0%,
     #3961e7 25%,
@@ -75,7 +76,7 @@ label {
 
 .header h1 {
   margin: 20px 0px 15px 0px;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .header h1 a {
@@ -108,7 +109,7 @@ label {
 .links a:visited {
   position: relative;
   display: inline-block;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   font-size: 20px;
   font-weight: bolder;
   color: rgb(57, 97, 231);
@@ -168,7 +169,7 @@ label {
 }
 
 .introductions h1 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .intro-para {
@@ -202,7 +203,7 @@ label {
   text-align: center;
   border-radius: 5px;
   padding: 5px 0;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 
   position: absolute;
   z-index: 1;
@@ -228,10 +229,13 @@ label {
 
 .all-pies-item-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-content: flex-start;
   flex-wrap: wrap;
+}
+
+.invisible-pie-div {
+  flex-grow: 1;
 }
 
 .single-pie-item {
@@ -278,7 +282,7 @@ label {
 }
 
 .pie-name {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   margin: 10px 18px 0px 18px;
   margin-bottom: auto;
   display: -webkit-box;
@@ -404,7 +408,7 @@ label {
 }
 
 .img-box h4 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   margin-top: 40px;
 }
 
@@ -436,7 +440,7 @@ label {
 }
 
 .name-price h2:first-child {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   font-size: 30px;
   width: 320px;
   word-wrap: break-word;
@@ -533,7 +537,7 @@ label {
 }
 
 .title h2 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -586,10 +590,6 @@ label {
   justify-content: space-between;
 }
 
-.price-qty label {
-  margin-bottom: 14px;
-}
-
 .price {
   margin-right: 20px;
   width: 50%;
@@ -624,38 +624,35 @@ label {
 
 .logged-in-userhome {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   text-align: center;
-  margin: 50px 70px;
+  min-height: 100vh;
 }
 
 .logged-in-header {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  width: 100%;
+  align-items: center;
   text-align: center;
+  margin: 50px 0px;
 }
 
 .logged-in-header h1 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .logged-in-header h3 {
   text-transform: uppercase;
   line-height: 30px;
-  margin-top: 10px;
+  margin: 10px 0px;
   letter-spacing: 1px;
   color: #3961e7;
 }
 
 .past-orders {
   width: 500px;
-  height: 100%;
   margin: 50px;
-  padding: 30px 0px 30px 0px;
+  padding: 30px 0px 15px 0px;
   background-color: white;
   border-radius: 2px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
@@ -667,8 +664,12 @@ label {
   margin: 20px 30px;
 }
 
+.past-orders a {
+  text-decoration: none;
+}
+
 .past-orders h2 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   margin: 0px 30px;
   text-align: left;
 }
@@ -698,6 +699,18 @@ label {
 .orders p:first-child,
 .orders p:nth-child(3) {
   width: 79px;
+}
+
+.logged-in-userhome button {
+  padding: 0px 13px 0px 13px;
+  height: 35px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  background-color: #3961e7;
+  cursor: pointer;
 }
 
 /* ---------------------------- SINGLE ORDER PAGE */
@@ -763,7 +776,7 @@ label {
 }
 
 .info-input h1 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   text-align: center;
   margin: 30px;
 }
@@ -841,7 +854,7 @@ label {
 }
 
 .cart h1 {
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   margin: 0px 30px 30px 30px;
 }
 
@@ -936,7 +949,6 @@ label {
   line-height: 30px;
 }
 
-
 /* ---------------------------- LOADING COMPONENT */
 
 .loading-page {
@@ -953,17 +965,33 @@ label {
   top: 100px;
 }
 
+/* ---------------------------- EDIT ACCOUNT PAGE */
+
+.city-state-zip {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
 /* ---------------------------- ALL USERS PAGE */
 
 .all-users-view {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.all-users-table {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0px;
+  width: 900px;
 }
 
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 90%;
+  margin-top: 30px;
 }
 
 td,
@@ -975,4 +1003,10 @@ th {
 
 tr:nth-child(even) {
   background-color: #d5e5f8;
+}
+
+.invisible-div2 {
+  width: 225px;
+  height: 225px;
+  margin-left: 10px;
 }

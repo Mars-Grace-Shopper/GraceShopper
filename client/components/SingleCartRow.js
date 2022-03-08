@@ -40,15 +40,12 @@ export default function SinglePieItem(props) {
 //Single cart row for checkout page
 export function SingleCheckoutCartItem(props) {
   return (
-    <div className='cart-item'>
-      <Link to={`/pies/${props.pie.id}`}>
-        <img src={props.pie.thumbnailurl} />
-      </Link>
+    <tr>
+      <td> <Link to={`/pies/${props.pie.id}`}>
       <p>{props.pie.name}</p>
-      <div className='quantity'>
-        <h3>{props.quantity}</h3>
-      </div>
-      <p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p>
-    </div>
+      </Link></td>
+      <td><p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p></td>
+      <td><h3>{props.quantity}</h3></td>
+    </tr>
   );
 }
