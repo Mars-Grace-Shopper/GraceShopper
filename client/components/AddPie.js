@@ -86,7 +86,7 @@ class AddPie extends React.Component {
               <input
                 onChange={handleChange}
                 name='name'
-                pattern='^[A-Za-z ]*$'
+                pattern='^[A-Za-zÀ-ÖØ-öø-ÿ ]*$'
                 required
                 title='Please enter a valid name.'
               />
@@ -96,7 +96,7 @@ class AddPie extends React.Component {
               <input
                 onChange={handleChange}
                 name='countryOrigin'
-                pattern='^[A-Za-z ]*$'
+                pattern='^[A-Za-zÀ-ÖØ-öø-ÿ ]*$'
                 required
                 title='Please enter a valid name.'
               />

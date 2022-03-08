@@ -1,6 +1,7 @@
 /* ---------------------------- ADMIN TOOLBAR */
 
 .admin-toolbar {
+  position: relative;
   left: 0;
   flex: 0 0 225px;
   background-color: rgb(57, 97, 231);

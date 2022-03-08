@@ -644,7 +644,7 @@ label {
 .logged-in-header h3 {
   text-transform: uppercase;
   line-height: 30px;
-  margin-top: 10px;
+  margin: 10px 0px;
   letter-spacing: 1px;
   color: #3961e7;
 }
@@ -662,6 +662,10 @@ label {
   display: flex;
   justify-content: space-between;
   margin: 20px 30px;
+}
+
+.past-orders a {
+  text-decoration: none;
 }
 
 .past-orders h2 {
@@ -980,7 +984,6 @@ label {
 .all-users-table {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 50px 0px;
   width: 900px;
 }
