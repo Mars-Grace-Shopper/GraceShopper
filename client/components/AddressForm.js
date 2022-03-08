@@ -119,7 +119,6 @@ export function SignUpAddressForm(props) {
           onChange={props.change}
           name="streetAddress"
           pattern="^[A-Za-z0-9 ]*$"
-          // defaultValue={props.address.streetAddress}
           required
           title="Please enter a valid street address."
         />
