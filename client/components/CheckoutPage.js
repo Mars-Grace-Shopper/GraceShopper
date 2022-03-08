@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { SingleCheckoutCartItem } from "./SingleCartRow";
-import AddressForm , {SetAddress} from "./AddressForm";
+import AddressForm, { SetAddress } from "./AddressForm";
 import { me } from "../store/auth";
 import axios from "axios";
 
@@ -10,7 +10,7 @@ class CheckoutPage extends Component {
   constructor() {
     super();
     this.state = {
-      setAddress:false,
+      setAddress: false,
       address: {
         customerName: "",
         streetAddress: "",
@@ -97,19 +97,25 @@ class CheckoutPage extends Component {
   }
 
   handleSetAddress() {
-    this.setState({...this.state, setAddress: !this.state.setAddress})
+    this.setState({ ...this.state, setAddress: !this.state.setAddress });
   }
   render() {
     let address = <div></div>;
-    if(!this.state.setAddress) address = <AddressForm
-    address={this.state.address}
-    change={this.handleChange}
-    setAddress={this.handleSetAddress}
-    />
-    if(this.state.setAddress) address =<SetAddress
-    address={this.state.address}
-    setAddress={this.handleSetAddress}
-    />
+    if (!this.state.setAddress)
+      address = (
+        <AddressForm
+          address={this.state.address}
+          change={this.handleChange}
+          setAddress={this.handleSetAddress}
+        />
+      );
+    if (this.state.setAddress)
+      address = (
+        <SetAddress
+          address={this.state.address}
+          setAddress={this.handleSetAddress}
+        />
+      );
     let cart = eval(localStorage.getItem("cart"));
     return (
       <div className="form-box">
@@ -117,14 +123,12 @@ class CheckoutPage extends Component {
           <button className="back-button">&#8249; BACK TO CART</button>
         </Link>
         <div className="field-box">
-          <div className="left-field">
-            {address}
-          </div>
+          <div className="left-field">{address}</div>
 
           <div className="right-field">
             <div>
               <div className="all-users-view">
-                <table style={{width:'100%'}}>
+                <table style={{ width: "100%" }}>
                   <tbody>
                     <tr>
                       <th>Pie</th>
@@ -141,8 +145,7 @@ class CheckoutPage extends Component {
                   </tbody>
                 </table>
               </div>
-              <br>
-              </br>
+              <br></br>
               <center>
                 <Link to="/cart/">
                   <button className="edit-submit">EDIT CART</button>
@@ -152,9 +155,13 @@ class CheckoutPage extends Component {
           </div>
         </div>
         <div>
-          <button className="edit-submit" onClick={this.handleCheckOut}>
-            PLACE ORDER
-          </button>
+          {this.state.setAddress ? (
+            <button className="edit-submit" onClick={this.handleCheckOut}>
+              PLACE ORDER
+            </button>
+          ) : (
+            <h3 style={{color:'#3961e7'}}>CONFIRM ADDRESS BEFORE PLACING ORDER</h3>
+          )}
         </div>
       </div>
     );

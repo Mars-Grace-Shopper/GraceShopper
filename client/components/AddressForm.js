@@ -78,7 +78,7 @@ export default function AddressForm(props) {
       </div>
       <div className="edit-buttons">
         <button className="edit-submit" onClick={props.setAddress}>
-          SET ADDRESS
+          CONFIRM ADDRESS
         </button>
       </div>
     </div>
