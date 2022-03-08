@@ -14,6 +14,7 @@ import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
 import AllUsers from './components/AllUsers'
+import EditAccountForm from './components/EditAccountForm';
 import CheckoutPage from './components/CheckoutPage';
 
 class Routes extends Component {
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path='/order' exact component={SingleOrder}/>
             <Route path='/order/:id' exact component={SingleOrder}/>
             <Route path='/userhome/order/' exact component={SingleOrder}/>
+            <Route path='/users/:id/editAccountForm' exact component={EditAccountForm}/>
             {/* will eventually redirect to cart/checkout/:id/confirmation, need to adjust for guest */}
             <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>
 

@@ -1,71 +1,83 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updatePie } from '../store/singlePie';
+import { fetchSingleUser, updateUser } from '../store/singleUser';
 
-class EditPie extends Component {
-  constructor() {
-    super();
+class EditAccountForm extends Component {
+  constructor(props) {
+    super(props);
+    const info = this.props.auth 
+    const customerName = this.props.auth.address.customerName 
     this.state = {
-      name: '',
-      countryOrigin: '',
-      type: '',
-      description: '',
-      thumbnailurl: '',
-      price: 0,
-      stockQuantity: 0,
+      customerName: customerName,
+      firstName: info.firstName,
+      lastName: info.lastName,
+      email: info.email,
+      newPassword: info.password,
+      confirmPassword: info.password,
+      streetAddress: info.address.streetAddress,
+      city: info.address.city,
+      state: info.address.state,
+      zipcode: info.address.zipcode,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    const pie = this.props.pie;
-    this.setState({ ...pie });
+    const userId = this.props.auth.id
+    this.props.fetchSingleUser(userId)
   }
 
   async handleChange(event) {
-
-    console.log(event.target.value)
     event.persist();
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
-    if (name === 'name')
-      await this.setState({ ...this.state, name: value });
-    if (name === 'country')
-      await this.setState({ ...this.state, countryOrigin: value });
-    if (name === 'type')
-      await this.setState({ ...this.state, type: value });
-    if (name === 'description')
-      await this.setState({ ...this.state, description: value });
-    if (name === 'thumbnailurl')
-      await this.setState({ ...this.state, thumbnailurl: value });
-    if (name === 'price')
-      await this.setState({ ...this.state, price: value });
-    if (name === 'stockQuantity')
-      await this.setState({ ...this.state, stockQuantity: value });
+    if (name === 'firstName')
+      this.setState({ ...this.state, firstName: value });
+    if (name === 'lastName')
+      this.setState({ ...this.state, lastName: value });
+    if (name === 'email')
+      this.setState({ ...this.state, email: value });
+    if (name === 'newPassword')
+      this.setState({ ...this.state, newPassword: value });
+    if (name === 'confirmPassword')
+      this.setState({ ...this.state, confirmPassword: value });
+    if (name === 'streetAddress')
+      this.setState({ ...this.state, streetAddress: value });
+    if (name === 'city')
+      this.setState({ ...this.state, city: value });
+    if (name === 'state')
+      this.setState({ ...this.state, state: value });
+    if (name === 'zipcode')
+      this.setState({ ...this.state, zipcode: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const pie = this.props.pie;
-    this.props.updatePie({ ...this.state, id: pie.id });
-    this.props.history.goBack();
+    const user = this.props.user;
+
+    if (this.state.newPassword !== this.state.confirmPassword) {
+      alert("The new passwords do not match!");
+    } else {
+      this.props.updateUser({...this.state, id: user.id});
+      this.props.history.goBack();
+    }
   }
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const pie = this.props.pie;
-    let price = this.props.pie.price;
-    price = Number(price / 100).toFixed(2);
+    const info = this.props.auth.address
+    const user = this.props.user
 
-    const spanStyle = {
-      color: 'red',
-      fontSize: '12px',
-      letterSpacing: '0.5px',
-      fontWeight: 'normal',
-    };
-    const required = <span style={spanStyle}>*Required</span>;
+    // const spanStyle = {
+    //   color: 'red',
+    //   fontSize: '12px',
+    //   letterSpacing: '0.5px',
+    //   fontWeight: 'normal',
+    // };
+
+    // const required = <span style={spanStyle}>*Required</span>;
 
     return (
       <div className='form-box'>
@@ -74,95 +86,130 @@ class EditPie extends Component {
             <div className='title-box'>
               <div className='title'>
                 <div className='pie-card'>
-                  <img src={pie.thumbnailurl} />
+                  <img src= "/blank-profile-picture.webp" />
                   <p>EDITING</p>
                 </div>
-                <h2>{pie.name}</h2>
+                <h2>{user.name}</h2>
               </div>
             </div>
+
             <div className='left-field'>
-              <label htmlFor='name'>
-                NAME {required}
-              </label>
+              <h3>ACCOUNT INFORMATION</h3>
+              <br />
+              <br />
+              <label htmlFor='firstName'>FIRST NAME</label>
               <input
                 onChange={handleChange}
-                name='name'
-                placeholder={pie.name}
+                name='firstName'
+                defaultValue={user.firstName}
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
               />
               <br />
               <br />
-              <label htmlFor='countryOrigin'>COUNTRY {required}</label>
+              <label htmlFor='lastName'>LAST NAME</label>
               <input
                 onChange={handleChange}
-                name='countryOrigin'
-                placeholder={pie.countryOrigin}
+                name='lastName'
+                defaultValue={user.lastName}
+                pattern='^[A-Za-z ]*$'
+                required
+                title='Please enter a valid name.'
               />
               <br />
               <br />
-              <label htmlFor='type'>TYPE {required}</label>
-              <select
-                defaultValue={pie.type}
+              <label htmlFor='email'>EMAIL</label>
+              <input
                 onChange={handleChange}
-                name='type'
-              >
-                <option value='Savory'>Savory</option>
-                <option value='Sweet'>Sweet</option>
-                <option value='Savory and sweet'>Savory and Sweet</option>
-                <option value='Savory or sweet'>Savory or Sweet</option>
-              </select>
+                name='email'
+                type='email'
+                defaultValue={user.email}
+                required
+                title='Please enter a valid email.'
+              />
             </div>
+
             <br />
             <br />
+
             <div className='right-field'>
-              <div className='price-qty'>
-                <div className='price'>
-                  <label htmlFor='price'>PRICE</label>
-                  <input
-                    type='number'
-                    step='.01'
-                    min='0'
-                    max='99.99'
-                    onChange={handleChange}
-                    name='price'
-                    placeholder={price}
-                  />
-                </div>
-                <br />
-                <br />
-                <div className='qty'>
-                  <label htmlFor='stockQuantity'>QUANTITY</label>
-                  <input
-                    type='number'
-                    step='1'
-                    min='0'
-                    onChange={handleChange}
-                    name='stockQuantity'
-                    placeholder={pie.stockQuantity}
-                  />
-                </div>
-              </div>
+              <h3>CHANGE PASSWORD</h3>
               <br />
               <br />
-              <label htmlFor='description'>DESCRIPTION</label>
+              <label htmlFor='password'>NEW PASSWORD</label>
               <input
                 onChange={handleChange}
-                name='description'
-                placeholder={pie.description}
+                name='password'
+                type='password'
               />
               <br />
               <br />
-              <label htmlFor='thumbnailurl'>PICTURE</label>
+              <label htmlFor='confirmPassword'>CONFIRM NEW PASSWORD</label>
               <input
                 onChange={handleChange}
-                name='thumbnailurl'
-                placeholder={pie.thumbnailurl}
+                name='confirmPassword'
+                type='password'
               />
             </div>
-            <br />
-            <br />
           </div>
+
+          <div>
+            <div className='left-field'>
+              <h3>ADDRESS</h3>
+              <br />
+              <br />
+              <label htmlFor='streetAddress'> STREET ADDRESS</label>
+              <input
+                onChange={handleChange}
+                name='streetAddress'
+                defaultValue={info.streetAddress}
+                required
+                title='Please enter a valid name.'
+              />
+            </div>
+
+            <div className='city-state-zip'>
+                <div className='price'>
+                  <label htmlFor='city'>CITY</label>
+                  <input
+                    onChange={handleChange}
+                    name='city'
+                    defaultValue={info.city}
+                    pattern='^[A-Za-z ]*$'
+                    required
+                    title='Please enter a valid name.'
+                  />
+                </div>
+                <br />
+                <br />
+                <div className='price'>
+                  <label htmlFor='state'>STATE</label>
+                  <input
+                    onChange={handleChange}
+                    name='state'
+                    defaultValue={info.state}
+                    pattern='^[A-Za-z ]*$'
+                    required
+                    title='Please enter a valid state.'
+                  />
+                </div>
+                <br />
+                <br />
+                <div className='price'>
+                <label htmlFor='zipcode'>ZIPCODE</label>
+              <input
+                onChange={handleChange}
+                name='zipcode'
+                defaultValue={info.zipcode}
+                title='Please enter a valid zipcode.'
+              />
+                  
+                </div>
+            </div>
+            </div>
           <div className='edit-buttons'>
-            <Link to={`/pies/${pie.id}`}>
+            <Link to={`/userhome`}>
               <button className='back-button'>&#8249; BACK</button>
             </Link>
             <button type='submit' className='edit-submit'>
@@ -177,14 +224,16 @@ class EditPie extends Component {
 
 const mapState = (state) => {
   return {
-    pie: state.pie,
+    user: state.user,
+    auth: state.auth
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    updatePie: (updatedPie) => dispatch(updatePie(updatedPie)),
+    fetchSingleUser: (userId) => dispatch(fetchSingleUser(userId)),
+    updateUser: (updatedUser) => dispatch(updateUser(updatedUser)),
   };
 };
 
-export default connect(mapState, mapDispatch)(EditPie);
+export default connect(mapState, mapDispatch)(EditAccountForm);

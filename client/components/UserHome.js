@@ -108,7 +108,8 @@ export class UserHome extends Component {
           {this.displayOrders(this.state.pastOrders)}
         </div>
 
-        <button>EDIT ACCOUNT INFO</button>
+        {/* have to protect this ID */}
+        <Link to={`/users/${this.props.id}/editAccountForm`}><button>EDIT ACCOUNT INFO</button></Link>
       </div>
     );
   }
@@ -117,6 +118,7 @@ export class UserHome extends Component {
 const mapState = (state) => {
   return {
     username: state.auth.username,
+    id: state.auth.id,
     type: state.auth.type,
   };
 };
