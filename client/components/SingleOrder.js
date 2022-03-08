@@ -38,9 +38,11 @@ export default class SingleOrder extends Component {
 
   render() {
 
+//  const orderDate = '99/99/9999';
   const orderDate = this.props.location.state.orderDate;
+
   const orderId = this.props.location.state.orderId;
-  const orderItems = [].concat(this.props.location.state.orderItems)
+//  const orderItems = [].concat(this.props.location.state.orderItems)
 
   const style = { color: '#3961e7' };
   console.log('SO this', this)

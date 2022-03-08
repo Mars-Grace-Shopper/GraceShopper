@@ -96,7 +96,9 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
 //      cartitem.update({quantity: req.body.quantity})
 //      cartitem.save()
       //console.log('cartitem.quantity', cartitem.quantity)
-      res.status(204).end();
+
+      res.status(200)
+      res.send({orderId: cart.id, orderDate: cart.updatedAt});
     }
   } catch (error) {
     next(error)
