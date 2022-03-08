@@ -1,20 +1,56 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+//import React from 'react';
+import React, { Component } from 'react';
 
-export default function SingleOrder(props) {
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
+
+export default class SingleOrder extends Component {
+//export default function SingleOrder(props) {
+//export default function SingleOrder(props) {
 
   // let price = props.pie.price
   // price = (price / 100).toFixed(2);
 
-  const style = { color: '#3961e7' };
+  constructor () {
+    super()
+    this.state = {
+      order: []
+    }
+  }
 
+
+  async componentDidMount() {
+    const token = window.localStorage.getItem('token')
+    const {data} = await axios.get('/api/orders/' + this.props.location.state.orderId, {headers: {authorization: token}});
+    await this.setState({ order: data})
+  }
+
+    findTotalPrice(cart) {
+    if (cart.length > 0) {
+      return cart.reduce((pv, cv) => pv + cv.pie.price * cv.quantity, 0);
+    } else {
+      return 0;
+    }
+  }
+
+
+  render() {
+
+  const orderDate = this.props.location.state.orderDate;
+  const orderId = this.props.location.state.orderId;
+  const orderItems = [].concat(this.props.location.state.orderItems)
+
+  const style = { color: '#3961e7' };
+  console.log('SO this', this)
   return (
     <div className='single-order'>
       <div className='single-order-header'>
         <h3>
-          <span style={style}>ORDER #</span> 2
+          <span style={style}>ORDER # </span> {orderId}
         </h3>
-        <h3>03/22/2022</h3>
+        <h3>{orderDate}</h3>
       </div>
       <div className='single-order-table'>
         <div className='order-table'>
@@ -24,18 +60,21 @@ export default function SingleOrder(props) {
         <hr className='navbar-hr' />
 
         {/* map in here */}
-        <div className='order-info'>
+        {this.state.order.map((item, idx) => {
+         return (
+        <div className='order-info' key={idx}>
           <p>
-            <span style={style}>x3</span> Product Name
+            <span style={style}>x{item.quantity}</span> {item.pie.name}
           </p>
-          <p>$27.00</p>
+          <p>${(item.pie.price / 100).toFixed(2)}</p>
         </div>
+            )})}
         <hr style={{margin: '0px 30px'}}/>
         {/* map in here */}
 
         <div className='order-total'>
           <p>
-            <span style={style}>Total</span>: $45.00
+            <span style={style}>Total</span>: ${(this.findTotalPrice(this.state.order) / 100).toFixed(2)}
           </p>
         </div>
       </div>
@@ -45,4 +84,5 @@ export default function SingleOrder(props) {
       </Link>
     </div>
   );
+}
 }
