@@ -36,11 +36,18 @@ router.get('/:id', requireUserToken, async (req, res, next) => {
 // PUT /api/users/:id to update user
 router.put('/:id', requireUserToken, async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const user = await User.findByPk(id);
-    await user.update(req.body);
-    const [userAddress] = await Address.findAll({ where: {userId: id }})
-    await userAddress.update({...req.body});
+    if(req.user){
+    const user = req.user
+    await user.update({...req.body});
+    console.log('--------', user)
+    await user.createAddress({customerName:req.body.firstName, ...req.body})
+    const [userAddress] = await Address.findOrCreate({ where: {userId: user.id }, defaults:{customerName: req.body.firstName, ...req.body}})
+    // if(userAddress){
+      await userAddress.update({...req.body});
+    // } else {
+      // await user.createAddress({customerName:req.body.firstName, ...req.body})
+    // }
+  }
     res.status(204).end();
   } catch (err) {
     next(err);

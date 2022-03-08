@@ -2,30 +2,47 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchSingleUser, updateUser } from '../store/singleUser';
+import {me} from '../store/auth'
 
 class EditAccountForm extends Component {
   constructor(props) {
     super(props);
-    const info = this.props.auth 
-    const customerName = this.props.auth.address.customerName 
     this.state = {
-      customerName: customerName,
-      firstName: info.firstName,
-      lastName: info.lastName,
-      email: info.email,
-      newPassword: info.password,
-      confirmPassword: info.password,
-      streetAddress: info.address.streetAddress,
-      city: info.address.city,
-      state: info.address.state,
-      zipcode: info.address.zipcode,
+      customerName: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      streetAddress: '',
+      city: '',
+      state: '',
+      zipcode: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount() {
-    const userId = this.props.auth.id
-    this.props.fetchSingleUser(userId)
+  async componentDidMount() {
+    await this.props.getAuth();
+    const user = this.props.auth
+    if(user.address){
+    this.setState({...this.state,
+      customerName: user.address.customerName,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      streetAddress: user.address.streetAddress,
+      city: user.address.city,
+      state: user.address.state,
+      zipcode: user.address.zipcode,
+    })
+  } else{
+    this.setState({...this.state,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    })
+  }
   }
 
   async handleChange(event) {
@@ -39,8 +56,8 @@ class EditAccountForm extends Component {
       this.setState({ ...this.state, lastName: value });
     if (name === 'email')
       this.setState({ ...this.state, email: value });
-    if (name === 'newPassword')
-      this.setState({ ...this.state, newPassword: value });
+    if (name === 'password')
+      this.setState({ ...this.state, password: value });
     if (name === 'confirmPassword')
       this.setState({ ...this.state, confirmPassword: value });
     if (name === 'streetAddress')
@@ -55,9 +72,9 @@ class EditAccountForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const user = this.props.user;
+    const user = this.props.auth
 
-    if (this.state.newPassword !== this.state.confirmPassword) {
+    if (this.state.password !== this.state.confirmPassword) {
       alert("The new passwords do not match!");
     } else {
       this.props.updateUser({...this.state, id: user.id});
@@ -67,8 +84,7 @@ class EditAccountForm extends Component {
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const info = this.props.auth.address
-    const user = this.props.user
+    const user = this.state
 
     // const spanStyle = {
     //   color: 'red',
@@ -163,7 +179,7 @@ class EditAccountForm extends Component {
               <input
                 onChange={handleChange}
                 name='streetAddress'
-                defaultValue={info.streetAddress}
+                defaultValue={user.streetAddress}
                 required
                 title='Please enter a valid name.'
               />
@@ -175,7 +191,7 @@ class EditAccountForm extends Component {
                   <input
                     onChange={handleChange}
                     name='city'
-                    defaultValue={info.city}
+                    defaultValue={user.city}
                     pattern='^[A-Za-z ]*$'
                     required
                     title='Please enter a valid name.'
@@ -188,7 +204,7 @@ class EditAccountForm extends Component {
                   <input
                     onChange={handleChange}
                     name='state'
-                    defaultValue={info.state}
+                    defaultValue={user.state}
                     pattern='^[A-Za-z ]*$'
                     required
                     title='Please enter a valid state.'
@@ -201,7 +217,7 @@ class EditAccountForm extends Component {
               <input
                 onChange={handleChange}
                 name='zipcode'
-                defaultValue={info.zipcode}
+                defaultValue={user.zipcode}
                 title='Please enter a valid zipcode.'
               />
                   
@@ -233,6 +249,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchSingleUser: (userId) => dispatch(fetchSingleUser(userId)),
     updateUser: (updatedUser) => dispatch(updateUser(updatedUser)),
+    getAuth: () => dispatch(me()),
   };
 };
 
