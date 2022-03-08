@@ -129,6 +129,7 @@ const mapDispatch = (dispatch) => {
     handleSubmit(evt) {
       evt.preventDefault();
       const userObj = {};
+      const address = {}
       const formName = evt.target.name;
 
       userObj.username = evt.target.username.value;
