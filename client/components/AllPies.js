@@ -58,6 +58,7 @@ export class AllPies extends Component {
             .map((pie) => (
               <SinglePieItem key={pie.id} pie={pie} isAdmin={this.state.isAdmin} delete={this.handleDelete}/>
             ))}
+            <div className='invisible-pie-div'></div>
         </div>
     </div>);
 
