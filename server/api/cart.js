@@ -112,8 +112,6 @@ router.post('/checkout', async (req, res, next) => {
     for (let i of req.body.cart) {
       await not_signed_in_cart.createCartitem({pieId: i.pie.id, quantity: i.quantity});
     }
-
-
     let address = req.body.address
 
     await not_signed_in_cart.createAddress({...address})

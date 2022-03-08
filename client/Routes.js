@@ -32,6 +32,8 @@ class Routes extends Component {
             <Route path='/userhome' exact component={UserHome}/>
 
             {/* will eventually redirect to userhome/order/:id */}
+            <Route path='/order' exact component={SingleOrder}/>
+            <Route path='/order/:id' exact component={SingleOrder}/>
             <Route path='/userhome/order/' exact component={SingleOrder}/>
             {/* will eventually redirect to cart/checkout/:id/confirmation, need to adjust for guest */}
             <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>

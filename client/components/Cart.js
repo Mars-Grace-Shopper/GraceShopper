@@ -183,8 +183,9 @@ export class Cart extends React.Component {
           <Link
             to={{ pathname: '/checkout', state: { cart: this.state.cart } }}
           >
-            <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>{' '}
+            <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>
           </Link>
+
         </div>
       </div>
     );
