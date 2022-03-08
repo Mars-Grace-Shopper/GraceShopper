@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
 import { Link } from 'react-router-dom';
+import AddressForm from './AddressForm';
 
 const AuthForm = (props) => {
   const { name, displayName, title, handleSubmit, error } = props;
@@ -9,6 +10,8 @@ const AuthForm = (props) => {
   if (name === 'signup') {
     signUpInfo = (
       <div>
+        <div>
+        </div>
         <div>
           <label htmlFor='firstName'>FIRST NAME</label>
           <input name='firstName' type='text'  pattern='*'
@@ -35,6 +38,7 @@ const AuthForm = (props) => {
       <form onSubmit={handleSubmit} name={name}>
         <div>
           {signUpInfo}
+          {/* <AddressForm/> */}
           <label htmlFor='username'>USERNAME</label>
           <input
             name='username'
