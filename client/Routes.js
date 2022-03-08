@@ -9,11 +9,13 @@ import AllPies from './components/AllPies'
 import AddPie from './components/AddPie';
 import EditPie from './components/EditPie'
 import SingleOrder from './components/SingleOrder';
+import Confirmation from './components/Confirmation';
 import ErrorPage from './components/ErrorPage';
 import {me} from './store'
 import Cart from './components/Cart';
 import AllUsers from './components/AllUsers'
 import EditAccountForm from './components/EditAccountForm';
+import CheckoutPage from './components/CheckoutPage';
 
 class Routes extends Component {
   componentDidMount() {
@@ -29,14 +31,20 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path='/userhome' exact component={UserHome}/>
+
+            {/* will eventually redirect to userhome/order/:id */}
             <Route path='/userhome/order/' exact component={SingleOrder}/>
             <Route path='/users/:id/editAccountForm' exact component={EditAccountForm}/>
+            {/* will eventually redirect to cart/checkout/:id/confirmation, need to adjust for guest */}
+            <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>
+
             <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>
             <Route path='/pies/:id/editpie' exact component={EditPie}/>
             <Route path='/cart' exact component={Cart}/>
+            <Route path='/checkout' exact component={CheckoutPage}/>
             <Redirect to="/" />
             <Route path="/error" exact component={ErrorPage}/>
           </Switch>
@@ -48,9 +56,9 @@ class Routes extends Component {
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/:id' component={SinglePieView}/>
             <Route path='/cart' exact component={Cart}/>
+            <Route path='/checkout' exact component={CheckoutPage}/>
             <Route path="/error" component={ErrorPage}/>
             {/* <Redirect to='/error' /> */}
-
           </Switch>
         )}
       </div>

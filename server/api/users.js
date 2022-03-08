@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
+const { models: { User, Address }} = require('../db')
 module.exports = router
 const {requireAdminToken, requireUserToken} = require('./gatekeeper')
 
@@ -26,8 +26,8 @@ router.get('/', requireAdminToken,  async (req, res, next) => {
 // GET /api/users/:id
 router.get('/:id', requireUserToken, async (req, res, next) => {
   try {
-    const pie = await User.findByPk(req.params.id);
-    res.json(pie);
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
   } catch (error) {
     next(error);
   }
@@ -38,7 +38,15 @@ router.put('/:id', requireUserToken, async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findByPk(id);
+    
+    console.log("LOLOLOLOLOL", req.body)
     await user.update(req.body);
+    console.log("LOLOLOLOLLOL", user)
+
+    const userAddress = await Address.findAll({ where: {userId: id }}).update(req.body);
+    // console.log("BRRRRRRRRR", userAddress)
+    // await userAddress.update();
+    // console.log("BBBBBBBBRR", userAddress)
     res.status(204).end();
   } catch (err) {
     next(err);

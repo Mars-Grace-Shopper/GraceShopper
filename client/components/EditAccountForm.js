@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom';
 import { fetchSingleUser, updateUser } from '../store/singleUser';
 
 class EditAccountForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const info = this.props.auth 
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      thumbnailurl: '',
+      firstName: info.firstName,
+      lastName: info.lastName,
+      email: info.email,
+      newPassword: info.password,
+      confirmPassword: info.password,
+      streetAddress: info.address.streetAddress,
+      city: info.address.city,
+      state: info.address.state,
+      zipcode: info.address.zipcode,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +24,6 @@ class EditAccountForm extends Component {
   componentDidMount() {
     const userId = this.props.auth.id
     this.props.fetchSingleUser(userId)
-    const user = this.props.user;
-    this.setState({ ...user });
   }
 
   async handleChange(event) {
@@ -29,50 +32,59 @@ class EditAccountForm extends Component {
     const name = event.target.name;
     const value = event.target.value;
     if (name === 'firstName')
-      await this.setState({ ...this.state, firstName: value });
+      this.setState({ ...this.state, firstName: value });
     if (name === 'lastName')
-      await this.setState({ ...this.state, lastName: value });
+      this.setState({ ...this.state, lastName: value });
     if (name === 'email')
-      await this.setState({ ...this.state, email: value });
-    if (name === 'password')
-      await this.setState({ ...this.state, password: value });
-    // if (name === 'thumbnailurl')
-    //   await this.setState({ ...this.state, thumbnailurl: value });
-    // if (name === 'price')
-    //   await this.setState({ ...this.state, price: value });
-    // if (name === 'stockQuantity')
-    //   await this.setState({ ...this.state, stockQuantity: value });
+      this.setState({ ...this.state, email: value });
+    if (name === 'newPassword')
+      this.setState({ ...this.state, newPassword: value });
+    if (name === 'confirmPassword')
+      this.setState({ ...this.state, confirmPassword: value });
+    if (name === 'streetAddress')
+      this.setState({ ...this.state, streetAddress: value });
+    if (name === 'city')
+      this.setState({ ...this.state, city: value });
+    if (name === 'state')
+      this.setState({ ...this.state, state: value });
+    if (name === 'zipcode')
+      this.setState({ ...this.state, zipcode: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const user = this.props.user;
-    this.props.updateUser({ ...this.state, id: user.id });
-    this.props.history.goBack();
-    
+
+    if (this.state.newPassword !== this.state.confirmPassword) {
+      alert("The new passwords do not match!");
+    } else {
+      this.props.updateUser({...this.state, id: user.id});
+      this.props.history.goBack();
+    }
   }
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const user = this.props.user;
+    const info = this.props.auth.address
+    const user = this.props.user
 
-    const spanStyle = {
-      color: 'red',
-      fontSize: '12px',
-      letterSpacing: '0.5px',
-      fontWeight: 'normal',
-    };
-    const required = <span style={spanStyle}>*Required</span>;
+    // const spanStyle = {
+    //   color: 'red',
+    //   fontSize: '12px',
+    //   letterSpacing: '0.5px',
+    //   fontWeight: 'normal',
+    // };
+
+    // const required = <span style={spanStyle}>*Required</span>;
 
     return (
       <div className='form-box'>
         <form className='add-edit-form' onSubmit={handleSubmit}>
-
           <div className='field-box'>
             <div className='title-box'>
               <div className='title'>
                 <div className='pie-card'>
-                  <img src={user.thumbnailurl} />
+                  <img src= "/blank-profile-picture.webp" />
                   <p>EDITING</p>
                 </div>
                 <h2>{user.name}</h2>
@@ -83,7 +95,7 @@ class EditAccountForm extends Component {
               <h3>ACCOUNT INFORMATION</h3>
               <br />
               <br />
-              <label htmlFor='firstName'>FIRST NAME {required}</label>
+              <label htmlFor='firstName'>FIRST NAME</label>
               <input
                 onChange={handleChange}
                 name='firstName'
@@ -94,7 +106,7 @@ class EditAccountForm extends Component {
               />
               <br />
               <br />
-              <label htmlFor='lastName'>LAST NAME {required}</label>
+              <label htmlFor='lastName'>LAST NAME</label>
               <input
                 onChange={handleChange}
                 name='lastName'
@@ -105,13 +117,12 @@ class EditAccountForm extends Component {
               />
               <br />
               <br />
-              <label htmlFor='email'>EMAIL {required}</label>
+              <label htmlFor='email'>EMAIL</label>
               <input
                 onChange={handleChange}
                 name='email'
                 type='email'
                 defaultValue={user.email}
-                pattern='^[A-Za-z ]*$'
                 required
                 title='Please enter a valid email.'
               />
@@ -124,14 +135,6 @@ class EditAccountForm extends Component {
               <h3>CHANGE PASSWORD</h3>
               <br />
               <br />
-              <label htmlFor='password'>CURRENT PASSWORD</label>
-              <input
-                onChange={handleChange}
-                name='password'
-                type='password'
-              />
-              <br />
-              <br />
               <label htmlFor='password'>NEW PASSWORD</label>
               <input
                 onChange={handleChange}
@@ -140,10 +143,10 @@ class EditAccountForm extends Component {
               />
               <br />
               <br />
-              <label htmlFor='thumbnailurl'>CONFIRM NEW PASSWORD</label>
+              <label htmlFor='confirmPassword'>CONFIRM NEW PASSWORD</label>
               <input
                 onChange={handleChange}
-                name='password'
+                name='confirmPassword'
                 type='password'
               />
             </div>
@@ -154,24 +157,23 @@ class EditAccountForm extends Component {
               <h3>ADDRESS</h3>
               <br />
               <br />
-              <label htmlFor='streetAddress'> STREET ADDRESS {required}</label>
+              <label htmlFor='streetAddress'> STREET ADDRESS</label>
               <input
                 onChange={handleChange}
                 name='streetAddress'
-                defaultValue={user.streetAddress}
-                pattern='^[A-Za-z ]*$'
+                defaultValue={info.streetAddress}
                 required
                 title='Please enter a valid name.'
               />
             </div>
 
-            <div className='price-qty'>
+            <div className='city-state-zip'>
                 <div className='price'>
-                  <label htmlFor='city'>CITY {required}</label>
+                  <label htmlFor='city'>CITY</label>
                   <input
                     onChange={handleChange}
                     name='city'
-                    defaultValue={user.city}
+                    defaultValue={info.city}
                     pattern='^[A-Za-z ]*$'
                     required
                     title='Please enter a valid name.'
@@ -180,11 +182,11 @@ class EditAccountForm extends Component {
                 <br />
                 <br />
                 <div className='price'>
-                  <label htmlFor='state'>STATE {required}</label>
+                  <label htmlFor='state'>STATE</label>
                   <input
                     onChange={handleChange}
                     name='state'
-                    defaultValue={user.state}
+                    defaultValue={info.state}
                     pattern='^[A-Za-z ]*$'
                     required
                     title='Please enter a valid state.'
@@ -193,12 +195,11 @@ class EditAccountForm extends Component {
                 <br />
                 <br />
                 <div className='price'>
-                <label htmlFor='zipcode'>ZIPCODE {required}</label>
+                <label htmlFor='zipcode'>ZIPCODE</label>
               <input
                 onChange={handleChange}
                 name='zipcode'
-                defaultValue={user.zipcode}
-                pattern='^[A-Za-z ]*$'
+                defaultValue={info.zipcode}
                 title='Please enter a valid zipcode.'
               />
                   

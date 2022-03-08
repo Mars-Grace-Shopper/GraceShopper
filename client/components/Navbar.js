@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import CartIcon from './CartIcon';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
@@ -29,12 +30,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/'>HOME</Link>
           <Link to='/pies'>PIES</Link>
           <Link to='/login'>LOGIN</Link>
-          {/* will change the link for cart later */}
         </div>
       )}
-      <Link to='/cart'>
-        <img src='/cart.png' className='cart-icon' />
-      </Link>
+      <CartIcon />
     </nav>
     <hr className='navbar-hr' />
   </div>
@@ -49,8 +47,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      localStorage.removeItem('token')
-      localStorage.removeItem('cart')
+      localStorage.removeItem('token');
+      localStorage.removeItem('cart');
       dispatch(logout());
     },
   };
