@@ -179,8 +179,9 @@ export class Cart extends React.Component {
             <p style={{ color: '#3961e7' }}>
               ${(this.findTotalPrice(this.state.cart) / 100).toFixed(2)}
             </p>
-         <Link to={{pathname:'/checkout', state:{cart: this.state.cart}}}><button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button> </Link>
+         
           </div>
+          <Link to={{pathname:'/checkout', state:{cart: this.state.cart}}}><button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button> </Link>
         </div>
       </div>
     );
