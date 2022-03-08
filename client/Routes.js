@@ -16,6 +16,7 @@ import Cart from './components/Cart';
 import AllUsers from './components/AllUsers'
 import EditAccountForm from './components/EditAccountForm';
 import CheckoutPage from './components/CheckoutPage';
+import AllPiesTable from './components/AllPiesTable';
 
 class Routes extends Component {
   componentDidMount() {
@@ -42,6 +43,7 @@ class Routes extends Component {
 
             <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
+            <Route path='/pies/table' exact component={AllPiesTable}/>
             <Route path='/pies/:id' exact component={SinglePieView}/>
             <Route path='/addpie' exact component={AddPie}/>
             <Route path='/pies/:id/editpie' exact component={EditPie}/>

@@ -19,12 +19,15 @@ export const AdminToolbar = (props) => {
                 </div>
               </li>
             </Link>
-              
-            <li>
-              <div>
-                🥧  Products
-              </div>
-            </li>
+
+            <Link to='/pies/table'>  
+              <li>
+                <div>
+                  🥧  Products
+                </div>
+              </li>
+            </Link>
+
             <li>
               <div>
                 <i className="ri-shopping-cart-line"></i>

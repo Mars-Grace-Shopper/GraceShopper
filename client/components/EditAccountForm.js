@@ -7,9 +7,7 @@ class EditAccountForm extends Component {
   constructor(props) {
     super(props);
     const info = this.props.auth 
-    const customerName = this.props.auth.address.customerName 
     this.state = {
-      customerName: customerName,
       firstName: info.firstName,
       lastName: info.lastName,
       email: info.email,
