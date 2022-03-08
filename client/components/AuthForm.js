@@ -2,8 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
 import { Link } from 'react-router-dom';
+import {SignUpAddressForm} from './AddressForm';
 
 const AuthForm = (props) => {
+  const spanStyle = {
+    color: "red",
+    fontSize: "12px",
+    letterSpacing: "0.5px",
+    fontWeight: "normal",
+  };
+  const required = <span style={spanStyle}>*Required</span>;
   const { name, displayName, title, handleSubmit, error } = props;
   let signUpInfo;
   if (name === 'signup') {
@@ -25,6 +33,37 @@ const AuthForm = (props) => {
             required
             title='Please enter a valid email.'/>
         </div>
+        <label htmlFor="streetAddress">STREET ADDRESS {required}</label>
+        <input
+          onChange={props.change}
+          name="streetAddress"
+          pattern="^[A-Za-z0-9 ]*$"
+          required
+          title="Please enter a valid street address."
+        />
+        <div className="city">
+          <label htmlFor="city">CITY</label>
+          <input
+            onChange={props.change}
+            name="city"
+            // defaultValue={props.address.city}
+            pattern="^[A-Za-z]*$"
+            required
+            title="Please enter a valid street address."
+          />
+        </div>
+        <div className="qty">
+          <label htmlFor="state">STATE</label>
+          <input
+            pattern="^[A-Za-z]*$"
+            // defaultValue={props.address.state}
+            onChange={props.change}
+            name="state"
+            required
+            title="Please enter a valid state."
+          />
+        </div>
+
       </div>
     );
   }
@@ -48,10 +87,11 @@ const AuthForm = (props) => {
           <input name='password' type='password' pattern='*'
             required/>
         </div>
-
+        {/* <SignUpAddressForm change={()=>''}/> */}
         <button type='submit' >{displayName}</button>
 
         {error && error.response && <div className='error'> {error.response.data} </div>}
+        
       </form>
       {name === 'signup' ? (
         <Link to='/login' className='login-signup'>
