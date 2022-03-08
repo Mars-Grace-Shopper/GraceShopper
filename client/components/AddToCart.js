@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import {fetchCart} from '../store/cart'
 
 import axios from 'axios';
 
@@ -43,7 +44,9 @@ class AddToCart extends React.Component {
     }
 
     localStorage.setItem('cart', JSON.stringify(localCart));
-    // this.props.history.push("/cart")
+    this.props.fetchCart()
+    //this.props.history.push("/cart")
+
   }    
 
   render() {
@@ -55,4 +58,20 @@ class AddToCart extends React.Component {
   }
 }
 
-export default AddToCart;
+//export default AddToCart;
+
+
+const mapState = (state) => {
+  return {
+    cart: state.cart
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    fetchCart: () => dispatch(fetchCart()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(AddToCart);
+
