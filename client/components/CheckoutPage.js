@@ -83,7 +83,7 @@ class CheckoutPage extends Component {
           { address: this.state.address },
           { headers: { authorization: token } }
         );
-        this.props.history.push("/");
+        this.props.history.push("/cart/checkout/confirmation");
       } else {
         let address = this.state.address;
         await axios.post(`/api/cart/checkout`, {
@@ -91,7 +91,7 @@ class CheckoutPage extends Component {
           cart: localCart,
         });
         localStorage.setItem("cart", "[]");
-        this.props.history.push("/");
+        this.props.history.push("/cart/checkout/confirmation");
       }
     }
   }
@@ -131,9 +131,9 @@ class CheckoutPage extends Component {
                 <table style={{ width: "100%" }}>
                   <tbody>
                     <tr>
-                      <th>Pie</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
+                      <th>PIE</th>
+                      <th>QUANTITY</th>
+                      <th>PRICE</th>
                     </tr>
                     {cart.map((cartItem) => (
                       <SingleCheckoutCartItem

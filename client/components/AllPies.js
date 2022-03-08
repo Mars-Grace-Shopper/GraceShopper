@@ -11,7 +11,6 @@ export class AllPies extends Component {
   constructor() {
     super();
     this.state = {
-      // isAdmin: false,
       isLoading: true,
     }
     this.handleDelete = this.handleDelete.bind(this)
@@ -21,7 +20,7 @@ export class AllPies extends Component {
     this.props.fetchPies().then(() => {
       this.setState({...this.state, isLoading: false });
     });
-    // if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true});
+   
   }
 
   handleDelete(id){
