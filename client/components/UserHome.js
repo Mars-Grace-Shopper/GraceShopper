@@ -87,9 +87,11 @@ export class UserHome extends Component {
   */
 
 
+
   render() {
     return (
       <div className='logged-in-userhome'>
+              {this.adminToolbar()}
         <div className='logged-in-header'>
             <h1>Welcome, {this.state.username}!</h1>
             <h3>{this.state.type}</h3>
@@ -104,21 +106,8 @@ export class UserHome extends Component {
           <hr className='navbar-hr' />
   
           {this.displayOrders(this.state.pastOrders)}
-
-          {/* ------ return if NO orders */}
-         {/* <div className='empty'>No orders yet. <Link to='/pies'>Make one!</Link></div> */}
-          {/* ------ return if  NO orders */}
-  
-          {/* ------ return if orders */}
-          
-          {/* <div className='orders'>
-            <p style={{ color: '#3961e7' }}>2</p>
-            <p>12/22/2022</p>
-            <p>$45.00</p>
-          </div> */}
-          {/* ------ return if orders */}
         </div>
-        {this.adminToolbar()}
+
         <button>EDIT ACCOUNT INFO</button>
       </div>
     );

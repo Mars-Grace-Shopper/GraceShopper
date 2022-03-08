@@ -43,7 +43,7 @@ export class AllUsers extends Component {
     : 
     (<div className='all-users-view'>
         <AdminToolbar/>
-        <div className='all-pies-menu'>
+        <div className='all-users-table'>
           <div className='filter-search'>
             <FilterMenuUsers />
             <input
@@ -51,9 +51,6 @@ export class AllUsers extends Component {
               placeholder='Who are you looking for...?'
             />
           </div>
-        {/* {addPie} */}
-        </div>
-        <div className='all-users-view'>
             <table>
                 <tbody>
                     <tr>
@@ -70,8 +67,8 @@ export class AllUsers extends Component {
                     ))}
                 </tbody>
             </table>
-            
         </div>
+        <div className='invisible-div2'></div>
     </div>);
 
     return component;
