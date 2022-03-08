@@ -121,19 +121,6 @@ export class Cart extends React.Component {
     }
   }
 
-  // async handleCheckOut() {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
-  //     this.props.history.push("/")
-  //   } else {
-  //     let localCart = eval(localStorage.getItem("cart"));
-  //     await axios.post(`/api/cart/checkout`, localCart)
-  //     localStorage.setItem('cart', '[]')
-  //     this.props.history.push("/")
-  //   }
-  // }
-
   render() {
     let empty = <div></div>;
     if (this.state.cart.length === 0)

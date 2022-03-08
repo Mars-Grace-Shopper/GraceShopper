@@ -89,13 +89,13 @@ router.put('/checkout', requireUserToken, async(req, res, next) => {
       await cart.setPaidTrue();
       await user.createCart()
       const oldAddress = await Address.findByPk(address.id)
+      if(oldAddress){
       await oldAddress.update({...req.body.address})
       oldAddress.save();
-//      const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
-      //console.log(cartitem.quantity)
-//      cartitem.update({quantity: req.body.quantity})
-//      cartitem.save()
-      //console.log('cartitem.quantity', cartitem.quantity)
+      } else{
+        await user.createAddress({...address})
+      }
+
       res.status(204).end();
     }
   } catch (error) {

@@ -37,8 +37,9 @@ router.get('/:id', requireUserToken, async (req, res, next) => {
 router.put('/:id', requireUserToken, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await User.findByPk(id);
-    await user.update(req.body);
+    const user = req.user
+    console.log('jslkflksdfjl', user)
+    await user.update({...req.body});
     const [userAddress] = await Address.findAll({ where: {userId: id }})
     await userAddress.update({...req.body});
     res.status(204).end();
