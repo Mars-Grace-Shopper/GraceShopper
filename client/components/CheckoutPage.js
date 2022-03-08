@@ -78,12 +78,16 @@ class CheckoutPage extends Component {
     else {
       const token = localStorage.getItem("token");
       if (token) {
-        await axios.put(
+        const response = await axios.put(
           `/api/cart/checkout`,
           { address: this.state.address },
           { headers: { authorization: token } }
         );
-        this.props.history.push("/cart/checkout/confirmation");
+
+        console.log('PUT RESPONSE:', response)
+
+        localStorage.setItem("cart", "[]");
+        this.props.history.push({pathname: "/cart/checkout/confirmation", state: {orderId: response.data.orderId, orderDate: response.data.orderDate.slice(0, 10)}});
       } else {
         let address = this.state.address;
         await axios.post(`/api/cart/checkout`, {
