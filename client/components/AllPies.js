@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SinglePieItem from './SinglePieItem';
-import { FilterMenu } from './FilterMenu';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
 import { Link } from 'react-router-dom';

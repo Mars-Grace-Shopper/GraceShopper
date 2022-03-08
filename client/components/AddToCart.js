@@ -43,7 +43,7 @@ class AddToCart extends React.Component {
     }
 
     localStorage.setItem('cart', JSON.stringify(localCart));
-    this.props.history.push("/cart")
+    // this.props.history.push("/cart")
   }    
 
   render() {
