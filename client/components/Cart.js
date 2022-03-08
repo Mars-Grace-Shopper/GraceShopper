@@ -51,6 +51,7 @@ export class Cart extends React.Component {
         headers: { authorization: token },
       });
     }
+    this.props.fetchCart()
   }
 
   async handleIncrement(id) {
@@ -105,6 +106,7 @@ export class Cart extends React.Component {
         { headers: { authorization: token } }
       );
     }
+    this.props.fetchCart()
   }
 
   findTotalQuantity(cart) {
