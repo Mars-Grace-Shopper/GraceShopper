@@ -11,7 +11,6 @@ class SinglePieView extends Component {
   constructor() {
     super();
     this.state = {
-      isAdmin: false,
       isLoading: true,
       quantity: 1,
     };
@@ -23,7 +22,7 @@ class SinglePieView extends Component {
     this.props.fetchSinglePie(this.props.match.params.id).then(() => {
       this.setState({...this.state, isLoading: false });
     });
-    if(this.props.auth.type === 'admin') this.setState({...this.state, isAdmin: true})
+    
   
   }
 
@@ -45,7 +44,7 @@ class SinglePieView extends Component {
     price = Number(price / 100).toFixed(2);
 
     let editButton = <div></div>
-    if(this.state.isAdmin) editButton = <Link to={`/pies/${pie.id}/editpie`}><button className='edit-button'>EDIT</button></Link>
+    if(this.props.auth.type === 'admin') editButton = <Link to={`/pies/${pie.id}/editpie`}><button className='edit-button'>EDIT</button></Link>
 
     let component = this.state.isLoading ? 
     <div className='loading-page'>
