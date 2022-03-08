@@ -16,7 +16,7 @@ export default function AddressForm(props) {
                 <h2>Shipping Address</h2>
               </div>
             </div> */}
-      <div className="left-field">
+      <form className="left-field" onSubmit={props.setAddress}>
         <label htmlFor="customerName">NAME {required}</label>
         <input
           onChange={props.change}
@@ -60,6 +60,8 @@ export default function AddressForm(props) {
             defaultValue={props.address.state}
             onChange={props.change}
             name="state"
+            required
+            title="Please enter a valid state."
           />
         </div>
         <br />
@@ -71,16 +73,19 @@ export default function AddressForm(props) {
             pattern="^[0-9]*$"
             onChange={props.change}
             name="zipcode"
+            required
+            title="Please enter a valid zipcode."
           />
         </div>
         <br />
         <br />
-      </div>
+      
       <div className="edit-buttons">
-        <button type='submit' className="edit-submit" onClick={props.setAddress}>
+        <button type='submit' className="edit-submit" >
           CONFIRM ADDRESS
         </button>
       </div>
+      </form>
     </div>
   );
 }
@@ -95,7 +100,7 @@ export function SetAddress(props){
     <p>{props.address.city}, {props.address.state}</p>
     <p>{props.address.zipcode}</p>
     </div>
-    <button className="edit-submit" onClick={props.setAddress}>
+    <button type='button' className="edit-submit" onClick={props.setAddress}>
          EDIT ADDRESS
         </button>
     </div>
