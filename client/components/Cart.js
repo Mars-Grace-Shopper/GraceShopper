@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SingleCartRow from './SingleCartRow';
+import {fetchCart} from '../store/cart'
 
 import axios from 'axios';
 
@@ -76,6 +77,7 @@ export class Cart extends React.Component {
         { headers: { authorization: token } }
       );
     }
+    this.props.fetchCart()
   }
 
   async handleDecrement(id) {
@@ -187,4 +189,18 @@ export class Cart extends React.Component {
   }
 }
 
-export default Cart;
+const mapState = (state) => {
+  return {
+    cart: state.cart
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    fetchCart: () => dispatch(fetchCart()),
+  };
+};
+
+//export default Cart;
+
+export default connect(mapState, mapDispatch)(Cart);
