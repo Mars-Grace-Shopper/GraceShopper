@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SinglePieRow from './SinglePieRow';
-import { FilterMenu } from './FilterMenu';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
 import { Link } from 'react-router-dom';
@@ -45,7 +44,6 @@ export class AllPiesTable extends Component {
         <AdminToolbar/>
         <div className='all-pies-table'>
           <div className='filter-search'>
-            <FilterMenu />
             <input
               type='text'
               placeholder='Search for a pie...'
