@@ -9,14 +9,13 @@ import usersReducer from './allUsers';
 import cartReducer from './cart';
 import singleUserReducer from './singleUser';
 
-const reducer = combineReducers({ 
-  auth, 
-  pies: piesReducer, 
+const reducer = combineReducers({
+  auth,
+  pies: piesReducer,
   pie: singlePieReducer,
   users: usersReducer,
   cart: cartReducer,
   user: singleUserReducer,
-
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

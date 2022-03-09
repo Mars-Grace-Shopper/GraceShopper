@@ -3,7 +3,6 @@ import SingleUserRow from './SingleUserRow';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../store/allUsers';
 import { Link } from 'react-router-dom';
-// import { deletePie } from '../store/allPies';
 import ClipLoader from 'react-spinners/ClipLoader';
 import AdminToolbar from './AdminToolbar';
 
@@ -16,7 +15,6 @@ export class AllUsers extends Component {
       filter: '',
       listOfUsers: [],
     };
-    // this.handleDelete = this.handleDelete.bind(this)
     this.handleSetFilter = this.handleSetFilter.bind(this);
   }
 
@@ -28,10 +26,6 @@ export class AllUsers extends Component {
     if (this.props.auth.type === 'admin')
       this.setState({ ...this.state, isAdmin: true });
   }
-
-  //   handleDelete(id){
-  //     this.props.deletePie(id);
-  //   }
 
   async handleSetFilter(event) {
     await this.setState({ ...this.state, filter: event.target.value });
@@ -53,10 +47,6 @@ export class AllUsers extends Component {
   }
 
   render() {
-    const users = this.props.users;
-    // let addPie = <div></div>
-    // if(this.state.isAdmin === true) addPie = <Link to='/addpie'><button>ADD PRODUCT</button></Link>
-
     let component = this.state.isLoading ? (
       <div className='loading-page'>
         <div className='spinner'>
@@ -92,12 +82,9 @@ export class AllUsers extends Component {
         <div className='invisible-div2'></div>
       </div>
     );
-
     return component;
   }
 }
-
-// delete={this.handleDelete}
 
 const mapState = (state) => {
   return {
@@ -109,7 +96,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
-    // deletePie: (id) => dispatch(deletePie(id)),
   };
 };
 

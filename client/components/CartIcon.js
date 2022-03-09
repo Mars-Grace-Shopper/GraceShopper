@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {fetchCart} from '../store/cart'
+import { fetchCart } from '../store/cart';
 
 import axios from 'axios';
 
@@ -30,9 +30,8 @@ class CartIcon extends React.Component {
     }
 
     this.setState({ ...this.state, cart: localCart });
-  
     // redux
-    this.props.fetchCart()
+    this.props.fetchCart();
   }
 
   findTotalQuantity(cart) {
@@ -47,7 +46,11 @@ class CartIcon extends React.Component {
     return (
       <div className='cart-qty'>
         <Link to='/cart'>
-          <img src='/cart.png' onClick={this.props.fetchCart} className='cart-icon' />
+          <img
+            src='/cart.png'
+            onClick={this.props.fetchCart}
+            className='cart-icon'
+          />
         </Link>
         <p>{this.findTotalQuantity(this.props.cart)}</p>
       </div>
@@ -57,23 +60,14 @@ class CartIcon extends React.Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart
-//    pies: state.pies,
-//    auth: state.auth,
+    cart: state.cart,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchCart: () => dispatch(fetchCart()),
-//    fetchPies: () => dispatch(fetchPies()),
-//    addPie: (pie) => dispatch(addPie(pie)),
-//    getAuth: () => dispatch(me()),
   };
 };
 
 export default connect(mapState, mapDispatch)(CartIcon);
-
-
-
-//export default CartIcon;

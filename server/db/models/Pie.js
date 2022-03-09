@@ -1,8 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
-const axios = require('axios');
-
-const SALT_ROUNDS = 5;
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Pie = db.define('pie', {
   name: {
@@ -18,14 +15,20 @@ const Pie = db.define('pie', {
     allowNull: false,
   },
   type: {
-    type: Sequelize.ENUM('Savory', 'Sweet', 'Savory or sweet', 'Savory and sweet'), 
+    type: Sequelize.ENUM(
+      'Savory',
+      'Sweet',
+      'Savory or sweet',
+      'Savory and sweet'
+    ),
   },
   description: {
     type: Sequelize.TEXT,
   },
   thumbnailurl: {
     type: Sequelize.STRING,
-    defaultValue: "https://www.simplyrecipes.com/thmb/s874U4AjfQBxYGz2nj5SWc-kYLg=/648x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Lattice-Pie-Crust-LEAD-1-1e320e0b6b864abbb0d038042a0af55b.jpg",
+    defaultValue:
+      'https://www.simplyrecipes.com/thmb/s874U4AjfQBxYGz2nj5SWc-kYLg=/648x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Lattice-Pie-Crust-LEAD-1-1e320e0b6b864abbb0d038042a0af55b.jpg',
   },
   price: {
     type: Sequelize.INTEGER, // all prices are stored as cents
@@ -43,25 +46,12 @@ const Pie = db.define('pie', {
       notEmpty: true,
       min: 0,
     },
-  }, 
+  },
 
   countryCode: {
     type: Sequelize.JSON,
     defaultValue: [],
-  }  
-})
+  },
+});
 
-module.exports = Pie
-
-/**
- * instanceMethods
- */
-
-/**
- * classMethods
- */
-
-
-/**
- * hooks
- */
+module.exports = Pie;

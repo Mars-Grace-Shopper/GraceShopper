@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
 import { Link } from 'react-router-dom';
-import {fetchCart} from '../store/cart';
+import { fetchCart } from '../store/cart';
 
 const AuthForm = (props) => {
   const { name, displayName, title, handleSubmit, error } = props;
@@ -12,19 +12,21 @@ const AuthForm = (props) => {
       <div>
         <div>
           <label htmlFor='firstName'>FIRST NAME</label>
-          <input name='firstName' type='text'  pattern='*'
-            required/>
+          <input name='firstName' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='lastName'>LAST NAME</label>
-          <input name='lastName' type='text'  pattern='*'
-            required/>
+          <input name='lastName' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='email'>EMAIL</label>
-          <input name='email' type='email'  pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
+          <input
+            name='email'
+            type='email'
+            pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
             required
-            title='Please enter a valid email.'/>
+            title='Please enter a valid email.'
+          />
         </div>
       </div>
     );
@@ -37,22 +39,18 @@ const AuthForm = (props) => {
         <div>
           {signUpInfo}
           <label htmlFor='username'>USERNAME</label>
-          <input
-            name='username'
-            type='text'
-            pattern='*'
-            required
-          />
+          <input name='username' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='password'>PASSWORD</label>
-          <input name='password' type='password' pattern='*'
-            required/>
+          <input name='password' type='password' pattern='*' required />
         </div>
 
-        <button type='submit' >{displayName}</button>
+        <button type='submit'>{displayName}</button>
 
-        {error && error.response && <div className='error'> {error.response.data} </div>}
+        {error && error.response && (
+          <div className='error'> {error.response.data} </div>
+        )}
       </form>
       {name === 'signup' ? (
         <Link to='/login' className='login-signup'>
@@ -73,7 +71,7 @@ const mapLogin = (state) => {
     title: 'Login',
     displayName: 'LOG IN',
     error: state.auth.error,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
@@ -83,7 +81,7 @@ const mapSignup = (state) => {
     title: 'Signup',
     displayName: 'SIGN UP',
     error: state.auth.error,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
@@ -103,15 +101,16 @@ const mapDispatch = (dispatch) => {
         userObj.lastName = evt.target.lastName.value;
 
         // get the cart they made before signup
-        let localCart = eval(localStorage.getItem("cart"));
+        let localCart = eval(localStorage.getItem('cart'));
         if (!Array.isArray(localCart)) {
-           localCart = []
+          localCart = [];
         }
         userObj.localCart = localCart;
       }
 
       dispatch(authenticate(userObj, formName));
-      dispatch(fetchCart())
+      dispatch(fetchCart());
+
     },
   };
 };

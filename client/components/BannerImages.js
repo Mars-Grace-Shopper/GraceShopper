@@ -1,7 +1,6 @@
 import React from 'react';
 
-//this will take in the all pies and filter to show random single views
-export default function FeaturedItems() {
+export default function BannerImages() {
   return (
     <div className='featured-items-container'>
       <div className='carousel-wrapper'>

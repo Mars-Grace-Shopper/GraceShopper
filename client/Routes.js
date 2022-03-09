@@ -31,16 +31,12 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path='/userhome' exact component={UserHome}/>
-
-            {/* will eventually redirect to userhome/order/:id */}
             <Route path='/order' exact component={SingleOrder}/>
             <Route path='/order/:id' exact component={SingleOrder}/>
+            <Route path='/userhome' exact component={UserHome}/>
             <Route path='/userhome/order/' exact component={SingleOrder}/>
             <Route path='/users/:id/editAccountForm' exact component={EditAccountForm}/>
-            {/* will eventually redirect to cart/checkout/:id/confirmation, need to adjust for guest */}
             <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>
-
             <Route path='/users' exact component={AllUsers}/>
             <Route path='/pies' exact component={AllPies}/>
             <Route path='/pies/table' exact component={AllPiesTable}/>
@@ -50,7 +46,7 @@ class Routes extends Component {
             <Route path='/cart' exact component={Cart}/>
             <Route path='/checkout' exact component={CheckoutPage}/>
             <Route path="/error" component={ErrorPage}/>
-            <Redirect to="/" />
+            <Redirect to='/userhome' />
           </Switch>
         ) : (
           <Switch>
@@ -61,8 +57,8 @@ class Routes extends Component {
             <Route path='/pies/:id' component={SinglePieView}/>
             <Route path='/cart' exact component={Cart}/>
             <Route path='/checkout' exact component={CheckoutPage}/>
+            <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>
             <Route path="/error" component={ErrorPage}/>
-            <Redirect to="/" />
           </Switch>
         )}
       </div>

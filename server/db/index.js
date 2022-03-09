@@ -11,17 +11,17 @@ const Address = require('./models/Address');
 
 //associations could go here!
 
-User.hasMany(Cart)
-Cart.belongsTo(User)
+User.hasMany(Cart);
+Cart.belongsTo(User);
 
-Pie.hasMany(CartItem)
-Cart.hasMany(CartItem)
+Pie.hasMany(CartItem);
+Cart.hasMany(CartItem);
 
-User.hasOne(Address)
-Address.belongsTo(User)
+User.hasOne(Address);
+Address.belongsTo(User);
 
-Cart.hasOne(Address)
-Address.belongsTo(Cart)
+Cart.hasOne(Address);
+Address.belongsTo(Cart);
 
 //Pie.belongsToMany(User, { through: Order });
 //User.belongsToMany(Pie, { through: Order });

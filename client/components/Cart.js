@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SingleCartRow from './SingleCartRow';
-import {fetchCart} from '../store/cart'
+import { fetchCart } from '../store/cart';
 
 import axios from 'axios';
 
@@ -17,7 +17,6 @@ export class Cart extends React.Component {
     this.handleDecrement = this.handleDecrement.bind(this);
     this.findTotalQuantity = this.findTotalQuantity.bind(this);
     this.findTotalPrice = this.findTotalPrice.bind(this);
-    // this.handleCheckOut = this.handleCheckOut.bind(this)
   }
 
   async componentDidMount() {
@@ -51,12 +50,10 @@ export class Cart extends React.Component {
         headers: { authorization: token },
       });
     }
-    this.props.fetchCart()
+    this.props.fetchCart();
   }
 
   async handleIncrement(id) {
-    console.log('Handleincrement: ', id);
-    console.log('this.state.cart : ', this.state.cart);
     let newQty;
 
     const token = localStorage.getItem('token');
@@ -78,11 +75,10 @@ export class Cart extends React.Component {
         { headers: { authorization: token } }
       );
     }
-    this.props.fetchCart()
+    this.props.fetchCart();
   }
 
   async handleDecrement(id) {
-    console.log('HandleDecrement: ', id);
     let newQty;
     const token = localStorage.getItem('token');
 
@@ -106,7 +102,7 @@ export class Cart extends React.Component {
         { headers: { authorization: token } }
       );
     }
-    this.props.fetchCart()
+    this.props.fetchCart();
   }
 
   findTotalQuantity(cart) {
@@ -125,20 +121,15 @@ export class Cart extends React.Component {
     }
   }
 
-  // async handleCheckOut() {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     await axios.put(`/api/cart/checkout`, {}, {headers:{authorization: token}})
-  //     this.props.history.push("/")
-  //   } else {
-  //     let localCart = eval(localStorage.getItem("cart"));
-  //     await axios.post(`/api/cart/checkout`, localCart)
-  //     localStorage.setItem('cart', '[]')
-  //     this.props.history.push("/")
-  //   }
-  // }
-
   render() {
+    const {
+      handleRemove,
+      handleIncrement,
+      handleDecrement,
+      findTotalPrice,
+      findTotalQuantity,
+    } = this;
+
     let empty = <div></div>;
     if (this.state.cart.length === 0)
       empty = (
@@ -146,6 +137,14 @@ export class Cart extends React.Component {
           Your cart is empty. <Link to='/pies'>Add something!</Link>
         </p>
       );
+
+    let checkoutButton = (
+      <Link to={{ pathname: '/checkout', state: { cart: this.state.cart } }}>
+        <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>
+      </Link>
+    );
+    if (this.state.cart.length === 0)
+      checkoutButton = <button disabled>PROCEED TO CHECKOUT</button>;
 
     return (
       <div className='cart-box'>
@@ -166,9 +165,9 @@ export class Cart extends React.Component {
               key={idx}
               pie={cartItem.pie}
               quantity={cartItem.quantity}
-              remove={this.handleRemove}
-              increment={this.handleIncrement}
-              decrement={this.handleDecrement}
+              remove={handleRemove}
+              increment={handleIncrement}
+              decrement={handleDecrement}
             />
           ))}
         </div>
@@ -179,17 +178,12 @@ export class Cart extends React.Component {
           </div>
           <hr className='navbar-hr' />
           <div className='total-price'>
-            <p>{this.findTotalQuantity(this.state.cart)}</p>
+            <p>{findTotalQuantity(this.state.cart)}</p>
             <p style={{ color: '#3961e7' }}>
-              ${(this.findTotalPrice(this.state.cart) / 100).toFixed(2)}
+              ${(findTotalPrice(this.state.cart) / 100).toFixed(2)}
             </p>
           </div>
-          <Link
-            to={{ pathname: '/checkout', state: { cart: this.state.cart } }}
-          >
-            <button onClick={this.handleCheckOut}> PROCEED TO CHECKOUT </button>
-          </Link>
-
+          {checkoutButton}
         </div>
       </div>
     );
@@ -198,7 +192,7 @@ export class Cart extends React.Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
@@ -207,7 +201,5 @@ const mapDispatch = (dispatch) => {
     fetchCart: () => dispatch(fetchCart()),
   };
 };
-
-//export default Cart;
 
 export default connect(mapState, mapDispatch)(Cart);

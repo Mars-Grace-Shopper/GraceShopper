@@ -39,7 +39,6 @@ async function seed() {
   jsonUserData.unshift({ username: 'cody', password: '123', email: 'cody@seed.js', type: 'admin', firstName: 'CoDy', lastName: 'ydoc'})
     
   for (let u of jsonUserData) {
-     //console.log(wikiPie)
      const createdUser = await User.create(u);
      const createdCart = await createdUser.createCart()
      for (let i = 1; i < 5; i++) {
@@ -48,7 +47,6 @@ async function seed() {
        }
      }
      const streetAddress = await genAddr()
-     //console.log(streetAddress)
      await createdUser.createAddress({
        customerName: createdUser.firstName + ' ' + createdUser.lastName, 
        cartId: createdCart.id,
@@ -104,20 +102,7 @@ async function seed() {
     console.log(`Magic methods for ${i}:`)
     console.log(Object.keys(eval(i).prototype))
   }
-
-
-/*
-    const a_cart = await Cart.findOrCreate({where: {userId: 10, paid: false}})
-    //console.log('a_cart', a_cart)
-    await a_cart[0].createCartitem({pieId: 27, quantity: 44})
-*/
   console.log(`seeded successfully`)
-//  return {
-//    users: {
-//      cody: users[0],
-//      murphy: users[1]
-//    }
-//  }
 }
 
 /*

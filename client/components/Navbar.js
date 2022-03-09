@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import CartIcon from './CartIcon';
-import {fetchCart} from '../store/cart'
+import { fetchCart } from '../store/cart';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>

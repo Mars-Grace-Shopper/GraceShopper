@@ -52,13 +52,13 @@ export const addPie = (pie) => {
     try {
       const token = window.localStorage.getItem('token');
       if (token) {
-      const { data } = await axios.post('/api/pies', pie, {
-        headers: {
-          authorization: token
-        }});
+        const { data } = await axios.post('/api/pies', pie, {
+          headers: {
+            authorization: token,
+          },
+        });
         dispatch(createPie(data));
-      }
-      else throw new Error('unauthorized');
+      } else throw new Error('unauthorized');
     } catch (error) {
       console.log(error);
     }
@@ -70,17 +70,19 @@ export const deletePie = (pieId) => {
     try {
       const token = window.localStorage.getItem('token');
       if (token) {
-      await axios.delete(`/api/pies/${pieId}`,{
-        headers: {
-          authorization: token
-        }});
-      dispatch(removePie(pieId));
+        await axios.delete(`/api/pies/${pieId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(removePie(pieId));
       }
     } catch (error) {
       console.log(error);
     }
   };
 };
+
 //INITIAL STATE:
 const initialState = [];
 
@@ -94,11 +96,10 @@ export default function piesReducer(state = initialState, action) {
     case REMOVE_PIE:
       console.log('redux DELETE action', action);
       console.log('redux DELETE state', state);
-      const newPiesArray = state.filter(x => x.id != action.pieId)
+      const newPiesArray = state.filter((x) => x.id != action.pieId);
       return newPiesArray;
     case FILTER_PIES:
-      console.log('reudcer filter', action.filter, '-- state:', state)
-      return state
+      return state;
     default:
       return state;
   }

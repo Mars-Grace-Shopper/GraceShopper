@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   models: { Pie },
 } = require('../db');
-const {requireAdminToken, requireUserToken} = require('./gatekeeper');
+const { requireAdminToken } = require('./gatekeeper');
 module.exports = router;
 
 // GET /api/pies

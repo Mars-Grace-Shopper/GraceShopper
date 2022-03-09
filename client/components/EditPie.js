@@ -28,12 +28,10 @@ class EditPie extends Component {
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
-    if (name === 'name')
-      await this.setState({ ...this.state, name: value });
+    if (name === 'name') await this.setState({ ...this.state, name: value });
     if (name === 'countryOrigin')
       await this.setState({ ...this.state, countryOrigin: value });
-    if (name === 'type')
-      await this.setState({ ...this.state, type: value });
+    if (name === 'type') await this.setState({ ...this.state, type: value });
     if (name === 'description')
       await this.setState({ ...this.state, description: value });
     if (name === 'thumbnailurl')
@@ -51,8 +49,8 @@ class EditPie extends Component {
     if (this.state.type === null) {
       alert('Please pick a type!');
     } else {
-    this.props.updatePie({ ...this.state, id: pie.id });
-    this.props.history.goBack();
+      this.props.updatePie({ ...this.state, id: pie.id });
+      this.props.history.goBack();
     }
   }
 
@@ -84,9 +82,7 @@ class EditPie extends Component {
               </div>
             </div>
             <div className='left-field'>
-              <label htmlFor='name'>
-                NAME {required}
-              </label>
+              <label htmlFor='name'>NAME {required}</label>
               <input
                 onChange={handleChange}
                 name='name'

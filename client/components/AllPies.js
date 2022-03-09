@@ -32,8 +32,7 @@ export class AllPies extends Component {
 
   async handleSetFilter(event) {
     await this.setState({ ...this.state, filter: event.target.value });
-    console.log('HSF')
-    this.props.filterPies(this.state.filter)
+    this.props.filterPies(this.state.filter);
   }
 
   renderFilteredPies() {

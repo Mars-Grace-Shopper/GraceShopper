@@ -59,11 +59,8 @@ const main = async () => {
       email: `${fName}${lName}@seed.js`,
       type: 'user',
     }
-    //  console.log(uniqueName(firstNamePool) + ' ' + uniqueName(lastNamePool))
     seedjson.push(tmpUser)
   }
-  
-  //console.log(seedjson)
   const data = JSON.stringify(seedjson);
   await fs.writeFileSync('users.json', data, {encoding:'utf8', flag:'w'});
 }

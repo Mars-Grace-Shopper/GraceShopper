@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { SingleCheckoutCartItem } from "./SingleCartRow";
-import AddressForm, { SetAddress } from "./AddressForm";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { SingleCheckoutCartItem } from './SingleCartRow';
+import AddressForm, { SetAddress } from './AddressForm';
 import { fetchCart } from '../store/cart';
-import { me } from "../store/auth";
-import axios from "axios";
+import { me } from '../store/auth';
+import axios from 'axios';
 
 class CheckoutPage extends Component {
   constructor() {
@@ -13,11 +13,11 @@ class CheckoutPage extends Component {
     this.state = {
       setAddress: false,
       address: {
-        customerName: "",
-        streetAddress: "",
-        city: "",
-        state: "",
-        zipcode: 0,
+        customerName: '',
+        streetAddress: '',
+        city: '',
+        state: '',
+        zipcode: '',
       },
     };
     this.handleCheckOut = this.handleCheckOut.bind(this);
@@ -43,27 +43,27 @@ class CheckoutPage extends Component {
     event.preventDefault();
     const className = event.target.name;
     const value = event.target.value;
-    if (className === "customerName")
+    if (className === 'customerName')
       this.setState({
         ...this.state,
         address: { ...this.state.address, customerName: value },
       });
-    if (className === "streetAddress")
+    if (className === 'streetAddress')
       this.setState({
         ...this.state,
         address: { ...this.state.address, streetAddress: value },
       });
-    if (className === "city")
+    if (className === 'city')
       this.setState({
         ...this.state,
         address: { ...this.state.address, city: value },
       });
-    if (className === "state")
+    if (className === 'state')
       this.setState({
         ...this.state,
         address: { ...this.state.address, state: value },
       });
-    if (className === "zipcode")
+    if (className === 'zipcode')
       this.setState({
         ...this.state,
         address: { ...this.state.address, zipcode: value },
@@ -72,34 +72,39 @@ class CheckoutPage extends Component {
       [event.target.name]: event.target.value,
     });
   }
+
   async handleCheckOut(event) {
     event.preventDefault();
-    let localCart = eval(localStorage.getItem("cart"));
+    let localCart = eval(localStorage.getItem('cart'));
 
-    if (this.findTotalQuantity(localCart) < 1) window.alert("noooooooooo");
+    if (this.findTotalQuantity(localCart) < 1) window.alert('noooooooooo');
     else {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token) {
         const response = await axios.put(
           `/api/cart/checkout`,
           { address: this.state.address },
           { headers: { authorization: token } }
         );
-
-        console.log('PUT RESPONSE:', response)
-
-        localStorage.setItem("cart", "[]");
+        
+        localStorage.setItem('cart', '[]');
         this.props.fetchCart();
-        this.props.history.push({pathname: "/cart/checkout/confirmation", state: {orderId: response.data.orderId, orderDate: response.data.orderDate.slice(0, 10)}});
+        this.props.history.push({
+          pathname: '/cart/checkout/confirmation',
+          state: {
+            orderId: response.data.orderId,
+            orderDate: response.data.orderDate.slice(0, 10),
+          },
+        });
       } else {
         let address = this.state.address;
         await axios.post(`/api/cart/checkout`, {
           address: address,
           cart: localCart,
         });
-        localStorage.setItem("cart", "[]");
+        localStorage.setItem('cart', '[]');
         this.props.fetchCart();
-        this.props.history.push("/cart/checkout/confirmation");
+        this.props.history.push('/cart/checkout/confirmation');
       }
     }
   }
@@ -124,19 +129,26 @@ class CheckoutPage extends Component {
           setAddress={this.handleSetAddress}
         />
       );
-    let cart = eval(localStorage.getItem("cart"));
+    let cart = eval(localStorage.getItem('cart'));
     return (
-      <div className="form-box">
-        <Link to="/cart">
-          <button className="back-button">&#8249; BACK TO CART</button>
-        </Link>
-        <div className="field-box">
-          <div className="left-field">{address}</div>
-
-          <div className="right-field">
+      <div className='checkout-box'>
+        <div className='checkout-field'>
+          <div className='checkout-left-field'>
+            <h1>Checkout</h1>
+            {address}
+            {this.state.setAddress ? (
+            <button className='place-order' onClick={this.handleCheckOut}>
+              PLACE ORDER
+            </button>
+          ) : (
+            <div></div>
+          )}
+            </div>
+          <div className='checkout-right-field'>
             <div>
-              <div className="all-users-view">
-                <table style={{ width: "100%" }}>
+              <div className='checkout-cart-view'>
+                <h1>Cart summary</h1>
+                <table>
                   <tbody>
                     <tr>
                       <th>PIE</th>
@@ -152,24 +164,12 @@ class CheckoutPage extends Component {
                     ))}
                   </tbody>
                 </table>
+              <Link to='/cart/'>
+                <button className='edit-submit'>EDIT CART</button>
+              </Link>
               </div>
-              <br></br>
-              <center>
-                <Link to="/cart/">
-                  <button className="edit-submit">EDIT CART</button>
-                </Link>
-              </center>
             </div>
           </div>
-        </div>
-        <div>
-          {this.state.setAddress ? (
-            <button className="edit-submit" onClick={this.handleCheckOut}>
-              PLACE ORDER
-            </button>
-          ) : (
-            <h3 style={{color:'#3961e7'}}>CONFIRM ADDRESS BEFORE PLACING ORDER</h3>
-          )}
         </div>
       </div>
     );
@@ -179,7 +179,7 @@ class CheckoutPage extends Component {
 const mapState = (state) => {
   return {
     auth: state.auth,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 

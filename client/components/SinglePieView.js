@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchSinglePie } from '../store/singlePie';
 import EditPie from './EditPie';
 import AddToCart from './AddToCart';
-
-import ClipLoader from "react-spinners/ClipLoader";
+import ClipLoader from 'react-spinners/ClipLoader';
 
 class SinglePieView extends Component {
   constructor() {
@@ -20,10 +19,8 @@ class SinglePieView extends Component {
 
   componentDidMount() {
     this.props.fetchSinglePie(this.props.match.params.id).then(() => {
-      this.setState({...this.state, isLoading: false });
+      this.setState({ ...this.state, isLoading: false });
     });
-    
-  
   }
 
   increment() {
@@ -39,61 +36,66 @@ class SinglePieView extends Component {
   render() {
     const { increment, decrement } = this;
     const pie = this.props.pie;
-
     let price = pie.price;
     price = Number(price / 100).toFixed(2);
 
-    let editButton = <div></div>
-    if(this.props.auth.type === 'admin') editButton = <Link to={`/pies/${pie.id}/editpie`}><button className='edit-button'>EDIT</button></Link>
+    let editButton = <div></div>;
+    if (this.props.auth.type === 'admin')
+      editButton = (
+        <Link to={`/pies/${pie.id}/editpie`}>
+          <button className='edit-button'>EDIT</button>
+        </Link>
+      );
 
-    let component = this.state.isLoading ? 
-    <div className='loading-page'>
-      <div className='spinner'>
-        <ClipLoader color={'#1B69E7'} size={60}/> 
-      </div>
-    </div>
-    :
-    (<div className='single-pie'>
-      <div className='single-pie-links'>
-        <Link to='/pies'><button className='back-button'>&#8249; BACK</button></Link>
-        {editButton}
-      </div>
-      <div className='single-pie-view-container'>
-        <div className='img-box'>
-          <img className='single-view-img' src={pie.thumbnailurl} />
-          <h4>TYPE: <span style={{ color: "#3961e7" }}>{pie.type}</span></h4>
+    let component = this.state.isLoading ? (
+      <div className='loading-page'>
+        <div className='spinner'>
+          <ClipLoader color={'#1B69E7'} size={60} />
         </div>
-        <div className='single-view-text-container'>
-          <div className='name-price'>
-            <h2>{pie.name}</h2>
-            <h2>${price}</h2>
+      </div>
+    ) : (
+      <div className='single-pie'>
+        <div className='single-pie-links'>
+          <Link to='/pies'>
+            <button className='back-button'>&#8249; BACK</button>
+          </Link>
+          {editButton}
+        </div>
+        <div className='single-pie-view-container'>
+          <div className='img-box'>
+            <img className='single-view-img' src={pie.thumbnailurl} />
+            <h4>
+              TYPE: <span style={{ color: '#3961e7' }}>{pie.type}</span>
+            </h4>
           </div>
-          <h4>{pie.countryOrigin}</h4>
-          <p>{pie.description}</p>
-          <div className='quantity-box'>
-            <div className='quantity'>
-              <button
-                type='button'
-                className='decrement'
-                onClick={decrement}
-              >
-                -
-              </button>
-              <h3>{this.state.quantity}</h3>
-              <button
-                type='button'
-                className='increment'
-                onClick={increment}
-              >
-                +
-              </button>
+          <div className='single-view-text-container'>
+            <div className='name-price'>
+              <h2>{pie.name}</h2>
+              <h2>${price}</h2>
             </div>
-            <AddToCart pie={pie} quantity={this.state.quantity} history={this.props.history} />
+            <h4>{pie.countryOrigin}</h4>
+            <p>{pie.description}</p>
+            <div className='quantity-box'>
+              <div className='quantity'>
+                <button type='button' className='decrement' onClick={decrement}>
+                  -
+                </button>
+                <h3>{this.state.quantity}</h3>
+                <button type='button' className='increment' onClick={increment}>
+                  +
+                </button>
+              </div>
+              <AddToCart
+                pie={pie}
+                quantity={this.state.quantity}
+                history={this.props.history}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>);
-    
+    );
+
     return component;
   }
 }

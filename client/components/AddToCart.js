@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {fetchCart} from '../store/cart'
+import { fetchCart } from '../store/cart';
 
 import axios from 'axios';
 
 class AddToCart extends React.Component {
-    constructor() {
-        super();
-        this.handleAddItem = this.handleAddItem.bind(this);
+  constructor() {
+    super();
+    this.handleAddItem = this.handleAddItem.bind(this);
+  }
+
+  async handleAddItem() {
+    const token = localStorage.getItem('token');
+    let localCart = eval(localStorage.getItem('cart'));
+    let newQty;
+
+    if (!Array.isArray(localCart)) {
+      localCart = [];
     }
-
-    async handleAddItem() {
-        const token = localStorage.getItem('token')
-        let localCart = eval(localStorage.getItem("cart"));
-        let newQty;
-
-        if (!Array.isArray(localCart)) {
-            localCart = []
-        }
 
     // if this pie is in the local cart
     if (localCart.filter((e) => e.pie.id === this.props.pie.id).length > 0) {
@@ -28,26 +28,31 @@ class AddToCart extends React.Component {
           newQty = localCart[i]['quantity'];
         }
       }
- 
+
       // if logged in, update quantity in database
       if (token) {
-        await axios.put(`/api/cart/cartitem`, {quantity: newQty, pieId: this.props.pie.id}, {headers:{authorization: token}})
+        await axios.put(
+          `/api/cart/cartitem`,
+          { quantity: newQty, pieId: this.props.pie.id },
+          { headers: { authorization: token } }
+        );
       }
-
     } else {
       // else add this pie to the localcart
       localCart.push({ quantity: this.props.quantity, pie: this.props.pie });
       // if logged in, create a new cart item in the database
       if (token) {
-        await axios.post(`/api/cart/cartitem`, {quantity: this.props.quantity, pieId: this.props.pie.id}, {headers:{authorization: token}})
+        await axios.post(
+          `/api/cart/cartitem`,
+          { quantity: this.props.quantity, pieId: this.props.pie.id },
+          { headers: { authorization: token } }
+        );
       }
     }
 
     localStorage.setItem('cart', JSON.stringify(localCart));
-    this.props.fetchCart()
-    //this.props.history.push("/cart")
-
-  }    
+    this.props.fetchCart();
+  }
 
   render() {
     return (
@@ -58,12 +63,9 @@ class AddToCart extends React.Component {
   }
 }
 
-//export default AddToCart;
-
-
 const mapState = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
@@ -74,4 +76,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(AddToCart);
-

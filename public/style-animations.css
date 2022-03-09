@@ -43,7 +43,8 @@
 
 .add-to-cart,
 .total button,
-.confirmation button {
+.confirmation button,
+.place-order {
   flex-grow: 1;
   margin-left: 20px;
   font-size: 16px;
@@ -56,7 +57,8 @@
   transition: all 0.5s;
 }
 
-.total button {
+.total button,
+.place-order {
   bottom: 0;
   border-radius: 0px 0px 2px 2px;
   margin: 0;
@@ -64,7 +66,7 @@
   width: 100%;
 }
 
-.confirmation button{
+.confirmation button {
   width: 300px;
   height: 45px;
   margin: 10px;
@@ -72,7 +74,8 @@
 
 .add-to-cart,
 .total button,
-.confirmation button {
+.confirmation button,
+.place-order {
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -81,7 +84,8 @@
 
 .add-to-cart:after,
 .total button:after,
-.confirmation button:after {
+.confirmation button:after,
+.place-order:after {
   content: '»';
   position: absolute;
   opacity: 0;
@@ -91,7 +95,8 @@
 
 .add-to-cart:hover,
 .total button:hover,
-.confirmation button:hover {
+.confirmation button:hover,
+.place-order:hover {
   padding-right: 24px;
   padding-left: 8px;
   background-color: #77a9f3;
@@ -99,7 +104,8 @@
 
 .add-to-cart:hover:after,
 .total button:hover:after,
-.confirmation button:after {
+.confirmation button:after,
+.place-order:after {
   opacity: 1;
   right: 10px;
 }

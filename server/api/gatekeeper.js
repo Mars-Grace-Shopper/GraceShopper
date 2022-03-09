@@ -26,4 +26,4 @@ const requireUserToken = async (req, res, next) => {
 module.exports = {
   requireAdminToken,
   requireUserToken,
-}
+};
