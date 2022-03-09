@@ -54,8 +54,6 @@ export class Cart extends React.Component {
   }
 
   async handleIncrement(id) {
-    console.log('Handleincrement: ', id);
-    console.log('this.state.cart : ', this.state.cart);
     let newQty;
 
     const token = localStorage.getItem('token');
@@ -81,7 +79,6 @@ export class Cart extends React.Component {
   }
 
   async handleDecrement(id) {
-    console.log('HandleDecrement: ', id);
     let newQty;
     const token = localStorage.getItem('token');
 

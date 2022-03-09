@@ -2,24 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Confirmation(props) {
-  console.log('CONF props:', props);
-
-  const handleVO = () => {
-    this.props.history.push({
-      pathname: '/order/' + props.location.state.orderId,
-      state: {
-        orderId: props.location.state.orderId,
-        orderDate: props.location.state.orderDate,
-      },
-    });
-  };
-
   return (
     <div className='confirmation'>
       <div className='confirmation-msg'>
         <h1>THANK YOU!</h1>
         <p>Your order has been placed.</p>
 
+        {/* show order number if user has an account */}
         {props.location.state === undefined ? (
           <div></div>
         ) : (
@@ -42,6 +31,7 @@ export default function Confirmation(props) {
         )}
       </div>
 
+      {/* show view order button if user has an account */}
       {props.location.state === undefined ? (
         <div></div>
       ) : (

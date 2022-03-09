@@ -86,9 +86,7 @@ class CheckoutPage extends Component {
           { address: this.state.address },
           { headers: { authorization: token } }
         );
-
-        console.log('PUT RESPONSE:', response);
-
+        
         localStorage.setItem('cart', '[]');
         this.props.fetchCart();
         this.props.history.push({

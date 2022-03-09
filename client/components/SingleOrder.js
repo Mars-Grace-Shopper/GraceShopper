@@ -1,4 +1,3 @@
-//import React from 'react';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -37,7 +36,8 @@ export default class SingleOrder extends Component {
       <div className='single-order'>
         <div className='single-order-header'>
           <h3>
-            <span style={style}>ORDER # </span>{orderId}
+            <span style={style}>ORDER # </span>
+            {orderId}
           </h3>
           <h3>{orderDate}</h3>
         </div>

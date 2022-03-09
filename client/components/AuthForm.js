@@ -11,19 +11,21 @@ const AuthForm = (props) => {
       <div>
         <div>
           <label htmlFor='firstName'>FIRST NAME</label>
-          <input name='firstName' type='text'  pattern='*'
-            required/>
+          <input name='firstName' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='lastName'>LAST NAME</label>
-          <input name='lastName' type='text'  pattern='*'
-            required/>
+          <input name='lastName' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='email'>EMAIL</label>
-          <input name='email' type='email'  pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
+          <input
+            name='email'
+            type='email'
+            pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
             required
-            title='Please enter a valid email.'/>
+            title='Please enter a valid email.'
+          />
         </div>
       </div>
     );
@@ -36,22 +38,18 @@ const AuthForm = (props) => {
         <div>
           {signUpInfo}
           <label htmlFor='username'>USERNAME</label>
-          <input
-            name='username'
-            type='text'
-            pattern='*'
-            required
-          />
+          <input name='username' type='text' pattern='*' required />
         </div>
         <div>
           <label htmlFor='password'>PASSWORD</label>
-          <input name='password' type='password' pattern='*'
-            required/>
+          <input name='password' type='password' pattern='*' required />
         </div>
 
-        <button type='submit' >{displayName}</button>
+        <button type='submit'>{displayName}</button>
 
-        {error && error.response && <div className='error'> {error.response.data} </div>}
+        {error && error.response && (
+          <div className='error'> {error.response.data} </div>
+        )}
       </form>
       {name === 'signup' ? (
         <Link to='/login' className='login-signup'>
@@ -100,13 +98,12 @@ const mapDispatch = (dispatch) => {
         userObj.lastName = evt.target.lastName.value;
 
         // get the cart they made before signup
-        let localCart = eval(localStorage.getItem("cart"));
+        let localCart = eval(localStorage.getItem('cart'));
         if (!Array.isArray(localCart)) {
-           localCart = []
+          localCart = [];
         }
         userObj.localCart = localCart;
       }
-
       dispatch(authenticate(userObj, formName));
     },
   };

@@ -36,16 +36,23 @@ export default function SinglePieItem(props) {
   );
 }
 
-
 //Single cart row for checkout page
 export function SingleCheckoutCartItem(props) {
   return (
     <tr>
-      <td> <Link to={`/pies/${props.pie.id}`}>
-      <p>{props.pie.name}</p>
-      </Link></td>
-      <td><p>{props.quantity}</p></td>
-      <td><p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p></td>
+      <td>
+        <Link to={`/pies/${props.pie.id}`}>
+          <p>{props.pie.name}</p>
+        </Link>
+      </td>
+      <td>
+        <p>{props.quantity}</p>
+      </td>
+      <td>
+        <p style={{ color: '#3961e7' }}>
+          ${(props.pie.price / 100).toFixed(2)}
+        </p>
+      </td>
     </tr>
   );
 }

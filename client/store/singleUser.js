@@ -17,8 +17,8 @@ export const fetchSingleUser = (userId) => {
       if (token) {
         const { data } = await axios.get(`/api/users/${userId}`, {
           headers: {
-            authorization: token
-          }
+            authorization: token,
+          },
         });
         dispatch(setSingleUser(data));
       }

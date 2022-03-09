@@ -36,13 +36,13 @@ export const addPie = (pie) => {
     try {
       const token = window.localStorage.getItem('token');
       if (token) {
-      const { data } = await axios.post('/api/pies', pie, {
-        headers: {
-          authorization: token
-        }});
+        const { data } = await axios.post('/api/pies', pie, {
+          headers: {
+            authorization: token,
+          },
+        });
         dispatch(createPie(data));
-      }
-      else throw new Error('unauthorized');
+      } else throw new Error('unauthorized');
     } catch (error) {
       console.log(error);
     }
@@ -54,17 +54,19 @@ export const deletePie = (pieId) => {
     try {
       const token = window.localStorage.getItem('token');
       if (token) {
-      await axios.delete(`/api/pies/${pieId}`,{
-        headers: {
-          authorization: token
-        }});
-      dispatch(fetchPies());
+        await axios.delete(`/api/pies/${pieId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(fetchPies());
       }
     } catch (error) {
       console.log(error);
     }
   };
 };
+
 //INITIAL STATE:
 const initialState = [];
 

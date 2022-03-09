@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AdminToolbar from './AdminToolbar';
 import axios from 'axios';
 
@@ -18,12 +18,10 @@ export class UserHome extends Component {
   }
 
   async componentDidMount() {
-    console.log('ssss', this);
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/orders', {
       headers: { authorization: token },
     });
-    console.log('response', response);
 
     await this.setState({
       ...this.state,

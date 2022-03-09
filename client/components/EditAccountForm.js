@@ -22,6 +22,7 @@ class EditAccountForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   async componentDidMount() {
     await this.props.getAuth();
     const user = this.props.auth;
@@ -95,7 +96,6 @@ class EditAccountForm extends Component {
                 <h2>{user.firstName}</h2>
               </div>
             </div>
-
             <div className='left-field'>
               <h3>ACCOUNT INFORMATION</h3>
               <br />
@@ -132,10 +132,8 @@ class EditAccountForm extends Component {
                 title='Please enter a valid email.'
               />
             </div>
-
             <br />
             <br />
-
             <div className='right-field'>
               <h3>CHANGE PASSWORD</h3>
               <br />
@@ -153,7 +151,6 @@ class EditAccountForm extends Component {
               <div style={{ height: '93px' }}></div>
             </div>
           </div>
-
           <div>
             <div className='left-field'>
               <h3>ADDRESS</h3>
@@ -168,7 +165,6 @@ class EditAccountForm extends Component {
                 title='Please enter a valid name.'
               />
             </div>
-
             <div className='city-state-zip'>
               <div className='price'>
                 <label htmlFor='city'>CITY</label>
