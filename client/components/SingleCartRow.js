@@ -44,8 +44,8 @@ export function SingleCheckoutCartItem(props) {
       <td> <Link to={`/pies/${props.pie.id}`}>
       <p>{props.pie.name}</p>
       </Link></td>
+      <td><p>{props.quantity}</p></td>
       <td><p style={{ color: '#3961e7' }}>${(props.pie.price / 100).toFixed(2)}</p></td>
-      <td><h3>{props.quantity}</h3></td>
     </tr>
   );
 }

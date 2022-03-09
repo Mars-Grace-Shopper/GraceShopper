@@ -1,108 +1,88 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AddressForm(props) {
-  const spanStyle = {
-    color: "red",
-    fontSize: "12px",
-    letterSpacing: "0.5px",
-    fontWeight: "normal",
-  };
-  const required = <span style={spanStyle}>*Required</span>;
   return (
-    <div className="add-edit-form">
-      {/* <div className='title-box'>
-              <div className='title' style={{ padding: '0px' }}>
-                <h2>Shipping Address</h2>
-              </div>
-            </div> */}
-      <form className="left-field" onSubmit={props.setAddress}>
-        <label htmlFor="customerName">NAME {required}</label>
-        <input
-          onChange={props.change}
-          name="customerName"
-          pattern="^[A-Za-z ]*$"
-          defaultValue={props.address.customerName}
-          required
-          title="Please enter a valid name."
-        />
-        <br />
-        <br />
-        <label htmlFor="streetAddress">STREET ADDRESS {required}</label>
-        <input
-          onChange={props.change}
-          name="streetAddress"
-          pattern="^[A-Za-z0-9 ]*$"
-          defaultValue={props.address.streetAddress}
-          required
-          title="Please enter a valid street address."
-        />
-
-        <br />
-        <br />
-        <div className="city">
-          <label htmlFor="city">CITY</label>
+    <form onSubmit={props.setAddress}>
+      <label htmlFor='customerName'>NAME</label>
+      <input
+        onChange={props.change}
+        name='customerName'
+        pattern='^[A-Za-z ]*$'
+        defaultValue={props.address.customerName}
+        required
+        title='Please enter a valid name.'
+      />
+      <br />
+      <br />
+      <label htmlFor='streetAddress'>STREET ADDRESS</label>
+      <input
+        onChange={props.change}
+        name='streetAddress'
+        pattern='^[A-Za-z0-9 ]*$'
+        defaultValue={props.address.streetAddress}
+        required
+        title='Please enter a valid street address.'
+      />
+      <br />
+      <br />
+      <label htmlFor='city'>CITY</label>
+      <input
+        onChange={props.change}
+        name='city'
+        defaultValue={props.address.city}
+        pattern='^[A-Za-z0-9 ]*$'
+        required
+        title='Please enter a valid street address.'
+      />
+      <br />
+      <br />
+      <div className='state-zip'>
+        <div className='state'>
+          <label htmlFor='state'>STATE</label>
           <input
-            onChange={props.change}
-            name="city"
-            defaultValue={props.address.city}
-            pattern="^[A-Za-z]*$"
-            required
-            title="Please enter a valid street address."
-          />
-        </div>
-        <br />
-        <br />
-        <div className="qty">
-          <label htmlFor="state">STATE</label>
-          <input
-            pattern="^[A-Za-z]*$"
+            pattern='^[A-Za-z]*$'
+            maxLength='2'
             defaultValue={props.address.state}
             onChange={props.change}
-            name="state"
+            name='state'
             required
-            title="Please enter a valid state."
+            title='Please enter a valid state.'
           />
         </div>
-        <br />
-        <br />
-        <div className="qty">
-          <label htmlFor="zipcode">ZIPCODE</label>
+        <div className='zip'>
+          <label htmlFor='zipcode'>ZIPCODE</label>
           <input
             defaultValue={props.address.zipcode}
-            pattern="^[0-9]*$"
+            pattern='^[0-9]*$'
+            maxLength='5'
             onChange={props.change}
-            name="zipcode"
+            name='zipcode'
             required
-            title="Please enter a valid zipcode."
+            title='Please enter a valid zipcode.'
           />
         </div>
-        <br />
-        <br />
-      
-      <div className="edit-buttons">
-        <button type='submit' className="edit-submit" >
-          CONFIRM ADDRESS
-        </button>
       </div>
-      </form>
-    </div>
+      <br />
+      <br />
+      <button type='submit' className='edit-submit'>
+        CONFIRM ADDRESS
+      </button>
+    </form>
   );
 }
 
-
-export function SetAddress(props){
-  return(
-    <div>
-    <div>
-    <h3>{props.address.customerName}</h3>
-    <p>{props.address.streetAddress}</p>
-    <p>{props.address.city}, {props.address.state}</p>
-    <p>{props.address.zipcode}</p>
+export function SetAddress(props) {
+  return (
+    <div className='address-confirmation'>
+      <h3>{props.address.customerName}</h3>
+      <p>
+        {props.address.streetAddress}
+        <br />
+        {props.address.city}, {props.address.state}
+        <br />
+        {props.address.zipcode}
+      </p>
     </div>
-    <button type='button' className="edit-submit" onClick={props.setAddress}>
-         EDIT ADDRESS
-        </button>
-    </div>
-  )
+  );
 }

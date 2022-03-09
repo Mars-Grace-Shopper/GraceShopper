@@ -20,6 +20,10 @@ label {
   display: block;
 }
 
+a {
+  text-decoration: none;
+}
+
 .back-button {
   padding: 0px 13px 0px 13px;
   height: 35px;
@@ -39,7 +43,6 @@ label {
 }
 
 .empty a {
-  text-decoration: none;
   color: #3961e7;
 }
 
@@ -62,7 +65,7 @@ label {
   bottom: -50px;
   left: 0px;
   width: 100%;
-  content: " ";
+  content: ' ';
   background: radial-gradient(
     circle at 50% 0%,
     #3961e7 25%,
@@ -76,7 +79,7 @@ label {
 
 .header h1 {
   margin: 20px 0px 15px 0px;
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .header h1 a {
@@ -109,22 +112,20 @@ label {
 .links a:visited {
   position: relative;
   display: inline-block;
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 20px;
   font-weight: bolder;
   color: rgb(57, 97, 231);
-  text-decoration: none;
   top: 0px;
   transition: top ease 0.5s;
 }
 
 .links a:hover {
-  text-decoration: none;
   top: -5px;
 }
 
 .nav-invisible {
-  width: 70px;
+  width: 100px;
   height: 40px;
 }
 
@@ -136,12 +137,14 @@ label {
 
 .cart-qty {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  width: 100px;
 }
 
 .cart-qty p {
   margin-left: 10px;
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 22px;
   color: #3961e7;
 }
@@ -169,7 +172,7 @@ label {
 }
 
 .introductions h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .intro-para {
@@ -282,7 +285,7 @@ label {
 }
 
 .pie-name {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin: 10px 18px 0px 18px;
   margin-bottom: auto;
   display: -webkit-box;
@@ -408,7 +411,7 @@ label {
 }
 
 .img-box h4 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin-top: 40px;
 }
 
@@ -440,7 +443,7 @@ label {
 }
 
 .name-price h2:first-child {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 30px;
   width: 320px;
   word-wrap: break-word;
@@ -537,7 +540,7 @@ label {
 }
 
 .title h2 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -605,7 +608,7 @@ label {
   margin: 20px;
 }
 
-.form-box .edit-submit {
+.edit-submit {
   padding: 0px 13px 0px 13px;
   height: 35px;
   font-size: 14px;
@@ -613,9 +616,6 @@ label {
   border: none;
   border-radius: 2px;
   cursor: pointer;
-}
-
-.form-box .edit-submit {
   color: white;
   background-color: #3961e7;
 }
@@ -638,7 +638,7 @@ label {
 }
 
 .logged-in-header h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .logged-in-header h3 {
@@ -664,12 +664,8 @@ label {
   margin: 20px 30px;
 }
 
-.past-orders a {
-  text-decoration: none;
-}
-
 .past-orders h2 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin: 0px 30px;
   text-align: left;
 }
@@ -776,7 +772,7 @@ label {
 }
 
 .info-input h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   text-align: center;
   margin: 30px;
 }
@@ -824,7 +820,6 @@ label {
 }
 
 .login-signup {
-  text-decoration: none;
   margin: 30px;
   color: #3961e7;
 }
@@ -854,7 +849,7 @@ label {
 }
 
 .cart h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin: 0px 30px 30px 30px;
 }
 
@@ -926,6 +921,110 @@ label {
 
 /* ---------------------------- CHECKOUT PAGE */
 
+.checkout-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
+.checkout-box h1 {
+  font-family: 'Fredoka', sans-serif;
+  margin-bottom: 20px;
+}
+
+.checkout-field {
+  display: flex;
+  width: 900px;
+  justify-content: space-between;
+}
+
+.checkout-left-field,
+.checkout-right-field {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  width: 100%;
+}
+
+.checkout-right-field th {
+  color: #8a8a8a;
+  word-spacing: 1px;
+}
+
+.checkout-box input,
+.checkout-box select {
+  width: 100%;
+  outline-width: 0;
+  height: 35px;
+  color: #3961e7;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 10px 0px 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-box label {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bolder;
+  color: #4b4b4b;
+  margin: 10px 0px 5px 0px;
+}
+
+.checkout-cart-view {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.checkout-cart-view a {
+  color: #3961e7;
+}
+
+.checkout-right-field .edit-submit {
+  position: absolute;
+  right: 0;
+  margin-top: 20px;
+}
+
+.checkout-left-field button {
+  width: 100%;
+}
+
+.state-zip {
+  display: flex;
+}
+
+.state {
+  margin-right: 20px;
+  width: 50%;
+}
+
+.zip {
+  width: 50%;
+}
+
+.address-confirmation {
+  background-color: white;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.address-confirmation h3 {
+  color: #3961e7;
+  text-transform: uppercase;
+}
+
+.address-confirmation p {
+  line-height: 25px;
+  margin-top: 10px;
+}
+
 /* ---------------------------- CONFIRMATION PAGE */
 
 .confirmation {
@@ -941,7 +1040,7 @@ label {
 }
 
 .confirmation h1 {
-  font-family: "Fredoka", sans-serif;
+  font-family: 'Fredoka', sans-serif;
   margin-bottom: 30px;
 }
 
