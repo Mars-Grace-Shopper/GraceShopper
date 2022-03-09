@@ -46,7 +46,7 @@ class Routes extends Component {
             <Route path='/cart' exact component={Cart}/>
             <Route path='/checkout' exact component={CheckoutPage}/>
             <Route path="/error" component={ErrorPage}/>
-            <Redirect to="/" />
+            <Redirect to='/userhome' />
           </Switch>
         ) : (
           <Switch>
@@ -59,7 +59,6 @@ class Routes extends Component {
             <Route path='/checkout' exact component={CheckoutPage}/>
             <Route path='/cart/checkout/confirmation' exact component={Confirmation}/>
             <Route path="/error" component={ErrorPage}/>
-            <Redirect to="/" />
           </Switch>
         )}
       </div>

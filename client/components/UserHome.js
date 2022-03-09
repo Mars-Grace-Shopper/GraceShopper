@@ -47,26 +47,27 @@ export class UserHome extends Component {
         </div>
       );
     } else {
-      return orders.map((order, idx) => {
-        return (
-          <div className='orders' key={idx}>
-            <Link
-              to={{
-                pathname: '/order',
-                state: {
-                  orderItems: order.cartitems,
-                  orderId: order.id,
-                  orderDate: order.updatedAt.slice(0, 10),
-                },
-              }}
-            >
-              <p style={{ color: '#3961e7' }}>{order.id}</p>
-            </Link>
-            <p> {order.updatedAt.slice(0, 10)}</p>
-            <p> $99.99 </p>
-          </div>
-        );
-      });
+      return orders
+        .sort((a, b) => (a.id > b.id ? 1 : -1))
+        .map((order, idx) => {
+          return (
+            <div className='orders' key={idx}>
+              <Link
+                to={{
+                  pathname: '/order',
+                  state: {
+                    orderItems: order.cartitems,
+                    orderId: order.id,
+                    orderDate: order.updatedAt.slice(0, 10),
+                  },
+                }}
+              >
+                <p style={{ color: '#3961e7' }}>{order.id}</p>
+              </Link>
+              <p> {order.updatedAt.slice(0, 10)}</p>
+            </div>
+          );
+        });
     }
   }
 
@@ -77,13 +78,14 @@ export class UserHome extends Component {
         <div className='logged-in-header'>
           <h1>Welcome, {this.state.username}!</h1>
           <h3>{this.state.accountType}</h3>
-          <Link to={`/users/${this.props.id}/editAccountForm`}><button>EDIT ACCOUNT</button></Link>
+          <Link to={`/users/${this.props.id}/editAccountForm`}>
+            <button>EDIT ACCOUNT</button>
+          </Link>
           <div className='past-orders'>
             <h2>Past Orders</h2>
             <div className='order-table'>
               <h4>ORDER #</h4>
               <h4>DATE</h4>
-              <h4>TOTAL</h4>
             </div>
             <hr className='navbar-hr' />
             {this.displayOrders(this.state.pastOrders)}

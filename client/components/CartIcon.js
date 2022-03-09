@@ -30,6 +30,7 @@ class CartIcon extends React.Component {
     }
 
     this.setState({ ...this.state, cart: localCart });
+    // redux
     this.props.fetchCart();
   }
 
@@ -45,7 +46,11 @@ class CartIcon extends React.Component {
     return (
       <div className='cart-qty'>
         <Link to='/cart'>
-          <img src='/cart.png' className='cart-icon' />
+          <img
+            src='/cart.png'
+            onClick={this.props.fetchCart}
+            className='cart-icon'
+          />
         </Link>
         <p>{this.findTotalQuantity(this.props.cart)}</p>
       </div>

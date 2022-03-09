@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import CartIcon from './CartIcon';
+import { fetchCart } from '../store/cart';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
@@ -41,6 +42,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    cart: state.cart,
   };
 };
 
@@ -48,7 +50,8 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       localStorage.removeItem('token');
-      localStorage.removeItem('cart');
+      localStorage.setItem('cart', '[]');
+      dispatch(fetchCart());
       dispatch(logout());
     },
   };

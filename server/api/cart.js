@@ -23,7 +23,7 @@ router.get('/', requireUserToken, async (req, res, next) => {
     }
     res.send();
   } catch (error) {
-    next(error);
+    next(error)
   }
 });
 
@@ -53,8 +53,8 @@ router.put('/cartitem', requireUserToken, async (req, res, next) => {
       const [cartitem] = await cart.getCartitems({
         where: { pieId: req.body.pieId },
       });
-      cartitem.update({ quantity: req.body.quantity });
-      cartitem.save();
+      await cartitem.update({ quantity: req.body.quantity });
+      await cartitem.save();
       res.status(204).end();
     }
   } catch (error) {
@@ -111,6 +111,7 @@ router.post('/checkout', async (req, res, next) => {
       });
     }
     let address = req.body.address;
+
     await not_signed_in_cart.createAddress({ ...address });
     await not_signed_in_cart.setPaidTrue();
     res.status(201).end();
