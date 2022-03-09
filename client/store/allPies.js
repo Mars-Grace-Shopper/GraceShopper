@@ -2,7 +2,9 @@ import axios from 'axios';
 
 // ACTION TYPE:
 const SET_PIES = 'SET_PIES';
-const ADD_PIE = 'SET_PIE';
+const ADD_PIE = 'ADD_PIE';
+const REMOVE_PIE = 'REMOVE_PIE';
+const FILTER_PIES = 'FILTER_PIES';
 
 // ACTION CREATOR:
 export const setPies = (pies) => {
@@ -16,6 +18,20 @@ export const createPie = (pie) => {
   return {
     type: ADD_PIE,
     pie,
+  };
+};
+
+export const removePie = (pieId) => {
+  return {
+    type: REMOVE_PIE,
+    pieId,
+  };
+};
+
+export const filterPies = (filter) => {
+  return {
+    type: FILTER_PIES,
+    filter,
   };
 };
 
@@ -58,7 +74,7 @@ export const deletePie = (pieId) => {
         headers: {
           authorization: token
         }});
-      dispatch(fetchPies());
+      dispatch(removePie(pieId));
       }
     } catch (error) {
       console.log(error);
@@ -75,6 +91,14 @@ export default function piesReducer(state = initialState, action) {
       return action.pies;
     case ADD_PIE:
       return action.pie;
+    case REMOVE_PIE:
+      console.log('redux DELETE action', action);
+      console.log('redux DELETE state', state);
+      const newPiesArray = state.filter(x => x.id != action.pieId)
+      return newPiesArray;
+    case FILTER_PIES:
+      console.log('reudcer filter', action.filter, '-- state:', state)
+      return state
     default:
       return state;
   }

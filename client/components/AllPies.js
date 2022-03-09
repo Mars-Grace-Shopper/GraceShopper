@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SinglePieItem from './SinglePieItem';
 import { connect } from 'react-redux';
 import { fetchPies } from '../store/allPies';
+import { filterPies } from '../store/allPies';
 import { Link } from 'react-router-dom';
 import { deletePie } from '../store/allPies';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -31,9 +32,13 @@ export class AllPies extends Component {
 
   async handleSetFilter(event) {
     await this.setState({ ...this.state, filter: event.target.value });
+    console.log('HSF')
+    this.props.filterPies(this.state.filter)
   }
 
   renderFilteredPies() {
+    console.log('rFP this', this)
+
     let replace;
     if (this.state.filter === 'alphabetical') {
       replace = '';
@@ -43,7 +48,7 @@ export class AllPies extends Component {
 
     let newRegex = new RegExp(`${replace}`, 'i');
     return []
-      .concat(this.state.listOfPies)
+      .concat(this.props.pies)
       .sort((a, b) => a.name.localeCompare(b.name))
       .filter((pie) => newRegex.test(pie.type))
       .map((pie) => (
@@ -109,6 +114,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    filterPies: (filter) => dispatch(fetchPies(filter)),
     fetchPies: () => dispatch(fetchPies()),
     deletePie: (id) => dispatch(deletePie(id)),
   };
