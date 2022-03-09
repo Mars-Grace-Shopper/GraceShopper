@@ -99,7 +99,6 @@ export default function piesReducer(state = initialState, action) {
       const newPiesArray = state.filter((x) => x.id != action.pieId);
       return newPiesArray;
     case FILTER_PIES:
-      console.log('reudcer filter', action.filter, '-- state:', state);
       return state;
     default:
       return state;

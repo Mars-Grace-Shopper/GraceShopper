@@ -1,7 +1,8 @@
-import axios from 'axios';
-import history from '../history';
+import axios from 'axios'
+import history from '../history'
+import {fetchCart} from './cart'
+const TOKEN = 'token'
 
-const TOKEN = 'token';
 
 /**
  * ACTION TYPES
@@ -21,10 +22,11 @@ export const me = () => async (dispatch) => {
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
-        authorization: token,
-      },
+        authorization: token
+      }
     });
-    return dispatch(setAuth(res.data));
+    dispatch(fetchCart());
+    return dispatch(setAuth(res.data))
   }
 };
 

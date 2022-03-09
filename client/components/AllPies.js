@@ -36,6 +36,8 @@ export class AllPies extends Component {
   }
 
   renderFilteredPies() {
+    console.log('rFP this', this)
+
     let replace;
     if (this.state.filter === 'alphabetical') {
       replace = '';

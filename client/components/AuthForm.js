@@ -110,6 +110,7 @@ const mapDispatch = (dispatch) => {
 
       dispatch(authenticate(userObj, formName));
       dispatch(fetchCart());
+
     },
   };
 };
