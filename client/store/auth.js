@@ -1,7 +1,8 @@
-import axios from 'axios';
-import history from '../history';
+import axios from 'axios'
+import history from '../history'
+import {fetchCart} from './cart'
+const TOKEN = 'token'
 
-const TOKEN = 'token';
 
 /**
  * ACTION TYPES
@@ -21,18 +22,19 @@ export const me = () => async (dispatch) => {
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
-        authorization: token,
-      },
-    });
-    return dispatch(setAuth(res.data));
+        authorization: token
+      }
+    })
+    dispatch(fetchCart());
+    return dispatch(setAuth(res.data))
   }
 };
 
 export const authenticate = (userObj, method) => async (dispatch) => {
   try {
-    const res = await axios.post(`/auth/${method}`, userObj);
-    window.localStorage.setItem(TOKEN, res.data.token);
-    dispatch(me());
+    const res = await axios.post(`/auth/${method}`, userObj)
+    window.localStorage.setItem(TOKEN, res.data.token)
+    dispatch(me())
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }

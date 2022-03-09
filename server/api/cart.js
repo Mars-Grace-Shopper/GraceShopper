@@ -49,12 +49,10 @@ router.put('/cartitem', requireUserToken, async (req, res, next) => {
   try {
     if (req.user) {
       const user = req.user;
-      const [cart] = await user.getCarts({ where: { paid: false } });
-      const [cartitem] = await cart.getCartitems({
-        where: { pieId: req.body.pieId },
-      });
-      cartitem.update({ quantity: req.body.quantity });
-      cartitem.save();
+      const [cart] = await user.getCarts({where: {paid: false}})
+      const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
+      await cartitem.update({quantity: req.body.quantity})
+      await cartitem.save()
       res.status(204).end();
     }
   } catch (error) {
