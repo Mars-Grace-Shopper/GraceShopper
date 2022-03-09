@@ -15,16 +15,16 @@ export const setCart = (cart) => {
 export const fetchCart = () => {
     return async (dispatch) => {
       try {
-        //const token = window.localStorage.getItem('token');
-        //if (token) {
-        //  const res = await axios.get('/api/cart', {
-        //      headers: {
-        //        authorization: token
-        //      }
-        //  });
-        //localStorage.setItem('cart', JSON.stringify(data));
-        //  dispatch(setCart(res.data));
-        //}
+        const token = window.localStorage.getItem('token');
+        if (token) {
+          const res = await axios.get('/api/cart', {
+              headers: {
+                authorization: token
+              }
+          });
+          localStorage.setItem('cart', JSON.stringify(res.data));
+          dispatch(setCart(res.data));
+        }
         dispatch(setCart(eval(localStorage.getItem('cart'))));
       } catch (error) {
         console.log(error);

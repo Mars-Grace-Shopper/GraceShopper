@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
 import { Link } from 'react-router-dom';
+import {fetchCart} from '../store/cart';
 
 const AuthForm = (props) => {
   const { name, displayName, title, handleSubmit, error } = props;
@@ -72,6 +73,7 @@ const mapLogin = (state) => {
     title: 'Login',
     displayName: 'LOG IN',
     error: state.auth.error,
+    cart: state.cart
   };
 };
 
@@ -81,6 +83,7 @@ const mapSignup = (state) => {
     title: 'Signup',
     displayName: 'SIGN UP',
     error: state.auth.error,
+    cart: state.cart
   };
 };
 
@@ -108,6 +111,7 @@ const mapDispatch = (dispatch) => {
       }
 
       dispatch(authenticate(userObj, formName));
+      dispatch(fetchCart())
     },
   };
 };
