@@ -39,7 +39,7 @@ class EditPie extends Component {
     if (name === 'thumbnailurl')
       await this.setState({ ...this.state, thumbnailurl: value });
     if (name === 'price')
-      await this.setState({ ...this.state, price: value });
+      await this.setState({ ...this.state, price: Number(value) });
     if (name === 'stockQuantity')
       await this.setState({ ...this.state, stockQuantity: value });
   }
@@ -130,7 +130,6 @@ class EditPie extends Component {
                     type='number'
                     step='.01'
                     min='0'
-                    max='99.99'
                     onChange={handleChange}
                     name='price'
                     defaultValue={price}

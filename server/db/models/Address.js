@@ -16,7 +16,7 @@ const Address = db.define("address", {
       type: Sequelize.STRING
     },
     zipcode: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     cartId: Sequelize.INTEGER,
     userId: Sequelize.INTEGER,
