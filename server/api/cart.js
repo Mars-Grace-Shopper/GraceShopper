@@ -52,8 +52,8 @@ router.put('/cartitem', requireUserToken, async(req, res, next) => {
       const [cart] = await user.getCarts({where: {paid: false}})
       const [cartitem] = await cart.getCartitems({where: {pieId: req.body.pieId}});
       //console.log(cartitem.quantity)
-      cartitem.update({quantity: req.body.quantity})
-      cartitem.save()
+      await cartitem.update({quantity: req.body.quantity})
+      await cartitem.save()
       //console.log('cartitem.quantity', cartitem.quantity)
       res.status(204).end();
     }
