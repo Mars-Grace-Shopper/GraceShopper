@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { SingleCheckoutCartItem } from "./SingleCartRow";
 import AddressForm, { SetAddress } from "./AddressForm";
+import { fetchCart } from '../store/cart';
 import { me } from "../store/auth";
 import axios from "axios";
 
@@ -23,6 +24,7 @@ class CheckoutPage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSetAddress = this.handleSetAddress.bind(this);
   }
+
   findTotalQuantity(cart) {
     if (cart.length > 0) {
       return cart.reduce((pv, cv) => pv + cv.quantity, 0);
@@ -87,6 +89,7 @@ class CheckoutPage extends Component {
         console.log('PUT RESPONSE:', response)
 
         localStorage.setItem("cart", "[]");
+        this.props.fetchCart();
         this.props.history.push({pathname: "/cart/checkout/confirmation", state: {orderId: response.data.orderId, orderDate: response.data.orderDate.slice(0, 10)}});
       } else {
         let address = this.state.address;
@@ -95,6 +98,7 @@ class CheckoutPage extends Component {
           cart: localCart,
         });
         localStorage.setItem("cart", "[]");
+        this.props.fetchCart();
         this.props.history.push("/cart/checkout/confirmation");
       }
     }
@@ -175,12 +179,14 @@ class CheckoutPage extends Component {
 const mapState = (state) => {
   return {
     auth: state.auth,
+    cart: state.cart
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getAuth: () => dispatch(me()),
+    fetchCart: () => dispatch(fetchCart()),
   };
 };
 
