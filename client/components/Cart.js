@@ -24,12 +24,14 @@ export class Cart extends React.Component {
     const token = localStorage.getItem('token');
 
     if (token) {
+      // JOE CR: Why is this not being done with thunks? Let's discuss. :)
       const { data } = await axios.get(`/api/cart`, {
         headers: { authorization: token },
       });
       localStorage.setItem('cart', JSON.stringify(data));
     }
 
+    // JOE CR: eval? That's surprising! Tell me more.
     let localCart = eval(localStorage.getItem('cart'));
     if (!Array.isArray(localCart)) {
       localCart = [];
@@ -40,6 +42,8 @@ export class Cart extends React.Component {
   }
 
   async handleRemove(id) {
+    // JOE CR: setState is not something that returns a promise (I believe),
+    // so it's not useful to `await`. What is the intention here, and is it working?
     await this.setState({
       cart: this.state.cart.filter((i) => i.pie.id != id),
     });

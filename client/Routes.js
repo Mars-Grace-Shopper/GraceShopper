@@ -28,6 +28,10 @@ class Routes extends Component {
 
     return (
       <div>
+        {/* JOE CR: It would be more manageable to include different routes in the same <Switch>
+            conditionally as opposed to having a loggedIn <Switch> and a separate <Switch> that
+            include many of the same destinations. Let's discuss. 
+        */}
         {isLoggedIn ? (
           <Switch>
             <Route path="/" exact component={HomePage} />

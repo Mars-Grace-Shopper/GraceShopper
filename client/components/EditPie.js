@@ -24,10 +24,14 @@ class EditPie extends Component {
   }
 
   async handleChange(event) {
+    // JOE CR: This is brand new to me. What does it do?
     event.persist();
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
+    // JOE CR: When you use setState, you do not have to copy over the current state.
+    // Only keys that you provide to the setState call will change, all other keys will stay the same.
+    // This can also be simplified with this.setState({ [name]: value });
     if (name === 'name')
       await this.setState({ ...this.state, name: value });
     if (name === 'countryOrigin')
@@ -49,6 +53,7 @@ class EditPie extends Component {
     const pie = this.props.pie;
 
     if (this.state.type === null) {
+      // JOE CR: alert() is something you should avoid using. Let's discuss!
       alert('Please pick a type!');
     } else {
     this.props.updatePie({ ...this.state, id: pie.id });
