@@ -21,7 +21,6 @@ router.get('/', requireUserToken, async (req, res, next) => {
       );
       res.send(data);
     }
-    res.send();
   } catch (error) {
     next(error)
   }
